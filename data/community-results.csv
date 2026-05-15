@@ -1,8 +1,8 @@
-date,contributor,gpu_count,gpu_model,vram_per_gpu_gb,driver,runtime,runtime_version,model,quant,context_tokens,kv_cache,tp_or_split,mtp_or_spec,decode_tok_s,notes
-2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q4,8192,q8_0,"1,1",draft2,34.63,"768 generated tokens; acceptance 0.607"
-2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,8192,q8_0,"1,1",draft2,27.33,"768 generated tokens; acceptance 0.628"
-2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,65536,q8_0,"51,49",draft2,24.83,"512 generated tokens; no-thinking decode; stable router preset"
-2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,204800,q8_0,"1,1",draft2,n/a,"direct server chat OK; tight long-context fit"
-2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 35B A3B,GGUF IQ4_XS,8192,q8_0,"1,1",none,90.45,"256 generated tokens; text-only smoke"
-2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,vLLM,0.19.2rc1.dev134,Qwen3.6 27B,NVFP4,8192,fp8,2,MTP n=3,64,"approximate range 62-66 tok/s"
-2026-05-04,seed,2,RTX 5060 Ti,16,595.58.03,vLLM,0.19.2rc1.dev134,Qwen3.6 35B A3B,NVFP4,131072,fp8,2,MTP n=3,n/a,"startup OK; /v1/models OK; FlashInfer MoE"
+date,contributor,gpu_count,gpu_model,vram_per_gpu_gb,driver,motherboard,cpu,host_ram_gb,host_ram_speed,inference_vcpu,inference_ram_gb,pcie_link,runtime,runtime_version,model,quant,context_tokens,kv_cache,tp_or_split,mtp_or_spec,decode_tok_s,notes
+2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q4,8192,q8_0,"1,1",draft2,34.63,"768 generated tokens; acceptance 0.607"
+2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,8192,q8_0,"1,1",draft2,27.33,"768 generated tokens; acceptance 0.628"
+2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,65536,q8_0,"51,49",draft2,24.83,"512 generated tokens; no-thinking decode; stable router preset"
+2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 27B,GGUF Q6,204800,q8_0,"1,1",draft2,n/a,"direct server chat OK; tight long-context fit"
+2026-05-15,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,llama.cpp MTP,9032-5d5f1b46e,Qwen3.6 35B A3B,GGUF IQ4_XS,8192,q8_0,"1,1",none,90.45,"256 generated tokens; text-only smoke"
+2026-05-14,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,vLLM,0.19.2rc1.dev134,Qwen3.6 27B,NVFP4,8192,fp8,2,MTP n=3,64,"approximate range 62-66 tok/s"
+2026-05-04,seed,2,RTX 5060 Ti,16,595.58.03,Dell Precision Tower 7810 / Dell 0GWHMW,2x Intel Xeon E5-2680 v4,128,DDR4-2133,16,60,x8/x8,vLLM,0.19.2rc1.dev134,Qwen3.6 35B A3B,NVFP4,131072,fp8,2,MTP n=3,n/a,"startup OK; /v1/models OK; FlashInfer MoE"

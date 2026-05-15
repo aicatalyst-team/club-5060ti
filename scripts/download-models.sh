@@ -2,6 +2,7 @@
 set -euo pipefail
 
 MODEL_DIR="${MODEL_DIR:-$HOME/models}"
+export HF_HUB_DISABLE_XET="${HF_HUB_DISABLE_XET:-1}"
 
 usage() {
   cat <<'USAGE'
@@ -14,9 +15,11 @@ Targets:
   qwen36-35b-a3b-vllm      RedHatAI/Qwen3.6-35B-A3B-NVFP4
   qwen36-35b-a3b-gguf      unsloth Qwen3.6-35B-A3B IQ4_XS GGUF
 
-Set MODEL_DIR to choose the GGUF download root. Hugging Face downloads
-require either the hf CLI or huggingface-cli to be installed and logged in
-when a model requires authentication.
+Set MODEL_DIR to choose the GGUF download root. HF_HUB_DISABLE_XET defaults
+to 1 because large GGUF downloads were more reliable that way on the tested
+LXC storage path. Hugging Face downloads require either the hf CLI or
+huggingface-cli to be installed and logged in when a model requires
+authentication.
 USAGE
 }
 

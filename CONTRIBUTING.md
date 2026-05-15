@@ -5,7 +5,7 @@ Good contributions make the setup easier to reproduce.
 Please include:
 
 - GPU model and VRAM, including whether it is one card or multiple cards
-- CPU and system RAM if long context matters
+- CPU, host RAM, inference/container RAM allocation, motherboard, and PCIe slot/link details if long context or multi-GPU performance matters
 - driver version
 - runtime and runtime version or commit
 - model, quant, and source

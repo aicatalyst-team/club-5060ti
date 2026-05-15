@@ -11,7 +11,10 @@ labels: result
 - VRAM per GPU:
 - Driver:
 - CPU:
-- RAM:
+- Host RAM:
+- Inference/container RAM:
+- Motherboard/system:
+- PCIe layout/link width:
 - OS/container:
 
 ## Runtime

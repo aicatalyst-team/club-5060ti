@@ -22,8 +22,11 @@ The first documented setup is a dual RTX 5060 Ti 16GB machine running Qwen3.6 27
 - GPUs: 2x NVIDIA GeForce RTX 5060 Ti 16GB
 - Driver: 595.58.03
 - Total VRAM: 32GB across two cards
-- Host memory: 60GB RAM
-- CPU: 16 vCPU class Linux host
+- System: Dell Precision Tower 7810, Dell 0GWHMW board
+- CPU: 2x Intel Xeon E5-2680 v4
+- Host memory: 128GB DDR4-2133
+- Inference environment: Proxmox LXC with 16 vCPU and 60GB RAM assigned
+- PCIe link width: both RTX 5060 Ti cards are running at x8 in this host
 - Useful assumption: tensor parallel across both cards for 27B-class models
 
 See docs/hardware.md for the full baseline and hardware notes.
@@ -45,7 +48,7 @@ See docs/hardware.md for the full baseline and hardware notes.
 
 ## Model Downloads
 
-The download helper wraps the Hugging Face CLI for the model files used by the examples:
+The public download helper wraps the Hugging Face CLI for the model files used by the examples. It mirrors the model IDs used in the tested LXC workflow, but keeps the script generic and free of private host details:
 
 ~~~bash
 scripts/download-models.sh qwen36-27b-vllm
@@ -54,15 +57,15 @@ scripts/download-models.sh qwen36-35b-a3b-vllm
 scripts/download-models.sh qwen36-35b-a3b-gguf
 ~~~
 
-Set MODEL_DIR for GGUF downloads if you do not want to use ~/models.
+Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large GGUF files on slower or constrained storage, HF_HUB_DISABLE_XET=1 is the safer default used by the helper.
 
-## Updating llama.cpp
+## Building The llama.cpp MTP Tree
 
 ~~~bash
 scripts/update-llama.sh
 ~~~
 
-This rebuilds llama.cpp with the CUDA/Blackwell flags used for the llama.cpp examples. Use the --fresh flag if you want to move the existing source tree aside and clone again.
+This builds the MTP-capable llama.cpp tree used by the Qwen3.6 GGUF examples, pinned by default to the tested PR/commit. The live lab setup runs the service through its own LXC wrapper and preset files; the repo script is the reproducible public build helper, not a service manager. Use the --fresh flag if you want to move the existing source tree aside and clone again.
 
 ## Quick Health Check
 
@@ -96,6 +99,6 @@ The current focus is practical 2x RTX 5060 Ti 16GB serving for Qwen3.6 27B, with
 
 ## Contributing
 
-Contributions are most useful when they include exact GPU model, driver/runtime versions, launch commands, context length, KV cache settings, tokens/sec, and relevant caveats.
+Contributions are most useful when they include exact GPU model, motherboard/PCIe layout, negotiated link width/generation, driver/runtime versions, launch commands, context length, KV cache settings, tokens/sec, and relevant caveats.
 
 Start with CONTRIBUTING.md.

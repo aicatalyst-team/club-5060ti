@@ -42,13 +42,28 @@ echo "## Hardware"
 echo
 if command -v nvidia-smi >/dev/null 2>&1; then
   echo '~~~text'
-  nvidia-smi --query-gpu=name,memory.total,driver_version,power.limit --format=csv,noheader || true
+  nvidia-smi --query-gpu=index,name,pci.bus_id,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max,memory.total,driver_version,power.limit --format=csv,noheader || true
   echo '~~~'
 else
   echo "nvidia-smi not found."
 fi
 echo
-echo "CPU: $(uname -m)"
+if [[ -r /sys/class/dmi/id/product_name ]]; then
+  echo "System: $(cat /sys/class/dmi/id/product_name)"
+fi
+if [[ -r /sys/class/dmi/id/board_vendor && -r /sys/class/dmi/id/board_name ]]; then
+  echo "Motherboard: $(cat /sys/class/dmi/id/board_vendor) $(cat /sys/class/dmi/id/board_name)"
+fi
+if command -v lscpu >/dev/null 2>&1; then
+  CPU_MODEL=$(lscpu | awk -F: '/Model name/ {gsub(/^[ \t]+/, "", $2); print $2; exit}')
+  if [[ -n "$CPU_MODEL" ]]; then
+    echo "CPU: $CPU_MODEL"
+  else
+    echo "CPU: $(uname -m)"
+  fi
+else
+  echo "CPU: $(uname -m)"
+fi
 echo "Kernel: $(uname -sr)"
 if command -v free >/dev/null 2>&1; then
   echo "RAM: $(free -h | awk '/^Mem:/ {print $2}')"
@@ -103,5 +118,6 @@ echo
 echo "- Context length:"
 echo "- KV cache:"
 echo "- Tensor parallel / split:"
+echo "- PCIe layout / link width:"
 echo "- Thinking enabled:"
 echo "- Warnings/caveats:"

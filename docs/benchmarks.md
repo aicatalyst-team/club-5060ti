@@ -4,6 +4,8 @@ Benchmarks here are receipts, not universal claims. Always include the setup det
 
 ## Current Seed Results
 
+Seed hardware is a Dell Precision Tower 7810 with a Dell 0GWHMW board, 2x Intel Xeon E5-2680 v4, 128GB DDR4-2133 host RAM, and 2x RTX 5060 Ti 16GB. Both GPUs are running at PCIe x8 link width. The inference environment is a Proxmox LXC with 16 vCPU and 60GB RAM assigned. PCIe-sensitive comparisons should still include full slot topology and negotiated link generation.
+
 | Date | Hardware | Runtime | Model | Context | Config | Result |
 | --- | --- | --- | --- | --- | --- | --- |
 | 2026-05-14 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q4 GGUF | 8K | q8 KV, no MTP | 21.31 tok/s |

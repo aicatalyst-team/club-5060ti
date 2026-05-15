@@ -8,9 +8,29 @@ Initial results come from one dual-GPU Linux system.
 | VRAM | 16GB per card, 32GB total |
 | Driver | 595.58.03 |
 | GPU architecture | Blackwell-class, compute 12.0 |
-| System RAM | 60GB |
-| CPU allocation | 16 vCPU class host |
-| Runtime style | Linux host, CUDA containers for vLLM |
+| System/chassis | Dell Precision Tower 7810 |
+| Motherboard | Dell 0GWHMW |
+| Host CPU | 2x Intel Xeon E5-2680 v4 |
+| Host RAM | 128GB DDR4-2133 |
+| Inference environment | Proxmox LXC |
+| Inference CPU allocation | 16 vCPU |
+| Inference RAM allocation | 60GB |
+| PCIe link width | x8 on both RTX 5060 Ti cards |
+| Runtime style | Linux LXC, CUDA containers for vLLM |
+
+## PCIe Topology Matters
+
+For multi-GPU inference, the slot wiring and negotiated link state can change how much tensor-parallel traffic hurts. A result from two cards at x16/x16 is not directly comparable to x16/x4 or x4/x4 without that context.
+
+The seed setup has both RTX 5060 Ti cards running at x8 link width. Capture the full topology and link generation when possible:
+
+~~~bash
+nvidia-smi --query-gpu=index,name,pci.bus_id,pcie.link.gen.current,pcie.link.gen.max,pcie.link.width.current,pcie.link.width.max --format=csv
+lspci -tv
+sudo dmidecode -t system -t baseboard
+~~~
+
+The current seed benchmark rows are still useful as working recipe receipts. Treat PCIe-sensitive comparisons as host-specific unless the report includes slot wiring plus negotiated link width and generation.
 
 ## What Seems To Matter
 
@@ -18,14 +38,14 @@ Initial results come from one dual-GPU Linux system.
 - Tensor parallel across both cards is the useful default for vLLM 27B NVFP4 serving.
 - fp8 KV cache is important for long context experiments.
 - Blackwell support is still moving quickly. Runtime version and container image matter more than they would on older, mature cards.
-- Motherboard layout matters for community reports. Include PCIe slot wiring if you know it.
+- Motherboard layout and PCIe link width/gen matter for community reports. Include them if you know them.
 - Power limits and thermals matter for sustained decode. Include them when sharing numbers.
 
 ## What Not To Generalize Yet
 
 - Single RTX 5060 Ti results may look very different.
 - Motherboard PCIe layout may matter for multi-GPU setups.
-- Different CPUs and RAM bandwidth may change long-context behavior.
+- Different CPUs, RAM allocation, and host memory bandwidth may change long-context behavior.
 - New vLLM, CUDA, and modelopt builds may change the best flags.
 
 ## Hardware Report Template
@@ -36,9 +56,10 @@ When sharing a result, this level of detail is enough to help others:
 GPU: 2x RTX 5060 Ti 16GB
 Driver:
 CPU:
-RAM:
+Host RAM:
+Inference/container RAM:
 Motherboard:
-PCIe layout:
+PCIe layout/link width:
 Power limits:
 Runtime:
 Model:
