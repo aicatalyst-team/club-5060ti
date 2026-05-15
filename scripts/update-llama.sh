@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build the MTP-capable llama.cpp tree used for the Qwen3.6 GGUF examples.
+# Build the pinned MTP-capable llama.cpp tree used for the Qwen3.6 GGUF
+# examples. PR 22673 is moving quickly; newer tips may change speculative
+# flag spelling/defaults, so benchmark reports should include the exact ref.
 #
 # Defaults:
 #   LLAMA_CPP_DIR=$HOME/llama.cpp-mtp

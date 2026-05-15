@@ -15,6 +15,8 @@ The first documented setup is a dual RTX 5060 Ti 16GB machine running Qwen3.6 27
 | --- | --- | --- | --- |
 | vLLM | sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP | Working | Primary dual-card serving path. |
 | llama.cpp MTP branch | unsloth/Qwen3.6-27B-MTP-GGUF Q4/Q6 | Working | GGUF path with Q4/Q6 speed notes, a stable router preset, and Q6 long-context fit checks. Requires an MTP-capable llama.cpp build. |
+| llama.cpp MTP branch | unsloth/Qwen3.5-9B-MTP-GGUF Q4 | Early checks | Small-model GGUF path that fits the native 262144-token max context with q8 KV, without RoPE scaling or metadata override. |
+| llama.cpp | Qwen3.6 27B IQ4_XS / 35B A3B IQ3_XXS | Single-card checks | One RTX 5060 Ti 16GB can run these lower GGUF quants GPU-only; 35B A3B IQ3_XXS also passed a native-262144 fit and 93636-token retrieval check. |
 | llama.cpp / vLLM | Qwen3.6 35B A3B | Early checks | Small-context GGUF smoke result and vLLM NVFP4/MTP launch example. |
 
 ## Tested Baseline
@@ -37,8 +39,10 @@ See docs/hardware.md for the full baseline and hardware notes.
 - docs/community-goals.md - project goals and contribution priorities
 - docs/client-examples.md - connecting OpenAI-compatible clients
 - docs/reporting-results.md - how to capture a useful result report
+- docs/single-5060ti.md - conservative single-card starter configs
 - docs/vllm-qwen36.md - working vLLM NVFP4/MTP recipe
 - docs/llamacpp-qwen36.md - working llama.cpp MTP GGUF recipe
+- docs/llamacpp-qwen35-9b-mtp.md - Qwen3.5 9B GGUF native max-context fit check
 - docs/qwen36-35b-a3b.md - additional Qwen3.6 35B A3B checks
 - docs/benchmarks.md - benchmark notes and current result table
 - docs/troubleshooting.md - problems seen during testing
@@ -53,8 +57,11 @@ The public download helper wraps the Hugging Face CLI for the model files used b
 ~~~bash
 scripts/download-models.sh qwen36-27b-vllm
 scripts/download-models.sh qwen36-27b-gguf-q6
+scripts/download-models.sh qwen36-27b-gguf-iq4xs
+scripts/download-models.sh qwen35-9b-mtp-gguf-q4
 scripts/download-models.sh qwen36-35b-a3b-vllm
 scripts/download-models.sh qwen36-35b-a3b-gguf
+scripts/download-models.sh qwen36-35b-a3b-gguf-iq3xxs
 ~~~
 
 Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large GGUF files on slower or constrained storage, HF_HUB_DISABLE_XET=1 is the safer default used by the helper.
@@ -95,7 +102,7 @@ Then open a result issue using the template in this repo. The report script avoi
 
 ## Scope
 
-The current focus is practical 2x RTX 5060 Ti 16GB serving for Qwen3.6 27B, with additional checks for nearby models when we have reproducible evidence.
+The current focus is practical 2x RTX 5060 Ti 16GB serving for Qwen3.6 27B, with additional checks for nearby models when we have reproducible evidence. Single-card and mixed-GPU notes are included where they help people get started, but they should be reported separately from the dual-5060 Ti baseline.
 
 ## Contributing
 

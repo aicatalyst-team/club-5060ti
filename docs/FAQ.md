@@ -22,6 +22,24 @@ vLLM tensor parallel splits model work across GPUs. That is the useful path for 
 
 llama.cpp can split layers/weights across GPUs with tensor split settings. It is not the same thing as vLLM tensor parallel, but it is useful and handles some uneven setups.
 
+## Do the cards need to be identical?
+
+Not always, but mixed cards should be treated as a separate result.
+
+llama.cpp is the more forgiving path. A mixed pair such as RTX 4070 Ti Super 16GB plus RTX 5060 Ti 16GB may work for GGUF serving if the CUDA build supports both GPUs and the tensor split fits within each card's VRAM. Expect the slower card, PCIe layout, and split choice to affect results.
+
+vLLM tensor parallel is less forgiving. The documented NVFP4/MTP recipes were tested on two RTX 5060 Ti 16GB cards. Do not assume those exact vLLM NVFP4 flags work unchanged on a mixed Ada plus Blackwell setup, because the NVFP4 path depends on newer Blackwell-oriented CUDA/runtime support.
+
+If you test mixed cards, report the exact GPU names, VRAM, driver, CUDA/runtime build, PCIe link widths, model, quant, context, KV cache, tensor split or tensor-parallel size, and whether single-GPU and multi-GPU launches both work.
+
+For a 4070 Ti Super 16GB plus 5060 Ti 16GB, start with llama.cpp/GGUF before vLLM. The VRAM size matches, but the cards are different architectures, so the best working config may be different from the dual-5060 Ti NVFP4 recipe.
+
+## Is there a single 5060 Ti setup?
+
+Yes, but treat it as a starter path rather than the main tested baseline. A single 16GB card is a better fit for smaller GGUF models, lower context, or aggressive quantization than for the dual-card 27B recipes.
+
+See docs/single-5060ti.md and examples/llamacpp-single-5060ti.ini.
+
 ## Do I need NVLink?
 
 RTX 5060 Ti cards do not have NVLink. The tested setup works over PCIe. Faster interconnects can help some workloads, but they are not required for the documented recipes.

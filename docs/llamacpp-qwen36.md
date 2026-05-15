@@ -14,6 +14,12 @@ The working setup used llama.cpp MTP build `9032-5d5f1b46e`.
 
 The public helper scripts/update-llama.sh builds the same MTP-capable PR/commit by default. The live service wrapper and preset files in the tested LXC are separate from this repo; the important public pieces are the model path shape, build commit, CUDA flags, and preset settings below.
 
+## MTP Flag Compatibility
+
+Unsloth's 2026-05-15 update says newer Qwen3.6 MTP GGUF runs can benefit from `--spec-draft-p-min 0.75`, higher draft counts such as `--spec-draft-n-max 6`, and newer llama.cpp argument spelling around MTP.
+
+The tested build in this repo is pinned to `9032-5d5f1b46e`. That build exposes `--spec-draft-p-min` with a default of `0.75`, but it still uses `--spec-type mtp`; it rejects `--spec-type draft-mtp`. The benchmarked presets below therefore keep the exact tested `mtp`/draft-2 shape. If you build a newer PR tip, check `llama-server --help` and report the exact speculative flags used.
+
 ## Working Long-Context Preset
 
 ~~~ini
@@ -85,5 +91,6 @@ The long-context preset uses 204800 context. Focused direct-load checks also loa
 ## Caveats
 
 - Do not assume draft/speculative decoding is working just because flags are present. Check logs for real MTP/speculative acceptance.
+- Treat MTP flag names as build-specific while PR 22673 is moving. This repo's seed results use `--spec-type mtp`; newer builds may document a different spelling.
 - Older speculative paths for recurrent/hybrid Qwen models can produce corrupt output. Avoid unsafe pre-guard builds unless you are explicitly experimenting.
 - Keep one clean preset per model family. Swap the quant path instead of accumulating many stale preset sections.

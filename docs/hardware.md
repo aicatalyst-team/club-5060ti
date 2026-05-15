@@ -44,6 +44,7 @@ The current seed benchmark rows are still useful as working recipe receipts. Tre
 ## What Not To Generalize Yet
 
 - Single RTX 5060 Ti results may look very different.
+- Mixed GPU results, such as RTX 4070 Ti Super plus RTX 5060 Ti, should be reported separately from dual-5060 Ti results.
 - Motherboard PCIe layout may matter for multi-GPU setups.
 - Different CPUs, RAM allocation, and host memory bandwidth may change long-context behavior.
 - New vLLM, CUDA, and modelopt builds may change the best flags.
