@@ -2,7 +2,7 @@
 
 This is a small-model GGUF check on the same 2x RTX 5060 Ti 16GB seed machine.
 
-The useful public recipe is the model's native max context. It does not require RoPE scaling or a GGUF metadata override.
+The useful public recipe is the model's native max context using the stock GGUF metadata.
 
 ## Model
 
@@ -30,6 +30,8 @@ parallel = 1
 ~~~
 
 See examples/llamacpp-qwen35-9b-mtp-native-max.ini.
+
+For one RTX 5060 Ti 16GB, use examples/llamacpp-single-5060ti.ini. The single-card version removes `tensor-split`, keeps q8 KV, and uses batch 1024 / ubatch 256.
 
 ## Direct Server Shape
 
@@ -62,12 +64,22 @@ The tested llama.cpp MTP build is `9032-5d5f1b46e`. It accepts `--spec-type mtp`
 
 ## Observed Result
 
-At native `ctx-size 262144` with q8 KV and MTP draft 2:
+At native `ctx-size 262144` with q8 KV and MTP draft 2 on 2x RTX 5060 Ti 16GB:
 
 - the server loaded and answered at the full native context setting
 - warmed 512-token decode: 72.50 tok/s
 - prompt eval: 26 prompt tokens at 356.79 tok/s
 - MTP draft acceptance: 260/502, about 51.8%
+
+At native `ctx-size 262144` with q8 KV and MTP draft 2 on 1x RTX 5060 Ti 16GB:
+
+- the server loaded and answered at the full native context setting
+- loaded VRAM after startup: about 11535 MiB
+- 251-token short decode: 85.23 tok/s
+- 126053-token needle retrieval passed, recovering `COBALT-9137`
+- long-prompt eval: 1006 tok/s over 126053 prompt tokens
+- long-prompt decode: 53.36 tok/s over 10 generated tokens
+- VRAM during the long prompt: about 13091 MiB
 
 ## Caveats
 

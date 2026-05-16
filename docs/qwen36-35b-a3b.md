@@ -1,7 +1,7 @@
 # Qwen3.6 35B A3B Checks
 
-The 35B A3B model is included as an additional dual-5060 Ti reference point.
-It is not the main documented serving recipe yet.
+The 35B A3B model is included as an additional 5060 Ti reference point.
+Single-card IQ3_XXS long-context results live in docs/single-5060ti.md; this page keeps the larger-quant and dual-card checks together.
 
 ## llama.cpp GGUF
 

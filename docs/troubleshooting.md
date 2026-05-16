@@ -68,3 +68,9 @@ If performance is far lower than expected, collect:
 - whether P2P is supported or patched on your driver
 
 Do not assume NVLink is required. The seed dual-5060 Ti setup works over PCIe, but the exact motherboard layout can still matter.
+
+## CPU Threads Matter For Partial Offload
+
+If a model spills work to CPU, the `--threads` setting can materially change speed. Report the value you used, plus the CPU model and whether the number maps to performance cores, physical cores, or logical threads.
+
+For GPU-only rows, CPU thread tuning should matter less during decode, but it is still worth recording for reproducibility.

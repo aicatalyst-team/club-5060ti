@@ -1,6 +1,6 @@
 # Single RTX 5060 Ti 16GB Starter Notes
 
-The main seed results in this repo use 2x RTX 5060 Ti 16GB. A single 5060 Ti can still be useful, but it is a different target: less total VRAM, no tensor split, and less room for long context.
+The main seed results in this repo use 2x RTX 5060 Ti 16GB. A single 5060 Ti can still be useful, but it is a different target: less total VRAM, no tensor split, and less room for large dense models or higher-quality quants.
 
 Treat this page as a conservative starting point for community testing. The rows below are seed-machine receipts, not universal 16GB guarantees.
 
@@ -15,7 +15,7 @@ Example preset:
 ~~~ini
 [Qwen3.5-9B-MTP-Q4-single-5060ti]
 model = /path/to/Qwen3.5-9B-UD-Q4_K_XL.gguf
-ctx-size = 131072
+ctx-size = 262144
 cache-type-k = q8_0
 cache-type-v = q8_0
 n-gpu-layers = 99
@@ -30,7 +30,22 @@ parallel = 1
 
 See examples/llamacpp-single-5060ti.ini.
 
-If that is stable, raise context in steps. Do not jump straight to the largest context unless you are deliberately stress testing.
+If you want more headroom for other services, start lower and raise context in steps. Do not jump straight to the largest context unless you are deliberately stress testing.
+
+## Qwen3.5 9B Single-Card Recipe
+
+This is the tested small-model llama.cpp MTP recipe on one RTX 5060 Ti 16GB, with no unified-memory overcommit and one GPU visible.
+
+Tested with batch 1024, ubatch 256:
+
+| Model | Quant | Context | GPU layers | Result |
+| --- | --- | --- | --- | --- |
+| Qwen3.5 9B MTP | Q4_K_XL | 262144 | full | q8 KV, 126053-token needle retrieval OK, 1006 tok/s prompt eval, 53.36 tok/s decode, about 13091 MiB VRAM during the long prompt |
+| Qwen3.5 9B MTP | Q4_K_XL | 262144 | full | q8 KV, 251-token short decode, 85.23 tok/s decode, about 11535 MiB VRAM loaded |
+
+Recommended example:
+
+- examples/llamacpp-single-5060ti.ini
 
 ## Qwen3.6 Single-Card Recipes
 
@@ -86,7 +101,7 @@ Pin the server to one GPU so the result is clearly single-card:
 ~~~bash
 CUDA_VISIBLE_DEVICES=0 llama-server \
   --model /path/to/Qwen3.5-9B-UD-Q4_K_XL.gguf \
-  --ctx-size 131072 \
+  --ctx-size 262144 \
   --cache-type-k q8_0 \
   --cache-type-v q8_0 \
   --n-gpu-layers 99 \
@@ -99,7 +114,7 @@ CUDA_VISIBLE_DEVICES=0 llama-server \
   --spec-draft-n-max 2
 ~~~
 
-For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.6 35B A3B IQ3_XXS has the best long-context fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. Qwen3.6 27B IQ4_XS is much tighter: use 32768 with q8 KV, or 65536 only if you are comfortable dropping KV to q4.
+For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.5 9B MTP Q4 is the cleanest single-card starter because native 262144 context works with q8 KV. Qwen3.6 35B A3B IQ3_XXS has the best long-context larger-model fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. Qwen3.6 27B IQ4_XS is much tighter: use 32768 with q8 KV, or 65536 only if you are comfortable dropping KV to q4.
 
 ## What To Report
 

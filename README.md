@@ -15,9 +15,10 @@ The first documented setup is a dual RTX 5060 Ti 16GB machine running Qwen3.6 27
 | --- | --- | --- | --- |
 | vLLM | sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP | Working | Primary dual-card serving path. |
 | llama.cpp MTP branch | unsloth/Qwen3.6-27B-MTP-GGUF Q4/Q6 | Working | GGUF path with Q4/Q6 speed notes, a stable router preset, and Q6 long-context fit checks. Requires an MTP-capable llama.cpp build. |
-| llama.cpp MTP branch | unsloth/Qwen3.5-9B-MTP-GGUF Q4 | Early checks | Small-model GGUF path that fits the native 262144-token max context with q8 KV, without RoPE scaling or metadata override. |
-| llama.cpp | Qwen3.6 27B IQ4_XS / 35B A3B IQ3_XXS | Single-card checks | One RTX 5060 Ti 16GB can run these lower GGUF quants GPU-only; 35B A3B IQ3_XXS also passed a native-262144 fit and 93636-token retrieval check. |
-| llama.cpp / vLLM | Qwen3.6 35B A3B | Early checks | Small-context GGUF smoke result and vLLM NVFP4/MTP launch example. |
+| llama.cpp MTP branch | unsloth/Qwen3.5-9B-MTP-GGUF Q4 | Working | Small-model GGUF path that fits the native 262144-token max context with q8 KV on one or two 5060 Ti cards using the stock GGUF metadata. |
+| llama.cpp | Qwen3.6 27B IQ4_XS | Single-card check | One RTX 5060 Ti 16GB can run this GPU-only at 32768 context with q8 KV, or 65536 with q4 KV. |
+| llama.cpp | Qwen3.6 35B A3B IQ3_XXS | Single-card check | Stronger long-context single-card result: native 262144 context with q8 KV and a 93636-token retrieval pass. |
+| llama.cpp / vLLM | Qwen3.6 35B A3B | Additional checks | Larger-quant GGUF fallback notes, single-card IQ3_XXS long-context results, and a vLLM NVFP4/MTP launch example. |
 
 ## Tested Baseline
 
@@ -102,7 +103,7 @@ Then open a result issue using the template in this repo. The report script avoi
 
 ## Scope
 
-The current focus is practical 2x RTX 5060 Ti 16GB serving for Qwen3.6 27B, with additional checks for nearby models when we have reproducible evidence. Single-card and mixed-GPU notes are included where they help people get started, but they should be reported separately from the dual-5060 Ti baseline.
+The current focus is practical RTX 5060 Ti 16GB serving with reproducible receipts. Dual-card Qwen3.6 27B remains the main baseline, while single-card and mixed-GPU notes are included where they help people get started. Report those setups separately from the dual-5060 Ti baseline.
 
 ## Contributing
 

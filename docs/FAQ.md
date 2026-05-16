@@ -14,6 +14,12 @@ For vLLM, yes in practice: Linux + CUDA + NVIDIA container runtime is the target
 
 llama.cpp can run on more platforms, but the recipes here assume Linux paths and NVIDIA CUDA.
 
+## Do I need the exact tested NVIDIA driver?
+
+No. The seed rows report driver `595.58.03` because that is what was used for those tests, not because the repo requires that exact version.
+
+If you are already on another recent 595-series driver, try it first and report the exact driver, CUDA/runtime version, and whether the launch worked. Do not downgrade just to match the seed rows unless you are chasing a specific regression.
+
 ## Does VRAM combine across cards?
 
 Sort of, depending on runtime.
@@ -43,6 +49,12 @@ See docs/single-5060ti.md and examples/llamacpp-single-5060ti.ini.
 ## Do I need NVLink?
 
 RTX 5060 Ti cards do not have NVLink. The tested setup works over PCIe. Faster interconnects can help some workloads, but they are not required for the documented recipes.
+
+## Should I install patched P2P drivers?
+
+Not for the basic recipes. The seed results do not require NVLink or patched P2P support.
+
+Patched P2P drivers are system-dependent and should be treated as a separate experiment. If you test them, report stock vs patched driver state, `nvidia-smi topo -p2p`, PCIe topology, and whether tokens/sec or prompt eval actually changed.
 
 ## Should I use vLLM or llama.cpp?
 
