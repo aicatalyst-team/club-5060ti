@@ -75,6 +75,10 @@ scripts/update-llama.sh
 
 This builds the MTP-capable llama.cpp tree used by the Qwen3.6 GGUF examples, pinned by default to the tested PR/commit. The live lab setup runs the service through its own LXC wrapper and preset files; the repo script is the reproducible public build helper, not a service manager. Use the --fresh flag if you want to move the existing source tree aside and clone again.
 
+## Client Setup
+
+See docs/client-examples.md for curl, Python, Open WebUI, OpenCode, Pi/Cline/Cursor-style OpenAI-compatible clients, and Codex CLI gateway notes.
+
 ## Quick Health Check
 
 Once you have a local OpenAI-compatible endpoint running:
