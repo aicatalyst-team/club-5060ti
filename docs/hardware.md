@@ -45,18 +45,18 @@ The current seed benchmark rows are still useful as working recipe receipts. Tre
 
 The project name reflects the tested baseline, not a claim that every recipe is Blackwell-only. llama.cpp/GGUF results may transfer to other NVIDIA cards, especially when VRAM is similar, but mixed-architecture results should be reported separately from the 2x RTX 5060 Ti lane.
 
-For mixed RTX 40/50-series builds, set the CUDA architectures explicitly when building llama.cpp, for example:
+For non-5060 Ti or mixed-architecture builds, set the CUDA architectures explicitly when building llama.cpp, for example:
 
 ~~~bash
-CUDA_ARCHITECTURES="89;120a" scripts/update-llama.sh
+CUDA_ARCHITECTURES="86;89;120a" scripts/update-llama.sh
 ~~~
 
-See docs/gpu-compatibility.md for the full caveats.
+Use the architecture list supported by your installed CUDA/CMake toolchain. See docs/gpu-compatibility.md for the full caveats.
 
 ## What Not To Generalize Yet
 
 - Single RTX 5060 Ti results may look very different.
-- Mixed GPU results, such as RTX 4070 Ti Super plus RTX 5060 Ti, should be reported separately from dual-5060 Ti results.
+- Mixed GPU results should be reported separately from dual-5060 Ti results.
 - Motherboard PCIe layout may matter for multi-GPU setups.
 - Different CPUs, RAM allocation, and host memory bandwidth may change long-context behavior.
 - New vLLM, CUDA, and modelopt builds may change the best flags.

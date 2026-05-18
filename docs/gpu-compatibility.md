@@ -15,17 +15,17 @@ club-5060ti is tested around RTX 5060 Ti 16GB cards, but not every note here is 
 - Benchmark reporting rules apply to any local GPU setup: record model, quant, context, generated tokens, KV cache, runtime, driver, and hardware topology.
 - Single-card and mixed-card results are useful, but they should be labeled separately from the 1x/2x RTX 5060 Ti lanes.
 
-## Mixed RTX 40/50 Series Setups
+## Mixed Or Non-Blackwell CUDA Setups
 
-Mixed Ada plus Blackwell setups, such as RTX 4070 Ti Super 16GB plus RTX 5060 Ti 16GB, may work for llama.cpp/GGUF serving. Expect a different best tensor split and do not assume the dual-5060 Ti numbers apply.
+Other NVIDIA CUDA GPUs may work with parts of the repo, especially the llama.cpp/GGUF recipes. Mixed-architecture setups may also work, but expect a different best tensor split and do not assume the dual-5060 Ti numbers apply.
 
-Start with llama.cpp before vLLM for mixed-card testing:
+Start with llama.cpp before vLLM for mixed-card or non-Blackwell testing:
 
 ~~~bash
-CUDA_ARCHITECTURES="89;120a" scripts/update-llama.sh
+CUDA_ARCHITECTURES="86;89;120a" scripts/update-llama.sh
 ~~~
 
-That example asks CMake to build for Ada-class RTX 40 cards and Blackwell-class RTX 50 cards. If your CUDA/CMake toolchain rejects an architecture string, use the architecture names supported by your installed toolchain and record the exact value in your result.
+That example is only illustrative. Set a semicolon-separated CMake CUDA architecture list that matches the GPUs you want the binary to support. If your CUDA/CMake toolchain rejects an architecture string, use the architecture names supported by your installed toolchain and record the exact value in your result.
 
 Then test a conservative GGUF route before raising context or adding speculative decoding:
 
@@ -42,7 +42,7 @@ Adjust `--tensor-split` for the actual cards. Equal VRAM does not guarantee equa
 
 ## vLLM Caveat
 
-vLLM tensor parallel and NVFP4/MTP paths are stricter than llama.cpp/GGUF paths. A setup that works with two identical RTX 5060 Ti cards may fail or underperform on mixed RTX 40/50 cards because the kernel, quantization, and runtime assumptions are different.
+vLLM tensor parallel and NVFP4/MTP paths are stricter than llama.cpp/GGUF paths. A setup that works with two identical RTX 5060 Ti cards may fail or underperform on another architecture or mixed-card system because the kernel, quantization, and runtime assumptions are different.
 
 If you test vLLM on mixed cards, report it as its own engine lane and include:
 

@@ -38,7 +38,7 @@ Environment overrides:
   LLAMA_CPP_REPO          llama.cpp remote, default ggml-org/llama.cpp
   LLAMA_CPP_REF           commit/ref to checkout, default tested commit b64739ea3...
   CUDA_ARCHITECTURES      default 120a for RTX 5060 Ti / Blackwell
-                          use quoted semicolon lists for mixed builds, for example 89;120a
+                          use quoted semicolon lists for mixed builds, for example 86;89;120a
   JOBS                    default 12
   INSTALL_PREFIX          optional symlink target for built binaries
 USAGE

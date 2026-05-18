@@ -10,7 +10,7 @@ The project focus is simple: make low-VRAM Blackwell local inference more reprod
 | --- | --- | --- |
 | 1x RTX 5060 Ti | You want the best single-card fits and conservative starter configs. | docs/single-5060ti.md |
 | 2x RTX 5060 Ti | You want dual-16GB recipes for 27B-class and long-context models. | docs/llamacpp-qwen36.md |
-| Mixed or non-Blackwell GPUs | You want to adapt the recipes to RTX 40/50-series or other NVIDIA setups. | docs/gpu-compatibility.md |
+| Other CUDA GPUs | You want to adapt the recipes to non-5060 Ti or mixed-architecture NVIDIA setups. | docs/gpu-compatibility.md |
 | Results explorer | You want to compare benchmark receipts and imported legacy data. | https://5p00kyy.github.io/club-5060ti/ |
 | Benchmark protocol | You want to submit or compare a result without mixing methods. | docs/benchmark-protocol.md |
 
@@ -88,7 +88,7 @@ The hosted explorer defaults to one card per model/setup, with prompt-specific b
 - docs/community-goals.md - project goals and contribution priorities
 - docs/client-examples.md - OpenAI-compatible client examples
 - docs/reporting-results.md - how to capture a useful result report
-- docs/gpu-compatibility.md - Blackwell, mixed-GPU, and non-5060 Ti adaptation notes
+- docs/gpu-compatibility.md - Blackwell baseline, mixed-GPU, and other CUDA architecture notes
 - docs/single-5060ti.md - conservative single-card starter configs
 - docs/vllm-qwen36.md - vLLM NVFP4/MTP notes
 - docs/llamacpp-qwen36.md - llama.cpp Qwen3.6 27B MTP GGUF route
@@ -123,13 +123,13 @@ scripts/update-llama.sh
 
 This builds the upstream llama.cpp tree used by the Qwen3.6 GGUF examples. The helper is a reproducible public build path, not a service manager for a specific deployment.
 
-The default CUDA architecture target is `120a` for RTX 5060 Ti / Blackwell. For mixed RTX 40/50-series builds, pass the architectures explicitly:
+The default CUDA architecture target is `120a` for RTX 5060 Ti / Blackwell. For other CUDA GPUs or mixed-architecture builds, pass the architectures explicitly:
 
 ~~~bash
-CUDA_ARCHITECTURES="89;120a" scripts/update-llama.sh
+CUDA_ARCHITECTURES="86;89;120a" scripts/update-llama.sh
 ~~~
 
-See docs/gpu-compatibility.md before treating mixed-card results as comparable with the 2x RTX 5060 Ti baseline.
+Use the architecture list supported by your installed CUDA/CMake toolchain and record the exact value in your result. See docs/gpu-compatibility.md before treating mixed-card results as comparable with the 2x RTX 5060 Ti baseline.
 
 ## Contribution Standard
 

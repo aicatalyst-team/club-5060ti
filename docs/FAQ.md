@@ -32,13 +32,13 @@ llama.cpp can split layers/weights across GPUs with tensor split settings. It is
 
 Not always, but mixed cards should be treated as a separate result.
 
-llama.cpp is the more forgiving path. A mixed pair such as RTX 4070 Ti Super 16GB plus RTX 5060 Ti 16GB may work for GGUF serving if the CUDA build supports both GPUs and the tensor split fits within each card's VRAM. Expect the slower card, PCIe layout, and split choice to affect results.
+llama.cpp is the more forgiving path. A mixed pair may work for GGUF serving if the CUDA build supports all GPUs and the tensor split fits within each card's VRAM. Expect the slower card, PCIe layout, CUDA architecture support, and split choice to affect results.
 
-vLLM tensor parallel is less forgiving. The documented NVFP4/MTP recipes were tested on two RTX 5060 Ti 16GB cards. Do not assume those exact vLLM NVFP4 flags work unchanged on a mixed Ada plus Blackwell setup, because the NVFP4 path depends on newer Blackwell-oriented CUDA/runtime support.
+vLLM tensor parallel is less forgiving. The documented NVFP4/MTP recipes were tested on two RTX 5060 Ti 16GB cards. Do not assume those exact vLLM NVFP4 flags work unchanged on another architecture or mixed-architecture setup, because the NVFP4 path depends on newer Blackwell-oriented CUDA/runtime support.
 
 If you test mixed cards, report the exact GPU names, VRAM, driver, CUDA/runtime build, PCIe link widths, model, quant, context, KV cache, tensor split or tensor-parallel size, and whether single-GPU and multi-GPU launches both work.
 
-For a 4070 Ti Super 16GB plus 5060 Ti 16GB, start with llama.cpp/GGUF before vLLM. The VRAM size matches, but the cards are different architectures, so the best working config may be different from the dual-5060 Ti NVFP4 recipe.
+For non-5060 Ti or mixed-architecture systems, start with llama.cpp/GGUF before vLLM. Similar VRAM does not mean the cards behave the same, so the best working config may be different from the dual-5060 Ti NVFP4 recipe.
 
 See docs/gpu-compatibility.md for build and reporting notes.
 
