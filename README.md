@@ -78,6 +78,8 @@ python3 scripts/run_openai_bench.py \
 
 The old llm-bench summary rows have been imported into data/results/llm-bench-legacy-import.json as deprecated data. They are useful migration material, not new headline evidence.
 
+The hosted explorer defaults to one row per setup, using the best decode run when repeated measurements exist. Enable "all runs" in the explorer to inspect raw repeated measurements.
+
 ## Repo Map
 
 - docs/benchmark-protocol.md - comparable-result rules, prompt sets, context tiers, and promotion levels

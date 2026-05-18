@@ -6,6 +6,8 @@ Benchmarks here are receipts, not universal claims. Always include the setup det
 
 Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are deprecated migration data and should be redone before headline use.
 
+The explorer defaults to one row per setup and collapses repeated runs to the best decode run while keeping the run count visible. Use the all-runs toggle when inspecting raw repeated measurements.
+
 Seed run files:
 
 - data/results/seed-qwen35-server-20260519.json

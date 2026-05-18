@@ -210,7 +210,7 @@
     .toolbar {
       display: grid;
       gap: 7px;
-      grid-template-columns: minmax(220px, 1.8fr) repeat(5, minmax(120px, 1fr)) minmax(110px, 0.8fr);
+      grid-template-columns: minmax(220px, 1.8fr) repeat(5, minmax(120px, 1fr)) repeat(2, minmax(96px, 0.75fr));
     }
 
     input, select {
@@ -252,6 +252,18 @@
       box-shadow: none;
       margin: 0;
       background: transparent;
+    }
+
+    .sr-only {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
     }
 
     .sec {
@@ -304,6 +316,12 @@
       min-height: 34px;
     }
 
+    .mode-note {
+      color: var(--text-3);
+      font-size: 11px;
+      margin-top: 7px;
+    }
+
     .table-wrap {
       border: 1px solid var(--line);
       border-radius: 6px;
@@ -314,7 +332,7 @@
     table {
       width: 100%;
       border-collapse: collapse;
-      min-width: 960px;
+      min-width: 1040px;
     }
 
     th, td {
@@ -461,7 +479,7 @@
 
     @media (max-width: 1060px) {
       .stat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
-      .toolbar { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+      .toolbar { grid-template-columns: repeat(4, minmax(0, 1fr)); }
       .toolbar > input { grid-column: 1 / -1; }
       .summary-grid { grid-template-columns: 1fr; }
     }
@@ -513,14 +531,14 @@
 
     <div class="stat-grid">
       <div class="stat">
-        <div class="k">Visible rows</div>
+        <div class="k">Visible setups</div>
         <div class="v" id="metric-visible">0</div>
-        <div class="n" id="metric-total">0 loaded</div>
+        <div class="n" id="metric-total">0 raw runs loaded</div>
       </div>
       <div class="stat">
-        <div class="k">Compare-ready</div>
-        <div class="v" id="metric-ready">0</div>
-        <div class="n">non-archived rows</div>
+        <div class="k">Raw runs</div>
+        <div class="v" id="metric-raw-visible">0</div>
+        <div class="n">in current filters</div>
       </div>
       <div class="stat">
         <div class="k">Highest context</div>
@@ -530,7 +548,7 @@
       <div class="stat">
         <div class="k">Best decode</div>
         <div class="v" id="metric-best-decode">n/a</div>
-        <div class="n">tok/s in visible rows</div>
+        <div class="n">tok/s in visible setups</div>
       </div>
       <div class="stat">
         <div class="k">Archived imports</div>
@@ -541,14 +559,22 @@
 
     <div class="panel" id="results">
       <div class="toolbar">
-        <input id="search" type="search" placeholder="filter model, engine, quant, caveat">
+        <label class="sr-only" for="search">Filter results</label>
+        <input id="search" type="search" placeholder="filter model, engine, quant, caveat" autocomplete="off">
+        <label class="sr-only" for="gpu-filter">Hardware filter</label>
         <select id="gpu-filter"></select>
+        <label class="sr-only" for="engine-filter">Engine filter</label>
         <select id="engine-filter"></select>
+        <label class="sr-only" for="family-filter">Model family filter</label>
         <select id="family-filter"></select>
+        <label class="sr-only" for="level-filter">Status filter</label>
         <select id="level-filter"></select>
+        <label class="sr-only" for="prompt-filter">Prompt set filter</label>
         <select id="prompt-filter"></select>
         <label class="check"><input id="archived-filter" type="checkbox"> archived</label>
+        <label class="check"><input id="raw-filter" type="checkbox"> all runs</label>
       </div>
+      <div class="mode-note" id="mode-note">Default view shows the best run for each setup. Enable all runs to inspect raw repeated measurements.</div>
     </div>
 
     <section class="sec">
@@ -561,7 +587,7 @@
       </div>
       <div class="compare-note" id="compare-note"></div>
       <div class="table-wrap">
-        <table>
+        <table aria-describedby="compare-note mode-note">
           <thead>
             <tr>
               <th data-sort="model">Model</th>
@@ -571,6 +597,7 @@
               <th data-sort="prompt">Prompt Set</th>
               <th data-sort="decode">Decode</th>
               <th data-sort="prompt_speed">Prompt</th>
+              <th data-sort="runs">Runs</th>
               <th data-sort="level">Status</th>
               <th>Caveat</th>
             </tr>
@@ -638,6 +665,7 @@
   <script>
     const DATA_URL = 'data/results.json';
     let allResults = [];
+    let filteredResults = [];
     let visibleResults = [];
     let sortKey = 'decode';
     let sortDir = -1;
@@ -698,6 +726,7 @@
       if (key === 'prompt') return get(item, 'benchmark.prompt_set', '');
       if (key === 'decode') return get(item, 'metrics.decode_tok_s', 0);
       if (key === 'prompt_speed') return get(item, 'metrics.prompt_tok_s', 0);
+      if (key === 'runs') return item._run_count || 1;
       if (key === 'level') return get(item, 'promotion_level', '');
       return '';
     };
@@ -713,6 +742,43 @@
     const renderBar = (value, max) => {
       const width = max > 0 && value ? Math.max(3, Math.min(100, (value / max) * 100)) : 0;
       return '<div class="bar"><span class="num">' + formatNumber(value, 1) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + width + '%"></div></div></div>';
+    };
+
+    const groupKey = (item) => [
+      get(item, 'model.id', ''),
+      get(item, 'model.family', ''),
+      get(item, 'model.quant', ''),
+      get(item, 'runtime.engine', ''),
+      get(item, 'hardware.gpu_count', ''),
+      get(item, 'hardware.gpu_model', ''),
+      get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', '')),
+      get(item, 'benchmark.prompt_set', ''),
+      get(item, 'promotion_level', ''),
+      get(item, 'source.type', '')
+    ].join('|');
+
+    const collapseRepeatedRuns = (items) => {
+      const groups = new Map();
+      for (const item of items) {
+        const key = groupKey(item);
+        const row = groups.get(key) || [];
+        row.push(item);
+        groups.set(key, row);
+      }
+
+      return Array.from(groups.values()).map((runs) => {
+        const sorted = [...runs].sort((a, b) => Number(get(b, 'metrics.decode_tok_s', 0) || 0) - Number(get(a, 'metrics.decode_tok_s', 0) || 0));
+        const best = JSON.parse(JSON.stringify(sorted[0]));
+        const decodeValues = runs.map((item) => Number(get(item, 'metrics.decode_tok_s', 0) || 0)).filter((value) => value > 0);
+        const promptValues = runs.map((item) => Number(get(item, 'metrics.prompt_tok_s', 0) || 0)).filter((value) => value > 0);
+        best._run_count = runs.length;
+        best._raw_ids = runs.map((item) => item.id).filter(Boolean);
+        best._avg_decode_tok_s = decodeValues.length ? decodeValues.reduce((sum, value) => sum + value, 0) / decodeValues.length : null;
+        best._avg_prompt_tok_s = promptValues.length ? promptValues.reduce((sum, value) => sum + value, 0) / promptValues.length : null;
+        best._best_prompt_tok_s = promptValues.length ? Math.max(...promptValues) : null;
+        if (best._best_prompt_tok_s) best.metrics.prompt_tok_s = best._best_prompt_tok_s;
+        return best;
+      });
     };
 
     const buildHardwareLane = () => {
@@ -792,8 +858,9 @@
       const level = document.getElementById('level-filter').value;
       const prompt = document.getElementById('prompt-filter').value;
       const includeArchived = document.getElementById('archived-filter').checked;
+      const showRawRuns = document.getElementById('raw-filter').checked;
 
-      visibleResults = allResults.filter((item) => {
+      filteredResults = allResults.filter((item) => {
         const gpuLabel = String(get(item, 'hardware.gpu_count', '')) + 'x ' + get(item, 'hardware.gpu_model', '');
         const itemLevel = get(item, 'promotion_level', '');
         if (!includeArchived && !level && itemLevel === 'deprecated') return false;
@@ -805,6 +872,8 @@
         if (prompt && get(item, 'benchmark.prompt_set', '') !== prompt) return false;
         return true;
       });
+
+      visibleResults = showRawRuns ? filteredResults.map((item) => ({ ...item, _run_count: 1 })) : collapseRepeatedRuns(filteredResults);
 
       visibleResults.sort((a, b) => {
         const av = sortValue(a, sortKey);
@@ -830,28 +899,37 @@
         const prompt = get(item, 'benchmark.prompt_set', 'unknown');
         const level = get(item, 'promotion_level', 'unknown');
         const caveat = (item.caveats || [get(item, 'benchmark.notes', '')]).filter(Boolean)[0] || '';
+        const runCount = item._run_count || 1;
+        const avgDecode = item._avg_decode_tok_s;
+        const avgPrompt = item._avg_prompt_tok_s;
+        const decodeLabel = runCount > 1 && avgDecode ? 'best ' + formatNumber(get(item, 'metrics.decode_tok_s', null), 1) + ' / avg ' + formatNumber(avgDecode, 1) : formatNumber(get(item, 'metrics.decode_tok_s', null), 1);
+        const promptLabel = runCount > 1 && avgPrompt ? 'best ' + formatNumber(get(item, 'metrics.prompt_tok_s', null), 1) + ' / avg ' + formatNumber(avgPrompt, 1) : formatNumber(get(item, 'metrics.prompt_tok_s', null), 1);
         return '<tr>' +
           '<td><div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div></td>' +
           '<td><span class="badge engine">' + escapeHtml(engine) + '</span></td>' +
           '<td class="mono">' + escapeHtml(gpu) + '</td>' +
           '<td class="num">' + formatNumber(context, 0) + '</td>' +
           '<td><span class="badge">' + escapeHtml(prompt) + '</span></td>' +
-          '<td>' + renderBar(get(item, 'metrics.decode_tok_s', null), maxDecode) + '</td>' +
-          '<td>' + renderBar(get(item, 'metrics.prompt_tok_s', null), maxPrompt) + '</td>' +
+          '<td>' + renderBar(get(item, 'metrics.decode_tok_s', null), maxDecode) + '<div class="subline">' + escapeHtml(decodeLabel) + '</div></td>' +
+          '<td>' + renderBar(get(item, 'metrics.prompt_tok_s', null), maxPrompt) + '<div class="subline">' + escapeHtml(promptLabel) + '</div></td>' +
+          '<td><span class="badge">' + (runCount > 1 ? 'best of ' + runCount : '1') + '</span></td>' +
           '<td><span class="badge ' + badgeClass(level) + '">' + escapeHtml(level) + '</span></td>' +
           '<td class="muted">' + escapeHtml(caveat) + '</td>' +
           '</tr>';
       }).join('');
 
       document.getElementById('metric-visible').textContent = visibleResults.length;
-      document.getElementById('metric-total').textContent = allResults.length + ' loaded';
-      document.getElementById('metric-ready').textContent = allResults.filter((item) => get(item, 'promotion_level', '') !== 'deprecated').length;
+      document.getElementById('metric-total').textContent = allResults.length + ' raw runs loaded';
+      document.getElementById('metric-raw-visible').textContent = filteredResults.length;
       document.getElementById('metric-archived').textContent = allResults.filter((item) => get(item, 'promotion_level', '') === 'deprecated').length;
       const maxContext = Math.max(0, ...visibleResults.map((item) => Number(get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', 0)) || 0)));
       document.getElementById('metric-context').textContent = maxContext ? formatNumber(maxContext, 0) : 'n/a';
       const bestDecode = Math.max(0, ...visibleResults.map((item) => Number(get(item, 'metrics.decode_tok_s', 0) || 0)));
       document.getElementById('metric-best-decode').textContent = bestDecode ? formatNumber(bestDecode, 1) : 'n/a';
       document.getElementById('sort-label').textContent = 'sorted by ' + sortKey.replace('_', ' ');
+      document.getElementById('mode-note').textContent = document.getElementById('raw-filter').checked
+        ? 'Raw run view: repeated measurements are shown individually for inspection.'
+        : 'Default view: repeated measurements are collapsed to one setup row using the best decode run. The run count remains visible.';
 
       const prompts = unique(visibleResults.map((item) => get(item, 'benchmark.prompt_set', '')));
       const contexts = unique(visibleResults.map((item) => String(get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', '')))));
@@ -865,7 +943,7 @@
         note.textContent = 'Strict lane: same engine, prompt set, and configured context across visible rows.';
       } else {
         note.style.borderLeftColor = 'var(--amber)';
-        note.textContent = 'Recipe view: visible rows mix engine, prompt, or context settings. Filter down before treating speed numbers as a strict comparison.';
+        note.textContent = 'Recipe view: visible setups mix engine, prompt, or context settings. Filter down before treating speed numbers as a strict comparison.';
       }
 
       renderSummaries();
@@ -885,6 +963,7 @@
 
       document.querySelectorAll('input, select').forEach((element) => element.addEventListener('input', applyFilters));
       document.getElementById('archived-filter').addEventListener('change', applyFilters);
+      document.getElementById('raw-filter').addEventListener('change', applyFilters);
       document.querySelectorAll('th[data-sort]').forEach((header) => {
         header.addEventListener('click', () => {
           const next = header.getAttribute('data-sort');
@@ -901,7 +980,7 @@
     };
 
     boot().catch((error) => {
-      document.getElementById('results-body').innerHTML = '<tr><td colspan="9">Failed to load site data: ' + error + '</td></tr>';
+      document.getElementById('results-body').innerHTML = '<tr><td colspan="10">Failed to load site data: ' + error + '</td></tr>';
       document.getElementById('engine-summary-body').innerHTML = '<tr><td colspan="4" class="muted">No data.</td></tr>';
       document.getElementById('family-summary-body').innerHTML = '<tr><td colspan="4" class="muted">No data.</td></tr>';
     });
