@@ -13,37 +13,45 @@ Seed run files:
 - data/results/seed-qwen35-server-20260519.json
 - data/results/seed-qwen35-qwen36-server-20260519.json
 - data/results/seed-qwen35-qwen36-long-retrieval-20260519.json
+- data/results/seed-qwen36-35b-a3b-thinking-20260519.json
+- data/results/seed-qwen36-35b-a3b-thinking-long-retrieval-20260519.json
 
 Best decode results by model/prompt from the first run:
 
-| Model | Prompt set | Best decode tok/s | Best prompt tok/s | Generated tokens |
-| --- | --- | ---: | ---: | ---: |
-| Qwen3.5-0.8B | short-chat | 268.65 | 1832.80 | 256 |
-| Qwen3.5-0.8B | code-generate | 269.99 | 3095.07 | 768 |
-| Qwen3.5-0.8B | agent-tool | 270.52 | 241.08 | 512 |
-| Qwen3.5-0.8B | long-retrieval | 194.78 | 26.66 | 17 |
-| Qwen3.5-2B | short-chat | 182.50 | 1669.63 | 256 |
-| Qwen3.5-2B | code-generate | 178.30 | 2607.75 | 768 |
-| Qwen3.5-2B | agent-tool | 177.99 | 212.04 | 512 |
-| Qwen3.5-2B | long-retrieval | 145.73 | 26.03 | 17 |
-| Qwen3.5-4B | short-chat | 97.73 | 1159.83 | 256 |
-| Qwen3.5-4B | code-generate | 94.68 | 1802.11 | 768 |
-| Qwen3.5-4B | agent-tool | 94.69 | 126.31 | 512 |
-| Qwen3.5-4B | long-retrieval | 77.74 | 21.68 | 17 |
-| Qwen3.5-9B | short-chat | 70.99 | 508.23 | 256 |
-| Qwen3.5-9B | code-generate | 90.99 | 726.45 | 768 |
-| Qwen3.5-9B | agent-tool | 72.74 | 94.87 | 512 |
-| Qwen3.5-9B | long-retrieval | 104.45 | 19.62 | 17 |
-| Qwen3.6-27B | short-chat | 34.39 | 196.19 | 256 |
-| Qwen3.6-27B | code-generate | 37.78 | 288.80 | 768 |
-| Qwen3.6-27B | agent-tool | 29.03 | 35.03 | 512 |
-| Qwen3.6-27B | long-retrieval | 38.76 | 14.66 | 17 |
-| Qwen3.6-35B-A3B-Instruct | short-chat | 92.37 | 625.15 | 256 |
-| Qwen3.6-35B-A3B-Instruct | code-generate | 90.11 | 839.47 | 768 |
-| Qwen3.6-35B-A3B-Instruct | agent-tool | 90.07 | 104.70 | 512 |
-| Qwen3.6-35B-A3B-Instruct | long-retrieval | 74.41 | 22.55 | 17 |
+| Model | Prompt set | Thinking | Speculation | Best generation tok/s | Best prompt eval tok/s | Generated tokens |
+| --- | --- | --- | --- | ---: | ---: | ---: |
+| Qwen3.5-0.8B | short-chat | off | no MTP | 268.65 | 1832.80 | 256 |
+| Qwen3.5-0.8B | code-generate | off | no MTP | 269.99 | 3095.07 | 768 |
+| Qwen3.5-0.8B | agent-tool | off | no MTP | 270.52 | 241.08 | 512 |
+| Qwen3.5-0.8B | long-retrieval | off | no MTP | 194.78 | 26.66 | 17 |
+| Qwen3.5-2B | short-chat | off | no MTP | 182.50 | 1669.63 | 256 |
+| Qwen3.5-2B | code-generate | off | no MTP | 178.30 | 2607.75 | 768 |
+| Qwen3.5-2B | agent-tool | off | no MTP | 177.99 | 212.04 | 512 |
+| Qwen3.5-2B | long-retrieval | off | no MTP | 145.73 | 26.03 | 17 |
+| Qwen3.5-4B | short-chat | off | no MTP | 97.73 | 1159.83 | 256 |
+| Qwen3.5-4B | code-generate | off | no MTP | 94.68 | 1802.11 | 768 |
+| Qwen3.5-4B | agent-tool | off | no MTP | 94.69 | 126.31 | 512 |
+| Qwen3.5-4B | long-retrieval | off | no MTP | 77.74 | 21.68 | 17 |
+| Qwen3.5-9B | short-chat | off | draft-mtp n=3 | 70.99 | 508.23 | 256 |
+| Qwen3.5-9B | code-generate | off | draft-mtp n=3 | 90.99 | 726.45 | 768 |
+| Qwen3.5-9B | agent-tool | off | draft-mtp n=3 | 72.74 | 94.87 | 512 |
+| Qwen3.5-9B | long-retrieval | off | draft-mtp n=3 | 104.45 | 19.62 | 17 |
+| Qwen3.6-27B | short-chat | off | draft-mtp n=3 | 34.39 | 196.19 | 256 |
+| Qwen3.6-27B | code-generate | off | draft-mtp n=3 | 37.78 | 288.80 | 768 |
+| Qwen3.6-27B | agent-tool | off | draft-mtp n=3 | 29.03 | 35.03 | 512 |
+| Qwen3.6-27B | long-retrieval | off | draft-mtp n=3 | 38.76 | 14.66 | 17 |
+| Qwen3.6-35B-A3B | short-chat | on | no MTP | 92.16 | 595.95 | 256 |
+| Qwen3.6-35B-A3B | code-generate | on | no MTP | 89.75 | 871.21 | 768 |
+| Qwen3.6-35B-A3B | agent-tool | on | no MTP | 89.71 | 102.65 | 512 |
+| Qwen3.6-35B-A3B | long-retrieval | on | no MTP | 70.41 | 21.89 | 96 |
 
 These are OpenAI-compatible server benchmark results from the 2x RTX 5060 Ti seed system using scripts/run_openai_bench.py. Long-retrieval rows use a synthetic filler prompt and short answer budget, so they primarily measure long-prompt handling rather than sustained decode.
+
+Current comparison gaps to fill before making stricter MTP/no-MTP claims:
+
+- Qwen3.6 27B with the same benchmark protocol and MTP disabled.
+- Qwen3.6 35B A3B with a supported MTP/speculative route, if a stable engine lane is available.
+- Matching vLLM and alternate llama.cpp-family lanes with the same prompt sets, context, KV cache, and thinking mode.
 
 ## Current Seed Results
 

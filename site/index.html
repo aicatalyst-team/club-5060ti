@@ -218,7 +218,7 @@
     .toolbar {
       display: grid;
       gap: 7px;
-      grid-template-columns: minmax(240px, 1.4fr) repeat(6, minmax(105px, 1fr)) repeat(2, minmax(105px, 0.8fr));
+      grid-template-columns: minmax(240px, 1.4fr) repeat(7, minmax(105px, 1fr)) repeat(2, minmax(105px, 0.8fr));
     }
 
     input, select {
@@ -766,6 +766,8 @@
         <select id="engine-filter" aria-controls="results-list"></select>
         <label class="sr-only" for="spec-filter">MTP/speculation filter</label>
         <select id="spec-filter" aria-controls="results-list"></select>
+        <label class="sr-only" for="thinking-filter">Thinking mode filter</label>
+        <select id="thinking-filter" aria-controls="results-list"></select>
         <label class="sr-only" for="family-filter">Model family filter</label>
         <select id="family-filter" aria-controls="results-list"></select>
         <label class="sr-only" for="level-filter">Status filter</label>
@@ -901,6 +903,7 @@
       get(item, 'runtime.engine', ''),
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
+      get(item, 'serving.thinking', ''),
       get(item, 'benchmark.prompt_set', ''),
       (item.caveats || []).join(' ')
     ].join(' ').toLowerCase();
@@ -1124,6 +1127,7 @@
       const gpu = document.getElementById('gpu-filter').value;
       const engine = document.getElementById('engine-filter').value;
       const spec = document.getElementById('spec-filter').value;
+      const thinking = document.getElementById('thinking-filter').value;
       const family = document.getElementById('family-filter').value;
       const level = document.getElementById('level-filter').value;
       const prompt = document.getElementById('prompt-filter').value;
@@ -1138,6 +1142,7 @@
         if (gpu && gpuLabel !== gpu) return false;
         if (engine && get(item, 'runtime.engine', '') !== engine) return false;
         if (spec && specLabel(item) !== spec) return false;
+        if (thinking && get(item, 'serving.thinking', 'unknown') !== thinking) return false;
         if (family && get(item, 'model.family', '') !== family) return false;
         if (level && itemLevel !== level) return false;
         if (prompt && get(item, 'benchmark.prompt_set', '') !== prompt) return false;
@@ -1200,6 +1205,7 @@
       const context = get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', null));
       const level = get(item, 'promotion_level', 'unknown');
       const kv = [get(item, 'serving.kv_cache_k', ''), get(item, 'serving.kv_cache_v', '')].filter(Boolean).join('/') || 'KV n/a';
+      const thinking = get(item, 'serving.thinking', 'unknown');
       return '<article class="model-card">' +
         '<div class="model-head">' +
           '<div class="model-title"><div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div></div>' +
@@ -1209,6 +1215,7 @@
             '<span class="badge">ctx ' + formatNumber(context, 0) + '</span>' +
             '<span class="badge">' + escapeHtml(kv) + '</span>' +
             '<span class="badge blue">' + escapeHtml(specLabel(item)) + '</span>' +
+            '<span class="badge amber">thinking ' + escapeHtml(thinking) + '</span>' +
             '<span class="badge ' + badgeClass(level) + '">' + escapeHtml(level) + '</span>' +
           '</div>' +
           '<div class="model-kpis"><div class="model-kpi"><div class="k">best generation</div><div class="v">' + (group.bestDecode ? formatNumber(group.bestDecode, 1) : 'n/a') + '</div></div><div class="model-kpi"><div class="k">prompt rows</div><div class="v">' + group.rows.length + '</div></div></div>' +
@@ -1272,6 +1279,7 @@
       fillSelect('gpu-filter', 'all hardware', unique(allResults.map((item) => String(get(item, 'hardware.gpu_count', '')) + 'x ' + get(item, 'hardware.gpu_model', ''))));
       fillSelect('engine-filter', 'all engines', unique(allResults.map((item) => get(item, 'runtime.engine', ''))));
       fillSelect('spec-filter', 'all MTP/spec', unique(allResults.map((item) => specLabel(item))));
+      fillSelect('thinking-filter', 'all thinking', unique(allResults.map((item) => get(item, 'serving.thinking', 'unknown'))));
       fillSelect('family-filter', 'all families', unique(allResults.map((item) => get(item, 'model.family', ''))));
       fillSelect('level-filter', 'all levels', unique(allResults.map((item) => get(item, 'promotion_level', ''))));
       fillSelect('prompt-filter', 'all prompts', unique(allResults.map((item) => get(item, 'benchmark.prompt_set', ''))));
