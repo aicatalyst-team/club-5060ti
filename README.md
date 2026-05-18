@@ -101,19 +101,17 @@ The hosted explorer defaults to one row per setup, using the best decode run whe
 
 ## Model Downloads
 
-The public download helper wraps the Hugging Face CLI for model files used by the examples:
+The download helper wraps the Hugging Face CLI and accepts a Hugging Face author or organization, model repo name, optional quant/file selector, and optional download directory:
 
 ~~~bash
-scripts/download-models.sh qwen36-27b-vllm
-scripts/download-models.sh qwen36-27b-gguf-q6
-scripts/download-models.sh qwen36-27b-gguf-iq4xs
-scripts/download-models.sh qwen35-9b-mtp-gguf-q4
-scripts/download-models.sh qwen36-35b-a3b-vllm
-scripts/download-models.sh qwen36-35b-a3b-gguf
-scripts/download-models.sh qwen36-35b-a3b-gguf-iq3xxs
+scripts/download-models.sh unsloth Qwen3.6-27B-MTP-GGUF Q4_K_XL ~/models/Qwen3.6-27B-MTP-GGUF
+scripts/download-models.sh unsloth Qwen3.6-27B-MTP-GGUF Qwen3.6-27B-UD-Q6_K_XL.gguf ~/models/Qwen3.6-27B-MTP-GGUF
+scripts/download-models.sh RedHatAI Qwen3.6-35B-A3B-NVFP4 '' ~/models/Qwen3.6-35B-A3B-NVFP4
 ~~~
 
-Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large GGUF files on constrained storage, HF_HUB_DISABLE_XET=1 is the safer default used by the helper.
+When the selector ends in `.gguf`, it is treated as an exact file. Otherwise it becomes a GGUF include pattern, so `Q4_K_XL` downloads matching `*Q4_K_XL*.gguf` files. Leave the selector empty to download the full repository.
+
+Set `MODEL_DIR` if you want a different default root. Compatibility target aliases such as `qwen36-27b-gguf-q4` still work, but the explicit author/model/selector form is preferred because it is easier to audit and adapt.
 
 ## llama.cpp Build Helper
 
