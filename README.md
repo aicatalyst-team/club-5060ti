@@ -2,7 +2,7 @@
 
 Practical local LLM recipes, benchmark receipts, and setup notes for RTX 5060 Ti 16GB systems.
 
-The project focus is simple: make low-VRAM Blackwell local inference more reproducible. Every useful result should come with the launch shape, hardware context, model details, benchmark method, and caveats needed for someone else to reproduce or improve it.
+The project focus is simple: make low-VRAM Blackwell local inference more reproducible, starting with the RTX 5060 Ti 16GB. Some llama.cpp/GGUF notes are useful on other NVIDIA cards too, but non-5060 Ti and mixed-GPU results should be reported as separate hardware lanes. Every useful result should come with the launch shape, hardware context, model details, benchmark method, and caveats needed for someone else to reproduce or improve it.
 
 ## Start Here
 
@@ -10,12 +10,13 @@ The project focus is simple: make low-VRAM Blackwell local inference more reprod
 | --- | --- | --- |
 | 1x RTX 5060 Ti | You want the best single-card fits and conservative starter configs. | docs/single-5060ti.md |
 | 2x RTX 5060 Ti | You want dual-16GB recipes for 27B-class and long-context models. | docs/llamacpp-qwen36.md |
+| Mixed or non-Blackwell GPUs | You want to adapt the recipes to RTX 40/50-series or other NVIDIA setups. | docs/gpu-compatibility.md |
 | Results explorer | You want to compare benchmark receipts and imported legacy data. | https://5p00kyy.github.io/club-5060ti/ |
 | Benchmark protocol | You want to submit or compare a result without mixing methods. | docs/benchmark-protocol.md |
 
 ## Current Direction
 
-club-5060ti collects tested RTX 5060 Ti recipes and benchmark receipts. The results explorer is built from checked-in JSON under data/results/ so docs, scripts, and the static site all describe the same evidence.
+club-5060ti collects tested RTX 5060 Ti recipes and benchmark receipts. It is not meant to claim that only Blackwell cards can use these workflows; it keeps the 5060 Ti lane clear so community results from other cards remain comparable instead of blended together. The results explorer is built from checked-in JSON under data/results/ so docs, scripts, and the static site all describe the same evidence.
 
 Imported llm-bench rows are archived historical data until they are rerun under the benchmark protocol. They are useful provenance, not headline evidence.
 
@@ -87,6 +88,7 @@ The hosted explorer defaults to one card per model/setup, with prompt-specific b
 - docs/community-goals.md - project goals and contribution priorities
 - docs/client-examples.md - OpenAI-compatible client examples
 - docs/reporting-results.md - how to capture a useful result report
+- docs/gpu-compatibility.md - Blackwell, mixed-GPU, and non-5060 Ti adaptation notes
 - docs/single-5060ti.md - conservative single-card starter configs
 - docs/vllm-qwen36.md - vLLM NVFP4/MTP notes
 - docs/llamacpp-qwen36.md - llama.cpp Qwen3.6 27B MTP GGUF route
@@ -120,6 +122,14 @@ scripts/update-llama.sh
 ~~~
 
 This builds the upstream llama.cpp tree used by the Qwen3.6 GGUF examples. The helper is a reproducible public build path, not a service manager for a specific deployment.
+
+The default CUDA architecture target is `120a` for RTX 5060 Ti / Blackwell. For mixed RTX 40/50-series builds, pass the architectures explicitly:
+
+~~~bash
+CUDA_ARCHITECTURES="89;120a" scripts/update-llama.sh
+~~~
+
+See docs/gpu-compatibility.md before treating mixed-card results as comparable with the 2x RTX 5060 Ti baseline.
 
 ## Contribution Standard
 

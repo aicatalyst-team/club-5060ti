@@ -2,7 +2,7 @@
 
 ## What exactly is this?
 
-A practical repo for running local LLMs on RTX 5060 Ti 16GB cards. The current recipes focus on Qwen3.6 27B because that is what has been tested deeply so far.
+A practical repo for running local LLMs on RTX 5060 Ti 16GB cards. The tested baseline is Blackwell/5060 Ti, but some llama.cpp/GGUF recipes are useful starting points for other NVIDIA cards when they are reported as separate hardware lanes.
 
 ## Why care about 5060 Ti cards?
 
@@ -39,6 +39,8 @@ vLLM tensor parallel is less forgiving. The documented NVFP4/MTP recipes were te
 If you test mixed cards, report the exact GPU names, VRAM, driver, CUDA/runtime build, PCIe link widths, model, quant, context, KV cache, tensor split or tensor-parallel size, and whether single-GPU and multi-GPU launches both work.
 
 For a 4070 Ti Super 16GB plus 5060 Ti 16GB, start with llama.cpp/GGUF before vLLM. The VRAM size matches, but the cards are different architectures, so the best working config may be different from the dual-5060 Ti NVFP4 recipe.
+
+See docs/gpu-compatibility.md for build and reporting notes.
 
 ## Is there a single 5060 Ti setup?
 

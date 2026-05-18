@@ -37,9 +37,21 @@ The current seed benchmark rows are still useful as working recipe receipts. Tre
 - 16GB per card is tight for 27B-class models, so quantization and KV cache choices matter.
 - Tensor parallel across both cards is the useful default for vLLM 27B NVFP4 serving.
 - fp8 KV cache is important for long context experiments.
-- Blackwell support is still moving quickly. Runtime version and container image matter more than they would on older, mature cards.
+- Blackwell support is still moving quickly. Runtime version, container image, and CUDA architecture target matter more than they would on older, mature cards.
 - Motherboard layout and PCIe link width/gen matter for community reports. Include them if you know them.
 - Power limits and thermals matter for sustained decode. Include them when sharing numbers.
+
+## Blackwell And Mixed-GPU Scope
+
+The project name reflects the tested baseline, not a claim that every recipe is Blackwell-only. llama.cpp/GGUF results may transfer to other NVIDIA cards, especially when VRAM is similar, but mixed-architecture results should be reported separately from the 2x RTX 5060 Ti lane.
+
+For mixed RTX 40/50-series builds, set the CUDA architectures explicitly when building llama.cpp, for example:
+
+~~~bash
+CUDA_ARCHITECTURES="89;120a" scripts/update-llama.sh
+~~~
+
+See docs/gpu-compatibility.md for the full caveats.
 
 ## What Not To Generalize Yet
 

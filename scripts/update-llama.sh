@@ -8,6 +8,7 @@ set -euo pipefail
 #   LLAMA_CPP_DIR=$HOME/llama.cpp
 #   LLAMA_CPP_REPO=https://github.com/ggml-org/llama.cpp.git
 #   LLAMA_CPP_REF=b64739ea393b3c9d07cc9907e0a611f707838051
+#   CUDA_ARCHITECTURES=120a
 #
 # Use --fresh to move the existing source tree aside before cloning again.
 
@@ -28,7 +29,7 @@ need() {
 
 usage() {
   cat <<'USAGE'
-Usage: scripts/update-llama.sh [--fresh] [--ref <git-ref>] [--dir <path>] [--install-prefix <path>]
+Usage: scripts/update-llama.sh [--fresh] [--ref <git-ref>] [--dir <path>] [--install-prefix <path>] [--cuda-architectures <list>]
 
 Builds the upstream llama.cpp commit used by the repo examples.
 
@@ -37,6 +38,7 @@ Environment overrides:
   LLAMA_CPP_REPO          llama.cpp remote, default ggml-org/llama.cpp
   LLAMA_CPP_REF           commit/ref to checkout, default tested commit b64739ea3...
   CUDA_ARCHITECTURES      default 120a for RTX 5060 Ti / Blackwell
+                          use quoted semicolon lists for mixed builds, for example 89;120a
   JOBS                    default 12
   INSTALL_PREFIX          optional symlink target for built binaries
 USAGE
@@ -58,6 +60,10 @@ while [[ $# -gt 0 ]]; do
       ;;
     --install-prefix)
       INSTALL_PREFIX="$2"
+      shift 2
+      ;;
+    --cuda-architectures)
+      CUDA_ARCHITECTURES="$2"
       shift 2
       ;;
     -h|--help)
@@ -89,6 +95,8 @@ fi
 
 git -C "$LLAMA_CPP_DIR" fetch --tags origin main
 git -C "$LLAMA_CPP_DIR" checkout --detach "$LLAMA_CPP_REF"
+
+echo "Building llama.cpp with CMAKE_CUDA_ARCHITECTURES=$CUDA_ARCHITECTURES"
 
 cmake -S "$LLAMA_CPP_DIR" -B "$LLAMA_CPP_DIR/build" \
   -DGGML_CUDA=ON \

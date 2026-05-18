@@ -14,6 +14,7 @@ labels: result
 ## Hardware
 
 - GPU(s):
+- GPU architecture(s), if mixed:
 - VRAM per GPU:
 - Driver:
 - CPU:
