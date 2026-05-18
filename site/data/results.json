@@ -1,0 +1,3770 @@
+{
+  "results": [
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-0.8b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "0.8B",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 532,
+        "notes": "Extremely fast. Good for simple tasks."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 1503.7,
+        "decode_tok_s": 145.5,
+        "load_seconds": 9.4
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-2b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "2B",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 1277
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 1259.9,
+        "decode_tok_s": 116.8,
+        "load_seconds": 10.6
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-4b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "4B",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 2777
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 896.9,
+        "decode_tok_s": 69.7,
+        "load_seconds": 14.7
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-9b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "9B",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 5689
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 667.8,
+        "decode_tok_s": 50.3,
+        "load_seconds": 21.6
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-27b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-27B",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "27B",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 15954,
+        "notes": "Fits entirely on GPU0. Slow load from disk."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 65536,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 65536,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 171.6,
+        "decode_tok_s": 18.5,
+        "load_seconds": 88.7
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-27b-q5",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-27B-Q5",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "27B",
+        "quant": "Q5_K_XL",
+        "file_size_mb": 19236,
+        "notes": "Not yet tested"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 65536,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 65536,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {},
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-27b-q6",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-27B-Q6",
+        "family": "Qwen3.5",
+        "architecture": "dense",
+        "parameter_class": "27B",
+        "quant": "Q6_K_XL",
+        "file_size_mb": 21995,
+        "notes": "Not yet tested"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 65536,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 65536,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {},
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-35b-a3b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-35B-A3B",
+        "family": "Qwen3.5",
+        "architecture": "moe",
+        "parameter_class": "35B total / 3B active",
+        "quant": "Q4_K_XL",
+        "file_size_mb": 21211,
+        "notes": "MoE \u2014 faster than 27B dense despite 35B total params. Only 3B active per token."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 425.8,
+        "decode_tok_s": 56.9,
+        "load_seconds": 54.7
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-35b-a3b-q5",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-35B-A3B-Q5",
+        "family": "Qwen3.5",
+        "architecture": "moe",
+        "parameter_class": "35B total / 3B active",
+        "quant": "Q5_K_M",
+        "file_size_mb": 24576,
+        "notes": "Uncensored variant. MoE \u2014 tensor-split unsupported, auto-split ngl=41. Benchmarked with ik_llama.cpp (gen) and llama.cpp (pp). Best gen speed of any 35B+ model tested."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 131072,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 131072,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 1530.3,
+        "decode_tok_s": 76.7
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.6-35b-a3b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B",
+        "family": "Qwen3.6",
+        "architecture": "moe",
+        "parameter_class": "35B total / 3B active",
+        "quant": "UD-IQ4_XS",
+        "file_size_mb": 16909,
+        "notes": "Thinking-enabled MoE (A3B) on llama.cpp, IQ4_XS, 204.8K context. Very fast generation, but the thinking preset can spend small completion budgets in hidden reasoning before visible output."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 209920,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 209920,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 97.9,
+        "decode_tok_s": 83.4
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-qwen3.5-122b-a10b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "2x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Qwen3.5-122B-A10B",
+        "family": "Qwen3.5",
+        "architecture": "moe",
+        "parameter_class": "122B total / 10B active",
+        "quant": "IQ2_M",
+        "file_size_mb": 39906,
+        "notes": "Splits across both GPUs + CPU host (38GB model, ~28GB VRAM). Loaded and generates correctly. Speed not yet formally benchmarked (interrupts GPU services)."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 8192,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 8192,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {},
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "llm-bench-import-gemma4-26b-a4b",
+      "timestamp_utc": "2026-05-18T21:06:22.631687+00:00",
+      "source": {
+        "type": "imported",
+        "label": "llm-bench legacy import",
+        "notes": "Imported from the old llm-bench summary data. Re-benchmark before promoting."
+      },
+      "promotion_level": "deprecated",
+      "hardware": {
+        "gpu_count": 1,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "inference_ram_gb": 60,
+        "notes": "1x RTX 5060 Ti 16GB"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "notes": "Legacy llm-bench entry; exact runtime commit may be absent."
+      },
+      "model": {
+        "id": "Gemma4-26B-A4B",
+        "family": "Gemma4",
+        "architecture": "moe",
+        "parameter_class": "26B total / 4B active",
+        "quant": "UD-IQ4_XS",
+        "file_size_mb": 12497,
+        "notes": "Google DeepMind MoE (A4B). 256K native context. Apache 2.0. Multimodal (text+image). Thinking mode built in. Fits on single RTX 5060 Ti 16GB (IQ4_XS + 65K ctx). Benchmarked 2026-04-03 via llama.cpp b8642, 1x GPU."
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 66560,
+        "notes": "Imported legacy row; launch command not captured in schema form."
+      },
+      "benchmark": {
+        "prompt_set": "legacy",
+        "configured_context_tokens": 66560,
+        "runs": 1,
+        "warmups": 0,
+        "stream": false,
+        "notes": "Legacy llm-bench prompt mix; not comparable with the new protocol."
+      },
+      "metrics": {
+        "prompt_tok_s": 420.8,
+        "decode_tok_s": 83.5
+      },
+      "caveats": [
+        "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
+      ],
+      "_source_file": "data/results/llm-bench-legacy-import.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:43:17.018542+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1276.35046113307,
+        "decode_tok_s": 250.33785832050677,
+        "end_to_end_tok_s": 228.633,
+        "wall_seconds": 1.12
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:43:18.014000+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1832.8012297505024,
+        "decode_tok_s": 268.64512608481215,
+        "end_to_end_tok_s": 257.213,
+        "wall_seconds": 0.995
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:43:23.861706+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 3094.3484353106023,
+        "decode_tok_s": 268.09127390829605,
+        "end_to_end_tok_s": 261.286,
+        "wall_seconds": 2.939
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:43:26.746801+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 3095.0712450362066,
+        "decode_tok_s": 269.9877029038443,
+        "end_to_end_tok_s": 266.207,
+        "wall_seconds": 2.885
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:43:30.733268+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 220.44640396803527,
+        "decode_tok_s": 269.50857847910834,
+        "end_to_end_tok_s": 256.235,
+        "wall_seconds": 1.998
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:43:32.666228+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 241.0800385728062,
+        "decode_tok_s": 270.5207418608657,
+        "end_to_end_tok_s": 264.905,
+        "wall_seconds": 1.933
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:43:35.461953+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 26.656537182537306,
+        "decode_tok_s": 194.77766702184948,
+        "end_to_end_tok_s": 50.668,
+        "wall_seconds": 0.336
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-0.8b-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:43:35.803740+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-0.8B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 26.71261235992574,
+        "decode_tok_s": 181.51920900335276,
+        "end_to_end_tok_s": 49.756,
+        "wall_seconds": 0.342
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:43:53.769463+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1669.628911509668,
+        "decode_tok_s": 182.50438794729618,
+        "end_to_end_tok_s": 173.691,
+        "wall_seconds": 1.474
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:43:55.253720+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1495.7058766766381,
+        "decode_tok_s": 177.89353211082488,
+        "end_to_end_tok_s": 172.503,
+        "wall_seconds": 1.484
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:44:04.019618+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 2607.75437905924,
+        "decode_tok_s": 178.30083483329685,
+        "end_to_end_tok_s": 174.96,
+        "wall_seconds": 4.39
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:44:08.385478+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 2705.7382070655503,
+        "decode_tok_s": 177.6918933626525,
+        "end_to_end_tok_s": 175.916,
+        "wall_seconds": 4.366
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:44:14.319629+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 217.59234074960563,
+        "decode_tok_s": 177.7925320886004,
+        "end_to_end_tok_s": 172.058,
+        "wall_seconds": 2.976
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:44:17.238524+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 212.04410517387615,
+        "decode_tok_s": 177.9901298910784,
+        "end_to_end_tok_s": 175.417,
+        "wall_seconds": 2.919
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:44:20.795159+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 26.03065109166043,
+        "decode_tok_s": 145.73010784027983,
+        "end_to_end_tok_s": 46.074,
+        "wall_seconds": 0.369
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-2b-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:44:21.171389+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-2B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 25.57446645269363,
+        "decode_tok_s": 135.87499500459577,
+        "end_to_end_tok_s": 45.204,
+        "wall_seconds": 0.376
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:44:46.105372+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1159.8323855133192,
+        "decode_tok_s": 97.72790261414504,
+        "end_to_end_tok_s": 93.429,
+        "wall_seconds": 2.74
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:44:48.847588+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1141.5104761203372,
+        "decode_tok_s": 95.11258766798424,
+        "end_to_end_tok_s": 93.36,
+        "wall_seconds": 2.742
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:45:05.280114+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1802.1081264875893,
+        "decode_tok_s": 94.6794232395822,
+        "end_to_end_tok_s": 93.045,
+        "wall_seconds": 8.254
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:45:13.444478+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 1806.653940550859,
+        "decode_tok_s": 94.67399601185792,
+        "end_to_end_tok_s": 94.069,
+        "wall_seconds": 8.164
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:45:24.578655+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 126.31047113805735,
+        "decode_tok_s": 94.68926386494944,
+        "end_to_end_tok_s": 91.484,
+        "wall_seconds": 5.597
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:45:30.051899+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 125.47445026506477,
+        "decode_tok_s": 94.5009666046135,
+        "end_to_end_tok_s": 93.549,
+        "wall_seconds": 5.473
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:45:36.918925+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 21.679864284049582,
+        "decode_tok_s": 77.7366738763621,
+        "end_to_end_tok_s": 32.612,
+        "wall_seconds": 0.521
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164301-qwen3.5-4b-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:45:37.404811+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-4B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 2048,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 23.575036393962435,
+        "decode_tok_s": 77.14403699283469,
+        "end_to_end_tok_s": 34.997,
+        "wall_seconds": 0.486
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen35-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.5-9b-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:46:49.623705+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 19.62333017724773,
+        "decode_tok_s": 104.45147614512611,
+        "end_to_end_tok_s": 36.724,
+        "wall_seconds": 0.463
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.5-9b-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:46:50.089716+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 19.61601647745384,
+        "decode_tok_s": 103.35414602116936,
+        "end_to_end_tok_s": 36.493,
+        "wall_seconds": 0.466
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.6-27b-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:48:25.748900+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 14.660445750853054,
+        "decode_tok_s": 38.755536912369166,
+        "end_to_end_tok_s": 21.006,
+        "wall_seconds": 0.809
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.6-27b-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:48:26.565405+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 14.447526583448914,
+        "decode_tok_s": 38.66202115949676,
+        "end_to_end_tok_s": 20.824,
+        "wall_seconds": 0.816
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.6-35b-a3b-instruct-long-retrieval-1",
+      "timestamp_utc": "2026-05-18T16:49:43.342915+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 22.31433082111159,
+        "decode_tok_s": 74.34976754763852,
+        "end_to_end_tok_s": 33.667,
+        "wall_seconds": 0.505
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-164555-qwen3.6-35b-a3b-instruct-long-retrieval-2",
+      "timestamp_utc": "2026-05-18T16:49:43.845934+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "long-retrieval",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 27061,
+        "generated_tokens": 17,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 22.55007526087618,
+        "decode_tok_s": 74.41388125295467,
+        "end_to_end_tok_s": 33.804,
+        "wall_seconds": 0.503
+      },
+      "caveats": [
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:36:24.050096+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 508.23004787199153,
+        "decode_tok_s": 70.99345917293729,
+        "end_to_end_tok_s": 68.044,
+        "wall_seconds": 3.762
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:36:27.753458+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 518.9674222385911,
+        "decode_tok_s": 70.79011725719266,
+        "end_to_end_tok_s": 69.129,
+        "wall_seconds": 3.703
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:36:45.016356+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 726.4453521203981,
+        "decode_tok_s": 90.98569854092347,
+        "end_to_end_tok_s": 89.007,
+        "wall_seconds": 8.629
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:36:53.589179+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 724.419780760504,
+        "decode_tok_s": 90.62209947332983,
+        "end_to_end_tok_s": 89.587,
+        "wall_seconds": 8.573
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:37:08.173692+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 94.86990963641108,
+        "decode_tok_s": 72.73502148666407,
+        "end_to_end_tok_s": 70.725,
+        "wall_seconds": 7.239
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.5-9b-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:37:15.286008+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.5-9B",
+        "family": "Qwen3.5",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 262144,
+        "batch_size": 4096,
+        "ubatch_size": 1024,
+        "kv_cache_k": "unknown",
+        "kv_cache_v": "unknown",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 262144,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 94.70593806231652,
+        "decode_tok_s": 72.67415040085756,
+        "end_to_end_tok_s": 71.989,
+        "wall_seconds": 7.112
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:38:38.146488+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 196.19383951343926,
+        "decode_tok_s": 34.38995576860611,
+        "end_to_end_tok_s": 32.788,
+        "wall_seconds": 7.808
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:38:45.818495+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 197.7242575773038,
+        "decode_tok_s": 34.185208247341734,
+        "end_to_end_tok_s": 33.369,
+        "wall_seconds": 7.672
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:39:27.125664+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 288.8000087184908,
+        "decode_tok_s": 37.77665311347256,
+        "end_to_end_tok_s": 37.025,
+        "wall_seconds": 20.743
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:39:47.715482+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 289.9676658697115,
+        "decode_tok_s": 37.6834436661712,
+        "end_to_end_tok_s": 37.3,
+        "wall_seconds": 20.59
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:40:24.071080+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 35.02688313280443,
+        "decode_tok_s": 29.027159840380104,
+        "end_to_end_tok_s": 28.255,
+        "wall_seconds": 18.121
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-27b-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:40:41.881089+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-27B",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-Q4_K_XL"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 2048,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "51,49",
+        "speculation": {
+          "type": "draft-mtp",
+          "draft_n": 3
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 35.085872673368065,
+        "decode_tok_s": 28.97538620171736,
+        "end_to_end_tok_s": 28.748,
+        "wall_seconds": 17.81
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-short-chat-1",
+      "timestamp_utc": "2026-05-18T16:41:34.489816+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 625.1512462692586,
+        "decode_tok_s": 92.37325289162561,
+        "end_to_end_tok_s": 87.612,
+        "wall_seconds": 2.922
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-short-chat-2",
+      "timestamp_utc": "2026-05-18T16:41:37.363527+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "short-chat",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 31,
+        "generated_tokens": 256,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 622.1151916516155,
+        "decode_tok_s": 91.46819675809557,
+        "end_to_end_tok_s": 89.088,
+        "wall_seconds": 2.874
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-code-generate-1",
+      "timestamp_utc": "2026-05-18T16:41:54.697869+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 838.3688190072447,
+        "decode_tok_s": 90.01408579795729,
+        "end_to_end_tok_s": 88.229,
+        "wall_seconds": 8.705
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-code-generate-2",
+      "timestamp_utc": "2026-05-18T16:42:03.309190+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "code-generate",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 53,
+        "generated_tokens": 768,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 839.4709748950662,
+        "decode_tok_s": 90.10813327978468,
+        "end_to_end_tok_s": 89.186,
+        "wall_seconds": 8.611
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-agent-tool-1",
+      "timestamp_utc": "2026-05-18T16:42:15.074837+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 104.69833791388562,
+        "decode_tok_s": 90.06539944180562,
+        "end_to_end_tok_s": 86.918,
+        "wall_seconds": 5.891
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    },
+    {
+      "schema_version": "1.0",
+      "id": "20260518-163549-qwen3.6-35b-a3b-instruct-agent-tool-2",
+      "timestamp_utc": "2026-05-18T16:42:20.825392+00:00",
+      "source": {
+        "type": "seed",
+        "label": "seed-2x5060ti",
+        "notes": "Generated by scripts/run_openai_bench.py"
+      },
+      "promotion_level": "benchmark",
+      "hardware": {
+        "gpu_count": 2,
+        "gpu_model": "RTX 5060 Ti",
+        "vram_per_gpu_gb": 16,
+        "driver": "595.58.03",
+        "cpu": "2x Intel Xeon E5-2680 v4",
+        "host_ram_gb": 128,
+        "inference_ram_gb": 60,
+        "pcie": "x8/x8",
+        "notes": "Dell Precision Tower 7810 seed system"
+      },
+      "runtime": {
+        "engine": "llama.cpp",
+        "version": "llama.cpp router b64739ea3",
+        "commit": "b64739ea3"
+      },
+      "model": {
+        "id": "Qwen3.6-35B-A3B-Instruct",
+        "family": "Qwen3.6",
+        "architecture": "unknown",
+        "quant": "UD-IQ4_XS"
+      },
+      "serving": {
+        "route": "server",
+        "context_tokens": 204800,
+        "batch_size": 4096,
+        "ubatch_size": 512,
+        "kv_cache_k": "q8_0",
+        "kv_cache_v": "q8_0",
+        "tensor_parallel": "24,17",
+        "speculation": {
+          "type": "none",
+          "draft_n": 0
+        },
+        "thinking": "off"
+      },
+      "benchmark": {
+        "prompt_set": "agent-tool",
+        "configured_context_tokens": 204800,
+        "actual_prompt_tokens": 111,
+        "generated_tokens": 512,
+        "runs": 1,
+        "warmups": 1,
+        "stream": false
+      },
+      "metrics": {
+        "prompt_tok_s": 103.72099053545962,
+        "decode_tok_s": 90.0435251406974,
+        "end_to_end_tok_s": 89.037,
+        "wall_seconds": 5.75
+      },
+      "caveats": [
+        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+      ],
+      "_source_file": "data/results/seed-qwen36-server-20260519.json"
+    }
+  ]
+}

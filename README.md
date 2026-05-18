@@ -1,26 +1,27 @@
 # club-5060ti
 
-Practical local LLM recipes for RTX 5060 Ti 16GB cards.
+Practical local LLM recipes, benchmark receipts, and setup notes for RTX 5060 Ti 16GB systems.
 
-This repo collects tested RTX 5060 Ti local LLM configurations with the commands, benchmark context, and reporting templates needed to reproduce and compare results.
+The project focus is simple: make low-VRAM Blackwell local inference less guessy. Every useful result should come with the launch shape, hardware context, model details, benchmark method, and caveats needed for someone else to reproduce or improve it.
 
-The first documented setup is a dual RTX 5060 Ti 16GB machine running Qwen3.6 27B through two working paths:
+## Start Here
 
-- vLLM with Blackwell-friendly NVFP4/MTP on 2x16GB
-- llama.cpp MTP GGUF on 2x16GB
+| Path | Use this when | Entry point |
+| --- | --- | --- |
+| 1x RTX 5060 Ti | You want the best single-card fits and conservative starter configs. | docs/single-5060ti.md |
+| 2x RTX 5060 Ti | You want dual-16GB recipes for 27B-class and long-context models. | docs/llamacpp-qwen36.md |
+| Results explorer | You want to compare benchmark receipts and imported legacy data. | site/index.html |
+| Benchmark protocol | You want to submit or compare a result without mixing methods. | docs/benchmark-protocol.md |
 
-## Current Recipes
+## Current Direction
 
-| Runtime | Model | Status | Notes |
-| --- | --- | --- | --- |
-| vLLM | sakamakismile/Qwen3.6-27B-Text-NVFP4-MTP | Working | Primary dual-card serving path. |
-| llama.cpp MTP branch | unsloth/Qwen3.6-27B-MTP-GGUF Q4/Q6 | Working | GGUF path with Q4/Q6 speed notes, a stable router preset, and Q6 long-context fit checks. Requires an MTP-capable llama.cpp build. |
-| llama.cpp MTP branch | unsloth/Qwen3.5-9B-MTP-GGUF Q4 | Working | Small-model GGUF path that fits the native 262144-token max context with q8 KV on one or two 5060 Ti cards using the stock GGUF metadata. |
-| llama.cpp | Qwen3.6 27B IQ4_XS | Single-card check | One RTX 5060 Ti 16GB can run this GPU-only at 32768 context with q8 KV, or 65536 with q4 KV. |
-| llama.cpp | Qwen3.6 35B A3B IQ3_XXS | Single-card check | Stronger long-context single-card result: native 262144 context with q8 KV and a 93636-token retrieval pass. |
-| llama.cpp / vLLM | Qwen3.6 35B A3B | Additional checks | Larger-quant GGUF fallback notes, single-card IQ3_XXS long-context results, and a vLLM NVFP4/MTP launch example. |
+club-5060ti is the canonical source of truth for tested RTX 5060 Ti recipes and benchmark receipts. The results explorer is built from checked-in JSON under data/results/ so docs, scripts, and the static site all describe the same evidence.
+
+Imported llm-bench rows are marked as deprecated migration data until they are rerun under the benchmark protocol. They are useful history, not headline evidence.
 
 ## Tested Baseline
+
+Seed hardware:
 
 - GPUs: 2x NVIDIA GeForce RTX 5060 Ti 16GB
 - Driver: 595.58.03
@@ -29,31 +30,76 @@ The first documented setup is a dual RTX 5060 Ti 16GB machine running Qwen3.6 27
 - CPU: 2x Intel Xeon E5-2680 v4
 - Host memory: 128GB DDR4-2133
 - Inference environment: Proxmox LXC with 16 vCPU and 60GB RAM assigned
-- PCIe link width: both RTX 5060 Ti cards are running at x8 in this host
-- Useful assumption: tensor parallel across both cards for 27B-class models
+- PCIe link width: both RTX 5060 Ti cards run at x8 in this host
 
 See docs/hardware.md for the full baseline and hardware notes.
 
+## Recipe Status
+
+| Lane | Model | Status | Notes |
+| --- | --- | --- | --- |
+| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Working baseline | Current local route uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
+| upstream llama.cpp | Qwen3.5 9B MTP GGUF | Working baseline | Small long-context route; useful sanity lane for 1x and 2x cards. |
+| upstream llama.cpp | Qwen3.6 35B A3B GGUF | Working recipe | Strong MoE/active-parameter comparison route. |
+| ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Planned | Needs controlled testing on CUDA and graph split. |
+| BeeLlama | Qwen3.6 27B DFlash/TurboQuant | Planned | Test after current release work; only compare with equal target/KV/context settings. |
+| vLLM | Qwen3.6 27B NVFP4/MTP | Working historical lane | Needs fresh protocol-shaped results. |
+| vLLM | BNB4/AutoRound routes | Experimental | Do not promote CPU-offload health checks as useful recipes. |
+
+## Results And Data
+
+Canonical result files live under data/results/ and follow data/schema/benchmark-result.schema.json.
+
+Build the static site data:
+
+~~~bash
+python3 scripts/build_site_data.py
+~~~
+
+Validate result JSON:
+
+~~~bash
+python3 scripts/validate_results.py data/results
+~~~
+
+Run a protocol-shaped OpenAI-compatible benchmark:
+
+~~~bash
+python3 scripts/run_openai_bench.py \
+  --base-url http://127.0.0.1:8080/v1 \
+  --model Qwen3.6-27B \
+  --prompt-set short-chat \
+  --prompt-set code-generate \
+  --prompt-set agent-tool \
+  --runs 1 \
+  --no-thinking \
+  --output data/results/my-run.json
+~~~
+
+The old llm-bench summary rows have been imported into data/results/llm-bench-legacy-import.json as deprecated data. They are useful migration material, not new headline evidence.
+
 ## Repo Map
 
-- docs/FAQ.md - short answers to the questions people ask first
+- docs/benchmark-protocol.md - comparable-result rules, prompt sets, context tiers, and promotion levels
+- docs/FAQ.md - short answers to common setup questions
 - docs/community-goals.md - project goals and contribution priorities
-- docs/client-examples.md - connecting OpenAI-compatible clients
+- docs/client-examples.md - OpenAI-compatible client examples
 - docs/reporting-results.md - how to capture a useful result report
 - docs/single-5060ti.md - conservative single-card starter configs
-- docs/vllm-qwen36.md - working vLLM NVFP4/MTP recipe
-- docs/llamacpp-qwen36.md - working llama.cpp MTP GGUF recipe
-- docs/llamacpp-qwen35-9b-mtp.md - Qwen3.5 9B GGUF native max-context fit check
-- docs/qwen36-35b-a3b.md - additional Qwen3.6 35B A3B checks
-- docs/benchmarks.md - benchmark notes and current result table
-- docs/troubleshooting.md - problems seen during testing
-- examples/ - sanitized config snippets
-- scripts/ - small reproducible health/bench helpers
-- data/community-results.csv - community result table seed
+- docs/vllm-qwen36.md - vLLM NVFP4/MTP notes
+- docs/llamacpp-qwen36.md - llama.cpp Qwen3.6 27B MTP GGUF route
+- docs/llamacpp-qwen35-9b-mtp.md - Qwen3.5 9B native max-context route
+- docs/qwen36-35b-a3b.md - Qwen3.6 35B A3B checks
+- docs/benchmarks.md - current human-readable result notes
+- docs/troubleshooting.md - observed failures and fixes
+- data/ - canonical result data and schemas
+- examples/ - sanitized launch/config snippets
+- scripts/ - validation, report, smoke, import, and benchmark helpers
+- site/ - static results explorer generated from data/
 
 ## Model Downloads
 
-The public download helper wraps the Hugging Face CLI for the model files used by the examples. It mirrors the model IDs used in the tested LXC workflow, but keeps the script generic and free of private host details:
+The public download helper wraps the Hugging Face CLI for model files used by the examples:
 
 ~~~bash
 scripts/download-models.sh qwen36-27b-vllm
@@ -65,52 +111,28 @@ scripts/download-models.sh qwen36-35b-a3b-gguf
 scripts/download-models.sh qwen36-35b-a3b-gguf-iq3xxs
 ~~~
 
-Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large GGUF files on slower or constrained storage, HF_HUB_DISABLE_XET=1 is the safer default used by the helper.
+Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large GGUF files on constrained storage, HF_HUB_DISABLE_XET=1 is the safer default used by the helper.
 
-## Building The llama.cpp MTP Tree
+## llama.cpp Build Helper
 
 ~~~bash
 scripts/update-llama.sh
 ~~~
 
-This builds the MTP-capable llama.cpp tree used by the Qwen3.6 GGUF examples, pinned by default to the tested PR/commit. The live lab setup runs the service through its own LXC wrapper and preset files; the repo script is the reproducible public build helper, not a service manager. Use the --fresh flag if you want to move the existing source tree aside and clone again.
+This builds the upstream llama.cpp tree used by the Qwen3.6 GGUF examples. The live lab setup runs through its own service wrapper and preset files; this repo script is the reproducible public build helper, not a service manager.
 
-## Client Setup
+## Contribution Standard
 
-See docs/client-examples.md for curl, Python, Open WebUI, OpenCode, Pi/Cline/Cursor-style OpenAI-compatible clients, and Codex CLI gateway notes.
+Contributions are most useful when they include exact GPU model, motherboard/PCIe layout, negotiated link width/generation, driver/runtime versions, launch commands, context length, KV cache settings, prompt shape, generated token count, tokens/sec, and relevant caveats.
 
-## Quick Health Check
+Start with CONTRIBUTING.md and docs/benchmark-protocol.md.
 
-Once you have a local OpenAI-compatible endpoint running:
-
-~~~bash
-python3 scripts/openai_compat_smoke.py --base-url http://127.0.0.1:8000/v1 --model your-model-name
-~~~
-
-For a simple decode speed check:
+## Verification
 
 ~~~bash
-python3 scripts/simple_decode_bench.py --base-url http://127.0.0.1:8000/v1 --model your-model-name --max-tokens 512
+python3 -m py_compile scripts/*.py
+bash -n scripts/*.sh examples/*.sh
+python3 scripts/validate_results.py data/results
+python3 scripts/build_site_data.py
+./scripts/check_repo.sh
 ~~~
-
-These scripts only use the Python standard library.
-
-## Share A Result
-
-Generate a paste-ready local report:
-
-~~~bash
-bash scripts/report.sh --url http://127.0.0.1:8000 --model your-model-name > my-5060ti-result.md
-~~~
-
-Then open a result issue using the template in this repo. The report script avoids API keys and private paths, but review the output before posting it publicly.
-
-## Scope
-
-The current focus is practical RTX 5060 Ti 16GB serving with reproducible receipts. Dual-card Qwen3.6 27B remains the main baseline, while single-card and mixed-GPU notes are included where they help people get started. Report those setups separately from the dual-5060 Ti baseline.
-
-## Contributing
-
-Contributions are most useful when they include exact GPU model, motherboard/PCIe layout, negotiated link width/generation, driver/runtime versions, launch commands, context length, KV cache settings, tokens/sec, and relevant caveats.
-
-Start with CONTRIBUTING.md.

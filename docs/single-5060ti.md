@@ -22,7 +22,8 @@ n-gpu-layers = 99
 batch-size = 1024
 ubatch-size = 256
 flash-attn = on
-spec-type = mtp
+spec-type = draft-mtp
+spec-draft-p-min = 0.75
 spec-draft-n-max = 2
 jinja = on
 parallel = 1
@@ -110,7 +111,8 @@ CUDA_VISIBLE_DEVICES=0 llama-server \
   --batch-size 1024 \
   --ubatch-size 256 \
   --jinja \
-  --spec-type mtp \
+  --spec-type draft-mtp \
+  --spec-draft-p-min 0.75 \
   --spec-draft-n-max 2
 ~~~
 

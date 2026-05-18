@@ -1,22 +1,19 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Build the pinned MTP-capable llama.cpp tree used for the Qwen3.6 GGUF
-# examples. PR 22673 is moving quickly; newer tips may change speculative
-# flag spelling/defaults, so benchmark reports should include the exact ref.
+# Build the pinned upstream llama.cpp tree used for the Qwen3.6 GGUF examples.
+# The default ref is a tested post-merge commit with Qwen3.6 MTP support.
 #
 # Defaults:
-#   LLAMA_CPP_DIR=$HOME/llama.cpp-mtp
+#   LLAMA_CPP_DIR=$HOME/llama.cpp
 #   LLAMA_CPP_REPO=https://github.com/ggml-org/llama.cpp.git
-#   LLAMA_CPP_PR=22673
-#   LLAMA_CPP_REF=5d5f1b46e4f56885801c86363d4677a5f72f83af
+#   LLAMA_CPP_REF=b64739ea393b3c9d07cc9907e0a611f707838051
 #
 # Use --fresh to move the existing source tree aside before cloning again.
 
-LLAMA_CPP_DIR="${LLAMA_CPP_DIR:-$HOME/llama.cpp-mtp}"
+LLAMA_CPP_DIR="${LLAMA_CPP_DIR:-$HOME/llama.cpp}"
 LLAMA_CPP_REPO="${LLAMA_CPP_REPO:-https://github.com/ggml-org/llama.cpp.git}"
-LLAMA_CPP_PR="${LLAMA_CPP_PR:-22673}"
-LLAMA_CPP_REF="${LLAMA_CPP_REF:-5d5f1b46e4f56885801c86363d4677a5f72f83af}"
+LLAMA_CPP_REF="${LLAMA_CPP_REF:-b64739ea393b3c9d07cc9907e0a611f707838051}"
 INSTALL_PREFIX="${INSTALL_PREFIX:-}"
 JOBS="${JOBS:-12}"
 CUDA_ARCHITECTURES="${CUDA_ARCHITECTURES:-120a}"
@@ -33,13 +30,12 @@ usage() {
   cat <<'USAGE'
 Usage: scripts/update-llama.sh [--fresh] [--ref <git-ref>] [--dir <path>] [--install-prefix <path>]
 
-Builds the MTP-capable llama.cpp PR/commit used by the repo examples.
+Builds the upstream llama.cpp commit used by the repo examples.
 
 Environment overrides:
-  LLAMA_CPP_DIR           source/build directory, default ~/llama.cpp-mtp
+  LLAMA_CPP_DIR           source/build directory, default ~/llama.cpp
   LLAMA_CPP_REPO          llama.cpp remote, default ggml-org/llama.cpp
-  LLAMA_CPP_PR            PR ref to fetch, default 22673
-  LLAMA_CPP_REF           commit/ref to checkout, default tested commit 5d5f1b46...
+  LLAMA_CPP_REF           commit/ref to checkout, default tested commit b64739ea3...
   CUDA_ARCHITECTURES      default 120a for RTX 5060 Ti / Blackwell
   JOBS                    default 12
   INSTALL_PREFIX          optional symlink target for built binaries
@@ -92,7 +88,6 @@ else
 fi
 
 git -C "$LLAMA_CPP_DIR" fetch --tags origin main
-git -C "$LLAMA_CPP_DIR" fetch origin "pull/$LLAMA_CPP_PR/head:pr-$LLAMA_CPP_PR" || true
 git -C "$LLAMA_CPP_DIR" checkout --detach "$LLAMA_CPP_REF"
 
 cmake -S "$LLAMA_CPP_DIR" -B "$LLAMA_CPP_DIR/build" \

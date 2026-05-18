@@ -8,7 +8,7 @@ The useful public recipe is the model's native max context using the stock GGUF 
 
 - Repository: `unsloth/Qwen3.5-9B-MTP-GGUF`
 - Tested file: `Qwen3.5-9B-UD-Q4_K_XL.gguf`
-- Runtime: llama.cpp MTP build `9032-5d5f1b46e`
+- Runtime: seed results used llama.cpp MTP build `9032-5d5f1b46e`; current upstream examples should use a post-merge build such as `9190 (b64739ea3)`.
 
 ## Native Max-Context Preset
 
@@ -23,7 +23,8 @@ tensor-split = 1,1
 batch-size = 4096
 ubatch-size = 1024
 flash-attn = on
-spec-type = mtp
+spec-type = draft-mtp
+spec-draft-p-min = 0.75
 spec-draft-n-max = 2
 jinja = on
 parallel = 1
@@ -54,13 +55,14 @@ llama-server \
   --reasoning-format auto \
   --no-mmap \
   --no-warmup \
-  --spec-type mtp \
+  --spec-type draft-mtp \
+  --spec-draft-p-min 0.75 \
   --spec-draft-n-max 2
 ~~~
 
 ## MTP Flag Compatibility
 
-The tested llama.cpp MTP build is `9032-5d5f1b46e`. It accepts `--spec-type mtp` and exposes `--spec-draft-p-min` with a default of `0.75`; it does not accept `--spec-type draft-mtp`. Keep reported results tied to the exact build and speculative flags, because PR 22673's flag names and draft defaults are still moving.
+The older seed build `9032-5d5f1b46e` accepted `--spec-type mtp`. Merged upstream llama.cpp now uses `--spec-type draft-mtp` with `--spec-draft-p-min 0.75`. Keep reported results tied to the exact build and speculative flags.
 
 ## Observed Result
 
