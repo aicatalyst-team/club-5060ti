@@ -10,7 +10,7 @@ The project focus is simple: make low-VRAM Blackwell local inference less guessy
 | --- | --- | --- |
 | 1x RTX 5060 Ti | You want the best single-card fits and conservative starter configs. | docs/single-5060ti.md |
 | 2x RTX 5060 Ti | You want dual-16GB recipes for 27B-class and long-context models. | docs/llamacpp-qwen36.md |
-| Results explorer | You want to compare benchmark receipts and imported legacy data. | site/index.html |
+| Results explorer | You want to compare benchmark receipts and imported legacy data. | https://5p00kyy.github.io/club-5060ti/ |
 | Benchmark protocol | You want to submit or compare a result without mixing methods. | docs/benchmark-protocol.md |
 
 ## Current Direction
@@ -38,7 +38,7 @@ See docs/hardware.md for the full baseline and hardware notes.
 
 | Lane | Model | Status | Notes |
 | --- | --- | --- | --- |
-| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Working baseline | Current local route uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
+| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Working baseline | Current recipe uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
 | upstream llama.cpp | Qwen3.5 9B MTP GGUF | Working baseline | Small long-context route; useful sanity lane for 1x and 2x cards. |
 | upstream llama.cpp | Qwen3.6 35B A3B GGUF | Working recipe | Strong MoE/active-parameter comparison route. |
 | ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Planned | Needs controlled testing on CUDA and graph split. |
@@ -119,7 +119,7 @@ Set MODEL_DIR for GGUF downloads if you do not want to use ~/models. For large G
 scripts/update-llama.sh
 ~~~
 
-This builds the upstream llama.cpp tree used by the Qwen3.6 GGUF examples. The live lab setup runs through its own service wrapper and preset files; this repo script is the reproducible public build helper, not a service manager.
+This builds the upstream llama.cpp tree used by the Qwen3.6 GGUF examples. The helper is a reproducible public build path, not a service manager for a specific deployment.
 
 ## Contribution Standard
 

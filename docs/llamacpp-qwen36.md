@@ -12,7 +12,7 @@ missing tensor 'blk.64.ssm_conv1d.weight'
 
 The current working setup uses upstream llama.cpp `9190 (b64739ea3)`, after Qwen3.6 MTP support from PR 22673 merged. Earlier seed results used PR-tip build `9032-5d5f1b46e`; keep benchmark rows tied to the exact runtime version.
 
-The public helper scripts/update-llama.sh builds the tested upstream commit by default. The live service wrapper and preset files in the tested LXC are separate from this repo; the important public pieces are the model path shape, build commit, CUDA flags, and preset settings below.
+The public helper scripts/update-llama.sh builds the tested upstream commit by default. Deployment wrappers vary by machine; the important reproducible pieces are the model path shape, build commit, CUDA flags, and preset settings below.
 
 ## MTP Flag Compatibility
 

@@ -3,6 +3,16 @@ set -euo pipefail
 
 URL=""
 MODEL=""
+INCLUDE_BENCH=1
+
+sanitize_stream() {
+  sed -E \
+    -e 's/(Bearer )[A-Za-z0-9._-]{10,}/\1<redacted>/g' \
+    -e 's/(hf_|sk-)[A-Za-z0-9._-]{10,}/\1<redacted>/g' \
+    -e 's#(https?://)[^/ ]+#\1<redacted-host>#g' \
+    -e 's#/(home|Users|root)/[^[:space:]'"'"'"\\]+#/<redacted-path>#g' \
+    -e 's/\b(192\.168|10\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[0-1]))(\.[0-9]{1,3}){2}\b/<private-ip>/g'
+}
 
 while [[ $# -gt 0 ]]; do
   case "$1" in
@@ -14,8 +24,12 @@ while [[ $# -gt 0 ]]; do
       MODEL="$2"
       shift 2
       ;;
+    --no-bench)
+      INCLUDE_BENCH=0
+      shift
+      ;;
     -h|--help)
-      echo "Usage: bash scripts/report.sh --url http://127.0.0.1:8000 --model model-name"
+      echo "Usage: bash scripts/report.sh [--url http://127.0.0.1:8000] [--model model-name] [--no-bench]"
       exit 0
       ;;
     *)
@@ -71,8 +85,11 @@ fi
 echo
 echo "## Endpoint"
 echo
-echo "- Health URL: $HEALTH_BASE/health"
-echo "- API URL: $API_BASE"
+if [[ -n "$URL" ]]; then
+  echo "- Endpoint provided: yes"
+else
+  echo "- Endpoint provided: no"
+fi
 if [[ -n "$MODEL" ]]; then
   echo "- Model: $MODEL"
 else
@@ -82,36 +99,52 @@ echo
 if [[ -n "$URL" ]]; then
   echo "### Health"
   echo
-  if curl -fsS --max-time 10 "$HEALTH_BASE/health" >/tmp/club5060ti-health.$$ 2>/tmp/club5060ti-health-err.$$; then
-    echo '~~~text'
-    cat /tmp/club5060ti-health.$$
-    echo
-    echo '~~~'
+  if HEALTH_HTTP_CODE=$(curl -sS --max-time 10 -o /tmp/club5060ti-health.$$ -w "%{http_code}" "$HEALTH_BASE/health" 2>/tmp/club5060ti-health-err.$$); then
+    if [[ "$HEALTH_HTTP_CODE" == "200" ]]; then
+      echo "- Health check: ok (HTTP 200)"
+    else
+      echo "- Health check: unexpected status (HTTP $HEALTH_HTTP_CODE)"
+    fi
   else
-    echo '~~~text'
-    cat /tmp/club5060ti-health-err.$$ || true
-    echo '~~~'
+    echo "- Health check: failed"
+    if [[ -s /tmp/club5060ti-health-err.$$ ]]; then
+      echo "- Error:"
+      echo '~~~text'
+      sanitize_stream < /tmp/club5060ti-health-err.$$
+      echo '~~~'
+    fi
   fi
   rm -f /tmp/club5060ti-health.$$ /tmp/club5060ti-health-err.$$
 fi
 echo
-if [[ -n "$URL" && -n "$MODEL" ]]; then
+if [[ -n "$URL" && -n "$MODEL" && "$INCLUDE_BENCH" -eq 1 ]]; then
   echo "### Smoke"
   echo
   echo '~~~json'
-  python3 scripts/openai_compat_smoke.py --base-url "$API_BASE" --model "$MODEL" || true
+  if python3 scripts/openai_compat_smoke.py --base-url "$API_BASE" --model "$MODEL" >/tmp/club5060ti-smoke.$$ 2>/tmp/club5060ti-smoke-err.$$; then
+    sanitize_stream < /tmp/club5060ti-smoke.$$
+  else
+    sanitize_stream < /tmp/club5060ti-smoke.$$
+    sanitize_stream < /tmp/club5060ti-smoke-err.$$ || true
+  fi
   echo '~~~'
   echo
   echo "### Decode Bench"
   echo
   echo '~~~json'
-  python3 scripts/simple_decode_bench.py --base-url "$API_BASE" --model "$MODEL" --max-tokens 256 || true
+  if python3 scripts/simple_decode_bench.py --base-url "$API_BASE" --model "$MODEL" --max-tokens 256 >/tmp/club5060ti-decode.$$ 2>/tmp/club5060ti-decode-err.$$; then
+    sanitize_stream < /tmp/club5060ti-decode.$$
+  else
+    sanitize_stream < /tmp/club5060ti-decode.$$
+    sanitize_stream < /tmp/club5060ti-decode-err.$$ || true
+  fi
   echo '~~~'
+  rm -f /tmp/club5060ti-smoke.$$ /tmp/club5060ti-smoke-err.$$ /tmp/club5060ti-decode.$$ /tmp/club5060ti-decode-err.$$
 fi
 echo
 echo "## Launch Config"
 echo
-echo "Paste sanitized launch command/config here."
+echo "Paste sanitized launch command/config here (remove private IPs, local hostnames, tokens, and absolute home paths)."
 echo
 echo "## Notes"
 echo

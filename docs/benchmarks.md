@@ -4,7 +4,7 @@ Benchmarks here are receipts, not universal claims. Always include the setup det
 
 ## 2026-05-19 Protocol-Shaped Seed Run
 
-Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through site/index.html. Imported llm-bench rows are deprecated migration data and should be redone before headline use.
+Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are deprecated migration data and should be redone before headline use.
 
 Seed run files:
 

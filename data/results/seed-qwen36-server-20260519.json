@@ -61,7 +61,7 @@
         "wall_seconds": 3.762
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -125,7 +125,7 @@
         "wall_seconds": 3.703
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -189,7 +189,7 @@
         "wall_seconds": 8.629
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -253,7 +253,7 @@
         "wall_seconds": 8.573
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -317,7 +317,7 @@
         "wall_seconds": 7.239
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -381,7 +381,7 @@
         "wall_seconds": 7.112
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -446,7 +446,7 @@
         "wall_seconds": 7.808
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -511,7 +511,7 @@
         "wall_seconds": 7.672
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -576,7 +576,7 @@
         "wall_seconds": 20.743
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -641,7 +641,7 @@
         "wall_seconds": 20.59
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -706,7 +706,7 @@
         "wall_seconds": 18.121
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -771,7 +771,7 @@
         "wall_seconds": 17.81
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -836,7 +836,7 @@
         "wall_seconds": 2.922
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -901,7 +901,7 @@
         "wall_seconds": 2.874
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -966,7 +966,7 @@
         "wall_seconds": 8.705
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -1031,7 +1031,7 @@
         "wall_seconds": 8.611
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -1096,7 +1096,7 @@
         "wall_seconds": 5.891
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     },
     {
@@ -1161,7 +1161,7 @@
         "wall_seconds": 5.75
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ]
     }
   ]

@@ -691,7 +691,7 @@
         "wall_seconds": 1.12
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -756,7 +756,7 @@
         "wall_seconds": 0.995
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -821,7 +821,7 @@
         "wall_seconds": 2.939
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -886,7 +886,7 @@
         "wall_seconds": 2.885
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -951,7 +951,7 @@
         "wall_seconds": 1.998
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1016,7 +1016,7 @@
         "wall_seconds": 1.933
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1081,7 +1081,7 @@
         "wall_seconds": 0.336
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1146,7 +1146,7 @@
         "wall_seconds": 0.342
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1211,7 +1211,7 @@
         "wall_seconds": 1.474
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1276,7 +1276,7 @@
         "wall_seconds": 1.484
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1341,7 +1341,7 @@
         "wall_seconds": 4.39
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1406,7 +1406,7 @@
         "wall_seconds": 4.366
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1471,7 +1471,7 @@
         "wall_seconds": 2.976
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1536,7 +1536,7 @@
         "wall_seconds": 2.919
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1601,7 +1601,7 @@
         "wall_seconds": 0.369
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1666,7 +1666,7 @@
         "wall_seconds": 0.376
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1731,7 +1731,7 @@
         "wall_seconds": 2.74
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1796,7 +1796,7 @@
         "wall_seconds": 2.742
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1861,7 +1861,7 @@
         "wall_seconds": 8.254
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1926,7 +1926,7 @@
         "wall_seconds": 8.164
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -1991,7 +1991,7 @@
         "wall_seconds": 5.597
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -2056,7 +2056,7 @@
         "wall_seconds": 5.473
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -2121,7 +2121,7 @@
         "wall_seconds": 0.521
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -2186,7 +2186,7 @@
         "wall_seconds": 0.486
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen35-server-20260519.json"
     },
@@ -2251,7 +2251,7 @@
         "wall_seconds": 0.463
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2316,7 +2316,7 @@
         "wall_seconds": 0.466
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2382,7 +2382,7 @@
         "wall_seconds": 0.809
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2448,7 +2448,7 @@
         "wall_seconds": 0.816
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2514,7 +2514,7 @@
         "wall_seconds": 0.505
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2580,7 +2580,7 @@
         "wall_seconds": 0.503
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-long-retrieval-20260519.json"
     },
@@ -2645,7 +2645,7 @@
         "wall_seconds": 3.762
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -2710,7 +2710,7 @@
         "wall_seconds": 3.703
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -2775,7 +2775,7 @@
         "wall_seconds": 8.629
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -2840,7 +2840,7 @@
         "wall_seconds": 8.573
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -2905,7 +2905,7 @@
         "wall_seconds": 7.239
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -2970,7 +2970,7 @@
         "wall_seconds": 7.112
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3036,7 +3036,7 @@
         "wall_seconds": 7.808
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3102,7 +3102,7 @@
         "wall_seconds": 7.672
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3168,7 +3168,7 @@
         "wall_seconds": 20.743
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3234,7 +3234,7 @@
         "wall_seconds": 20.59
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3300,7 +3300,7 @@
         "wall_seconds": 18.121
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3366,7 +3366,7 @@
         "wall_seconds": 17.81
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3432,7 +3432,7 @@
         "wall_seconds": 2.922
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3498,7 +3498,7 @@
         "wall_seconds": 2.874
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3564,7 +3564,7 @@
         "wall_seconds": 8.705
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3630,7 +3630,7 @@
         "wall_seconds": 8.611
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3696,7 +3696,7 @@
         "wall_seconds": 5.891
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     },
@@ -3762,7 +3762,7 @@
         "wall_seconds": 5.75
       },
       "caveats": [
-        "Seed protocol run on the 2x RTX 5060 Ti lab host."
+        "Seed protocol run on the 2x RTX 5060 Ti seed system."
       ],
       "_source_file": "data/results/seed-qwen36-server-20260519.json"
     }

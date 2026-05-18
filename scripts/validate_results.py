@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
 
@@ -20,6 +21,7 @@ REQUIRED_TOP = {
 }
 
 PROMOTION_LEVELS = {"exploratory", "recipe", "benchmark", "verified", "deprecated"}
+SOURCE_TYPES = {"seed", "community", "imported", "external"}
 ENGINES = {"llama.cpp", "ik_llama.cpp", "BeeLlama", "vLLM", "SGLang", "other"}
 PROMPT_SETS = {
     "short-chat",
@@ -30,6 +32,31 @@ PROMPT_SETS = {
     "legacy",
     "custom",
 }
+
+PRIVATE_IPV4_RE = re.compile(r"\b(192\.168|10\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[0-1]))(\.[0-9]{1,3}){2}\b")
+TOKEN_RE = re.compile(r"(Bearer\s+[A-Za-z0-9._-]{10,}|hf_[A-Za-z0-9]{10,}|sk-[A-Za-z0-9]{10,})")
+PRIVATE_PATH_RE = re.compile(r"/(home|Users|root)/[^\s'\"\\]+")
+
+
+def find_sensitive_strings(value, path):
+    findings = []
+    if isinstance(value, dict):
+        for key, item in value.items():
+            findings.extend(find_sensitive_strings(item, f"{path}.{key}" if path else str(key)))
+        return findings
+    if isinstance(value, list):
+        for index, item in enumerate(value):
+            findings.extend(find_sensitive_strings(item, f"{path}[{index}]"))
+        return findings
+    if not isinstance(value, str):
+        return findings
+    if PRIVATE_IPV4_RE.search(value):
+        findings.append(f"{path}: contains private IPv4 address")
+    if TOKEN_RE.search(value):
+        findings.append(f"{path}: contains token-like secret")
+    if PRIVATE_PATH_RE.search(value):
+        findings.append(f"{path}: contains personal absolute path")
+    return findings
 
 
 def load_results(path):
@@ -52,7 +79,7 @@ def require(condition, errors, message):
         errors.append(message)
 
 
-def validate_result(result, label):
+def validate_result(result, label, allow_private=False):
     errors = []
     require(isinstance(result, dict), errors, f"{label}: result must be an object")
     if errors:
@@ -65,6 +92,7 @@ def validate_result(result, label):
 
     source = result.get("source") or {}
     require(isinstance(source, dict), errors, f"{label}: source must be an object")
+    require(source.get("type") in SOURCE_TYPES, errors, f"{label}: source.type is invalid")
     require(bool(source.get("type")), errors, f"{label}: source.type is required")
     require(bool(source.get("label")), errors, f"{label}: source.label is required")
 
@@ -85,11 +113,21 @@ def validate_result(result, label):
     benchmark = result.get("benchmark") or {}
     require(benchmark.get("prompt_set") in PROMPT_SETS, errors, f"{label}: benchmark.prompt_set is invalid")
 
+    serving = result.get("serving") or {}
+    for field in ("context_tokens", "batch_size", "ubatch_size"):
+        if field in serving:
+            require(isinstance(serving[field], int), errors, f"{label}: serving.{field} must be an integer")
+            require(serving[field] > 0, errors, f"{label}: serving.{field} must be greater than 0")
+
     metrics = result.get("metrics") or {}
     metric_names = {"prompt_tok_s", "decode_tok_s", "end_to_end_tok_s", "wall_seconds", "ttft_seconds", "load_seconds", "quality_score"}
     for name in metric_names:
         if name in metrics and metrics[name] is not None:
             require(isinstance(metrics[name], (int, float)), errors, f"{label}: metrics.{name} must be numeric")
+
+    if not allow_private:
+        for finding in find_sensitive_strings(result, ""):
+            errors.append(f"{label}: {finding}")
 
     return errors
 
@@ -97,6 +135,7 @@ def validate_result(result, label):
 def main():
     parser = argparse.ArgumentParser(description="Validate club-5060ti result JSON files.")
     parser.add_argument("paths", nargs="+", help="JSON files or directories under data/results")
+    parser.add_argument("--allow-private", action="store_true", help="Skip private-data lint checks")
     args = parser.parse_args()
 
     files = []
@@ -118,7 +157,7 @@ def main():
         for index, result in enumerate(results):
             count += 1
             label = f"{path}:{index}"
-            all_errors.extend(validate_result(result, label))
+            all_errors.extend(validate_result(result, label, allow_private=args.allow_private))
 
     if all_errors:
         for error in all_errors:

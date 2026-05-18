@@ -2,13 +2,34 @@
 
 A useful result is reproducible. A vague tok/s number is not.
 
-## Quick Report
+## Quick Start
 
 ~~~bash
-bash scripts/report.sh --url http://127.0.0.1:8000 --model qwen36-27b-nvfp4-mtp > my-result.md
+python3 scripts/run_openai_bench.py \
+  --base-url http://127.0.0.1:8000/v1 \
+  --model your-model-id \
+  --prompt-set short-chat \
+  --prompt-set code-generate \
+  --prompt-set agent-tool \
+  --runs 1 \
+  --no-thinking \
+  --output data/results/community-my-run.json \
+  --report-output my-result.md
 ~~~
 
-Review the output before posting it publicly.
+Validate before submitting:
+
+~~~bash
+python3 scripts/validate_results.py data/results/community-my-run.json
+~~~
+
+If you want a hardware/endpoint report block:
+
+~~~bash
+bash scripts/report.sh --url http://127.0.0.1:8000 --model your-model-id >> my-result.md
+~~~
+
+report.sh redacts common secrets, private IPs, and URL hosts from command output. Still review the final text manually.
 
 ## Include These Details
 
@@ -27,6 +48,7 @@ Review the output before posting it publicly.
 - generated token count
 - decode tok/s
 - warnings, restarts, or caveats
+- anything unusual that affects reproducibility
 
 ## Issue Reports
 

@@ -5,6 +5,12 @@ title: "[result] "
 labels: result
 ---
 
+## Privacy Checklist
+
+- [ ] I removed private IPs, hostnames, tokens, and personal paths.
+- [ ] I validated my JSON with python3 scripts/validate_results.py PATH_TO_RESULT_JSON.
+- [ ] I attached or linked the result JSON file.
+
 ## Hardware
 
 - GPU(s):
@@ -43,8 +49,20 @@ labels: result
 
 ## Optional Report Output
 
+You can generate a starter report with:
+
 Paste reviewed output from:
 
 ~~~bash
-bash scripts/report.sh --url http://127.0.0.1:8000 --model your-model-name
+python3 scripts/run_openai_bench.py \
+  --base-url http://127.0.0.1:8000/v1 \
+  --model your-model-name \
+  --prompt-set short-chat \
+  --prompt-set code-generate \
+  --prompt-set agent-tool \
+  --runs 1 \
+  --no-thinking \
+  --output data/results/community-your-run.json \
+  --report-output my-result.md
+bash scripts/report.sh --url http://127.0.0.1:8000 --model your-model-name >> my-result.md
 ~~~
