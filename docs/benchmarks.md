@@ -4,15 +4,15 @@ Benchmarks here are receipts, not universal claims. Always include the setup det
 
 ## 2026-05-19 Protocol-Shaped Seed Run
 
-Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are deprecated migration data and should be redone before headline use.
+Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are archived historical data and should be redone before comparison use.
 
-The explorer defaults to one row per setup and collapses repeated runs to the best decode run while keeping the run count visible. Use the all-runs toggle when inspecting raw repeated measurements.
+The explorer defaults to one row per setup and collapses repeated runs to the highest-decode raw run while keeping averages and the run count visible. Use the all-runs toggle when inspecting raw repeated measurements.
 
 Seed run files:
 
 - data/results/seed-qwen35-server-20260519.json
-- data/results/seed-qwen36-server-20260519.json
-- data/results/seed-qwen36-long-retrieval-20260519.json
+- data/results/seed-qwen35-qwen36-server-20260519.json
+- data/results/seed-qwen35-qwen36-long-retrieval-20260519.json
 
 Best decode results by model/prompt from the first run:
 
@@ -43,7 +43,7 @@ Best decode results by model/prompt from the first run:
 | Qwen3.6-35B-A3B-Instruct | agent-tool | 90.07 | 104.70 | 512 |
 | Qwen3.6-35B-A3B-Instruct | long-retrieval | 74.41 | 22.55 | 17 |
 
-These are server-route results from the local 2x RTX 5060 Ti seed host using scripts/run_openai_bench.py. Long-retrieval rows use a synthetic filler prompt and short answer budget, so they primarily measure long-prompt handling rather than sustained decode.
+These are OpenAI-compatible server benchmark results from the 2x RTX 5060 Ti seed system using scripts/run_openai_bench.py. Long-retrieval rows use a synthetic filler prompt and short answer budget, so they primarily measure long-prompt handling rather than sustained decode.
 
 ## Current Seed Results
 
@@ -84,7 +84,7 @@ Seed hardware is a Dell Precision Tower 7810 with a Dell 0GWHMW board, 2x Intel 
 
 ## Quality Smoke
 
-The vLLM NVFP4/MTP setup passed a deterministic no-thinking suite at 23/23 across math, logic, code, JSON, instruction following, knowledge, robustness, tool-calling, and long-context retrieval.
+In one local smoke suite, the vLLM NVFP4/MTP setup passed a deterministic no-thinking check at 23/23 across math, logic, code, JSON, instruction following, knowledge, robustness, tool-calling, and long-context retrieval. This is not a general quality evaluation.
 
 Long-context needle retrieval passed at actual prompt token counts around 22,228, 88,685, and 177,317.
 

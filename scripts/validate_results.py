@@ -132,6 +132,108 @@ def validate_result(result, label, allow_private=False):
     return errors
 
 
+def has_metric(result, *names):
+    metrics = result.get("metrics") or {}
+    return any(metrics.get(name) is not None for name in names)
+
+
+def combined_notes(result):
+    parts = []
+    for path in (
+        ("benchmark", "notes"),
+        ("serving", "notes"),
+        ("runtime", "notes"),
+        ("model", "notes"),
+    ):
+        value = result
+        for key in path:
+            value = (value or {}).get(key)
+        if value:
+            parts.append(str(value))
+    parts.extend(str(item) for item in result.get("caveats", []) if item)
+    return " ".join(parts).lower()
+
+
+def setup_group_key(result):
+    serving = result.get("serving") or {}
+    benchmark = result.get("benchmark") or {}
+    speculation = serving.get("speculation") or {}
+    return (
+        (result.get("model") or {}).get("id"),
+        (result.get("model") or {}).get("family"),
+        (result.get("model") or {}).get("quant"),
+        (result.get("runtime") or {}).get("engine"),
+        (result.get("runtime") or {}).get("version"),
+        (result.get("runtime") or {}).get("commit"),
+        (result.get("hardware") or {}).get("gpu_count"),
+        (result.get("hardware") or {}).get("gpu_model"),
+        (result.get("hardware") or {}).get("driver"),
+        (result.get("hardware") or {}).get("pcie"),
+        serving.get("context_tokens"),
+        serving.get("batch_size"),
+        serving.get("ubatch_size"),
+        serving.get("kv_cache_k"),
+        serving.get("kv_cache_v"),
+        serving.get("tensor_parallel"),
+        serving.get("split_mode"),
+        serving.get("gpu_layers"),
+        speculation.get("type"),
+        speculation.get("draft_n"),
+        serving.get("thinking"),
+        benchmark.get("prompt_set"),
+        benchmark.get("configured_context_tokens"),
+        benchmark.get("actual_prompt_tokens"),
+        benchmark.get("generated_tokens"),
+        benchmark.get("warmups"),
+        benchmark.get("stream"),
+        result.get("promotion_level"),
+        (result.get("source") or {}).get("type"),
+        (result.get("source") or {}).get("label"),
+    )
+
+
+def validate_dataset(results):
+    errors = []
+    seen_ids = {}
+    groups = {}
+
+    for label, result in results:
+        result_id = result.get("id")
+        if result_id:
+            if result_id in seen_ids:
+                errors.append(f"{label}: duplicate id also appears at {seen_ids[result_id]}: {result_id}")
+            else:
+                seen_ids[result_id] = label
+
+        level = result.get("promotion_level")
+        benchmark = result.get("benchmark") or {}
+        prompt_set = benchmark.get("prompt_set")
+        notes = combined_notes(result)
+
+        if level in {"benchmark", "verified"} and prompt_set != "legacy":
+            if not has_metric(result, "decode_tok_s", "prompt_tok_s", "end_to_end_tok_s"):
+                errors.append(f"{label}: benchmark/verified rows need comparable speed metrics")
+
+        if level == "deprecated" and prompt_set == "legacy" and not has_metric(result, "decode_tok_s", "prompt_tok_s", "end_to_end_tok_s"):
+            if "fit-only" not in notes:
+                errors.append(f"{label}: archived legacy row without speed metrics must be labeled fit-only")
+
+        generated = benchmark.get("generated_tokens")
+        if prompt_set == "long-retrieval" and isinstance(generated, int) and generated < 32:
+            if "short-answer" not in notes or "sustained decode" not in notes:
+                errors.append(f"{label}: long-retrieval rows below 32 generated tokens must be labeled as short-answer fit checks")
+
+        groups.setdefault(setup_group_key(result), []).append(result_id or label)
+
+    # Repeated benchmark runs are allowed, but broad accidental duplicates should
+    # still be visible to maintainers during review.
+    for ids in groups.values():
+        if len(ids) > 8:
+            errors.append(f"setup group has an unusually large repeat count ({len(ids)}): {', '.join(ids[:5])}...")
+
+    return errors
+
+
 def main():
     parser = argparse.ArgumentParser(description="Validate club-5060ti result JSON files.")
     parser.add_argument("paths", nargs="+", help="JSON files or directories under data/results")
@@ -147,6 +249,7 @@ def main():
             files.append(path)
 
     all_errors = []
+    labeled_results = []
     count = 0
     for path in files:
         try:
@@ -157,7 +260,11 @@ def main():
         for index, result in enumerate(results):
             count += 1
             label = f"{path}:{index}"
+            if isinstance(result, dict):
+                labeled_results.append((label, result))
             all_errors.extend(validate_result(result, label, allow_private=args.allow_private))
+
+    all_errors.extend(validate_dataset(labeled_results))
 
     if all_errors:
         for error in all_errors:

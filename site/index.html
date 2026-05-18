@@ -107,6 +107,13 @@
       background: var(--bg3);
     }
 
+    nav a:focus-visible,
+    th[data-sort]:focus-visible,
+    .check:focus-within {
+      outline: 2px solid var(--blue);
+      outline-offset: 2px;
+    }
+
     main { padding: 18px 0 30px; }
 
     .hw-bar {
@@ -173,6 +180,7 @@
       background: var(--bg2);
       padding: 8px 9px;
       min-height: 62px;
+      min-width: 0;
     }
 
     .stat .k {
@@ -254,6 +262,11 @@
       background: transparent;
     }
 
+    .check:focus-within {
+      color: var(--bright);
+      border-color: var(--blue);
+    }
+
     .sr-only {
       position: absolute;
       width: 1px;
@@ -326,6 +339,7 @@
       border: 1px solid var(--line);
       border-radius: 6px;
       overflow: auto;
+      overscroll-behavior-x: contain;
       background: var(--bg2);
     }
 
@@ -355,6 +369,8 @@
 
     th[data-sort] { cursor: pointer; }
     th[data-sort]:hover { color: var(--green); }
+    th[aria-sort="ascending"],
+    th[aria-sort="descending"] { color: var(--bright); }
     tbody tr:hover td { background: #141b23; }
     tbody tr:last-child td { border-bottom: 0; }
 
@@ -492,6 +508,62 @@
       .stat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .toolbar { grid-template-columns: 1fr; }
       .meta { white-space: normal; }
+      .results-wrap {
+        border: 0;
+        background: transparent;
+        overflow: visible;
+      }
+      .results-table {
+        min-width: 0;
+        border-collapse: separate;
+        border-spacing: 0 8px;
+      }
+      .results-table thead {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .results-table tbody,
+      .results-table tr,
+      .results-table td { display: block; }
+      .results-table tr {
+        border: 1px solid var(--line);
+        border-radius: 6px;
+        background: var(--bg2);
+        overflow: hidden;
+      }
+      .results-table td {
+        display: grid;
+        grid-template-columns: minmax(82px, 32%) minmax(0, 1fr);
+        gap: 8px;
+        padding: 7px 9px;
+        border-bottom: 1px solid var(--line);
+      }
+      .results-table td::before {
+        content: attr(data-label);
+        color: var(--text-3);
+        font-size: 9px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+      }
+      .results-table td:first-child,
+      .results-table .empty-row td { display: block; }
+      .results-table td:first-child::before {
+        display: block;
+        margin-bottom: 4px;
+      }
+      .results-table .empty-row td::before { display: none; }
+      .results-table .badge { white-space: normal; }
+      .results-table .bar {
+        min-width: 0;
+        grid-template-columns: minmax(44px, max-content) 1fr;
+      }
     }
 
     @media (max-width: 460px) {
@@ -523,7 +595,7 @@
         <span class="hw-spec" id="hw-vram"></span>
         <span class="hw-spec" id="hw-ram"></span>
       </div>
-      <div class="dataset-state">
+      <div class="dataset-state" role="status" aria-live="polite">
         <span class="dataset-dot" aria-hidden="true"></span>
         <span id="hw-updated">dataset loaded</span>
       </div>
@@ -560,21 +632,21 @@
     <div class="panel" id="results">
       <div class="toolbar">
         <label class="sr-only" for="search">Filter results</label>
-        <input id="search" type="search" placeholder="filter model, engine, quant, caveat" autocomplete="off">
+        <input id="search" type="search" placeholder="filter model, engine, quant, caveat" autocomplete="off" aria-controls="results-table">
         <label class="sr-only" for="gpu-filter">Hardware filter</label>
-        <select id="gpu-filter"></select>
+        <select id="gpu-filter" aria-controls="results-table"></select>
         <label class="sr-only" for="engine-filter">Engine filter</label>
-        <select id="engine-filter"></select>
+        <select id="engine-filter" aria-controls="results-table"></select>
         <label class="sr-only" for="family-filter">Model family filter</label>
-        <select id="family-filter"></select>
+        <select id="family-filter" aria-controls="results-table"></select>
         <label class="sr-only" for="level-filter">Status filter</label>
-        <select id="level-filter"></select>
+        <select id="level-filter" aria-controls="results-table"></select>
         <label class="sr-only" for="prompt-filter">Prompt set filter</label>
-        <select id="prompt-filter"></select>
-        <label class="check"><input id="archived-filter" type="checkbox"> archived</label>
-        <label class="check"><input id="raw-filter" type="checkbox"> all runs</label>
+        <select id="prompt-filter" aria-controls="results-table"></select>
+        <label class="check"><input id="archived-filter" type="checkbox" aria-controls="results-table"> archived imports</label>
+        <label class="check"><input id="raw-filter" type="checkbox" aria-controls="results-table"> all runs</label>
       </div>
-      <div class="mode-note" id="mode-note">Default view shows the best run for each setup. Enable all runs to inspect raw repeated measurements.</div>
+      <div class="mode-note" id="mode-note">Default view shows the highest-decode raw run for each setup. Enable all runs to inspect raw repeated measurements.</div>
     </div>
 
     <section class="sec">
@@ -585,9 +657,9 @@
         </div>
         <span class="meta" id="sort-label">sorted by decode speed</span>
       </div>
-      <div class="compare-note" id="compare-note"></div>
-      <div class="table-wrap">
-        <table aria-describedby="compare-note mode-note">
+      <div class="compare-note" id="compare-note" role="status" aria-live="polite"></div>
+      <div class="table-wrap results-wrap">
+        <table class="results-table" id="results-table" aria-describedby="compare-note mode-note">
           <thead>
             <tr>
               <th data-sort="model">Model</th>
@@ -685,6 +757,7 @@
     };
 
     const unique = (items) => Array.from(new Set(items.filter(Boolean))).sort((a, b) => String(a).localeCompare(String(b)));
+    const resultLabels = ['Model', 'Engine', 'Hardware', 'Context', 'Prompt Set', 'Decode', 'Prompt', 'Runs', 'Status', 'Caveat'];
 
     const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
       '&': '&amp;',
@@ -744,17 +817,43 @@
       return '<div class="bar"><span class="num">' + formatNumber(value, 1) + '</span><div class="bar-track"><div class="bar-fill" style="width:' + width + '%"></div></div></div>';
     };
 
+    const cell = (index, content, className = '') => {
+      const classAttr = className ? ' class="' + className + '"' : '';
+      return '<td data-label="' + escapeHtml(resultLabels[index]) + '"' + classAttr + '>' + content + '</td>';
+    };
+
     const groupKey = (item) => [
       get(item, 'model.id', ''),
       get(item, 'model.family', ''),
       get(item, 'model.quant', ''),
       get(item, 'runtime.engine', ''),
+      get(item, 'runtime.version', ''),
+      get(item, 'runtime.commit', ''),
+      get(item, 'runtime.build', ''),
       get(item, 'hardware.gpu_count', ''),
       get(item, 'hardware.gpu_model', ''),
+      get(item, 'hardware.driver', ''),
+      get(item, 'hardware.pcie', ''),
       get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', '')),
+      get(item, 'serving.batch_size', ''),
+      get(item, 'serving.ubatch_size', ''),
+      get(item, 'serving.kv_cache_k', ''),
+      get(item, 'serving.kv_cache_v', ''),
+      get(item, 'serving.tensor_parallel', ''),
+      get(item, 'serving.split_mode', ''),
+      get(item, 'serving.gpu_layers', ''),
+      get(item, 'serving.speculation.type', ''),
+      get(item, 'serving.speculation.draft_n', ''),
+      get(item, 'serving.thinking', ''),
       get(item, 'benchmark.prompt_set', ''),
+      get(item, 'benchmark.configured_context_tokens', ''),
+      get(item, 'benchmark.actual_prompt_tokens', ''),
+      get(item, 'benchmark.generated_tokens', ''),
+      get(item, 'benchmark.warmups', ''),
+      get(item, 'benchmark.stream', ''),
       get(item, 'promotion_level', ''),
-      get(item, 'source.type', '')
+      get(item, 'source.type', ''),
+      get(item, 'source.label', '')
     ].join('|');
 
     const collapseRepeatedRuns = (items) => {
@@ -775,8 +874,6 @@
         best._raw_ids = runs.map((item) => item.id).filter(Boolean);
         best._avg_decode_tok_s = decodeValues.length ? decodeValues.reduce((sum, value) => sum + value, 0) / decodeValues.length : null;
         best._avg_prompt_tok_s = promptValues.length ? promptValues.reduce((sum, value) => sum + value, 0) / promptValues.length : null;
-        best._best_prompt_tok_s = promptValues.length ? Math.max(...promptValues) : null;
-        if (best._best_prompt_tok_s) best.metrics.prompt_tok_s = best._best_prompt_tok_s;
         return best;
       });
     };
@@ -885,11 +982,26 @@
       render();
     };
 
+    const updateSortHeaders = () => {
+      const sortDirectionLabel = sortDir === 1 ? 'ascending' : 'descending';
+      const canFocusHeaders = !window.matchMedia('(max-width: 720px)').matches;
+      document.getElementById('sort-label').textContent = 'sorted by ' + sortKey.replace('_', ' ') + ', ' + sortDirectionLabel;
+      document.querySelectorAll('th[data-sort]').forEach((header) => {
+        const active = header.getAttribute('data-sort') === sortKey;
+        header.tabIndex = canFocusHeaders ? 0 : -1;
+        header.setAttribute('aria-sort', active ? sortDirectionLabel : 'none');
+        header.setAttribute('aria-label', 'Sort by ' + header.textContent.trim() + (active ? ', currently ' + sortDirectionLabel : ''));
+      });
+    };
+
     const render = () => {
       const body = document.getElementById('results-body');
       const maxDecode = Math.max(1, ...visibleResults.map((item) => Number(get(item, 'metrics.decode_tok_s', 0) || 0)));
       const maxPrompt = Math.max(1, ...visibleResults.map((item) => Number(get(item, 'metrics.prompt_tok_s', 0) || 0)));
-      body.innerHTML = visibleResults.map((item) => {
+      if (!visibleResults.length) {
+        body.innerHTML = '<tr class="empty-row"><td colspan="10" class="muted">No rows match the current filters. Clear the search or broaden the selected filters.</td></tr>';
+      } else {
+        body.innerHTML = visibleResults.map((item) => {
         const model = get(item, 'model.id', 'unknown');
         const quant = get(item, 'model.quant', 'unknown');
         const family = get(item, 'model.family', 'unknown');
@@ -902,21 +1014,22 @@
         const runCount = item._run_count || 1;
         const avgDecode = item._avg_decode_tok_s;
         const avgPrompt = item._avg_prompt_tok_s;
-        const decodeLabel = runCount > 1 && avgDecode ? 'best ' + formatNumber(get(item, 'metrics.decode_tok_s', null), 1) + ' / avg ' + formatNumber(avgDecode, 1) : formatNumber(get(item, 'metrics.decode_tok_s', null), 1);
-        const promptLabel = runCount > 1 && avgPrompt ? 'best ' + formatNumber(get(item, 'metrics.prompt_tok_s', null), 1) + ' / avg ' + formatNumber(avgPrompt, 1) : formatNumber(get(item, 'metrics.prompt_tok_s', null), 1);
+        const decodeLabel = runCount > 1 && avgDecode ? 'selected ' + formatNumber(get(item, 'metrics.decode_tok_s', null), 1) + ' / avg ' + formatNumber(avgDecode, 1) : formatNumber(get(item, 'metrics.decode_tok_s', null), 1);
+        const promptLabel = runCount > 1 && avgPrompt ? 'same run ' + formatNumber(get(item, 'metrics.prompt_tok_s', null), 1) + ' / avg ' + formatNumber(avgPrompt, 1) : formatNumber(get(item, 'metrics.prompt_tok_s', null), 1);
         return '<tr>' +
-          '<td><div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div></td>' +
-          '<td><span class="badge engine">' + escapeHtml(engine) + '</span></td>' +
-          '<td class="mono">' + escapeHtml(gpu) + '</td>' +
-          '<td class="num">' + formatNumber(context, 0) + '</td>' +
-          '<td><span class="badge">' + escapeHtml(prompt) + '</span></td>' +
-          '<td>' + renderBar(get(item, 'metrics.decode_tok_s', null), maxDecode) + '<div class="subline">' + escapeHtml(decodeLabel) + '</div></td>' +
-          '<td>' + renderBar(get(item, 'metrics.prompt_tok_s', null), maxPrompt) + '<div class="subline">' + escapeHtml(promptLabel) + '</div></td>' +
-          '<td><span class="badge">' + (runCount > 1 ? 'best of ' + runCount : '1') + '</span></td>' +
-          '<td><span class="badge ' + badgeClass(level) + '">' + escapeHtml(level) + '</span></td>' +
-          '<td class="muted">' + escapeHtml(caveat) + '</td>' +
+          cell(0, '<div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div>') +
+          cell(1, '<span class="badge engine">' + escapeHtml(engine) + '</span>') +
+          cell(2, escapeHtml(gpu), 'mono') +
+          cell(3, formatNumber(context, 0), 'num') +
+          cell(4, '<span class="badge">' + escapeHtml(prompt) + '</span>') +
+          cell(5, renderBar(get(item, 'metrics.decode_tok_s', null), maxDecode) + '<div class="subline">' + escapeHtml(decodeLabel) + '</div>') +
+          cell(6, renderBar(get(item, 'metrics.prompt_tok_s', null), maxPrompt) + '<div class="subline">' + escapeHtml(promptLabel) + '</div>') +
+          cell(7, '<span class="badge">' + (runCount > 1 ? 'best of ' + runCount : '1') + '</span>') +
+          cell(8, '<span class="badge ' + badgeClass(level) + '">' + escapeHtml(level) + '</span>') +
+          cell(9, escapeHtml(caveat), 'muted') +
           '</tr>';
-      }).join('');
+        }).join('');
+      }
 
       document.getElementById('metric-visible').textContent = visibleResults.length;
       document.getElementById('metric-total').textContent = allResults.length + ' raw runs loaded';
@@ -926,10 +1039,10 @@
       document.getElementById('metric-context').textContent = maxContext ? formatNumber(maxContext, 0) : 'n/a';
       const bestDecode = Math.max(0, ...visibleResults.map((item) => Number(get(item, 'metrics.decode_tok_s', 0) || 0)));
       document.getElementById('metric-best-decode').textContent = bestDecode ? formatNumber(bestDecode, 1) : 'n/a';
-      document.getElementById('sort-label').textContent = 'sorted by ' + sortKey.replace('_', ' ');
+      updateSortHeaders();
       document.getElementById('mode-note').textContent = document.getElementById('raw-filter').checked
         ? 'Raw run view: repeated measurements are shown individually for inspection.'
-        : 'Default view: repeated measurements are collapsed to one setup row using the best decode run. The run count remains visible.';
+        : 'Default view: repeated measurements are collapsed to one setup row using the highest-decode raw run. Averages and run count remain visible.';
 
       const prompts = unique(visibleResults.map((item) => get(item, 'benchmark.prompt_set', '')));
       const contexts = unique(visibleResults.map((item) => String(get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', '')))));
@@ -951,6 +1064,7 @@
 
     const boot = async () => {
       const response = await fetch(DATA_URL);
+      if (!response.ok) throw new Error('HTTP ' + response.status + ' loading ' + DATA_URL);
       const data = await response.json();
       allResults = data.results || [];
       buildHardwareLane();
@@ -964,23 +1078,34 @@
       document.querySelectorAll('input, select').forEach((element) => element.addEventListener('input', applyFilters));
       document.getElementById('archived-filter').addEventListener('change', applyFilters);
       document.getElementById('raw-filter').addEventListener('change', applyFilters);
+      const sortByHeader = (header) => {
+        const next = header.getAttribute('data-sort');
+        if (next === sortKey) sortDir *= -1;
+        else {
+          sortKey = next;
+          sortDir = next === 'decode' || next === 'prompt_speed' || next === 'context' ? -1 : 1;
+        }
+        applyFilters();
+      };
+
       document.querySelectorAll('th[data-sort]').forEach((header) => {
         header.addEventListener('click', () => {
-          const next = header.getAttribute('data-sort');
-          if (next === sortKey) sortDir *= -1;
-          else {
-            sortKey = next;
-            sortDir = next === 'decode' || next === 'prompt_speed' || next === 'context' ? -1 : 1;
+          sortByHeader(header);
+        });
+        header.addEventListener('keydown', (event) => {
+          if (event.key === 'Enter' || event.key === ' ') {
+            event.preventDefault();
+            sortByHeader(header);
           }
-          applyFilters();
         });
       });
+      window.addEventListener('resize', updateSortHeaders);
 
       applyFilters();
     };
 
     boot().catch((error) => {
-      document.getElementById('results-body').innerHTML = '<tr><td colspan="10">Failed to load site data: ' + error + '</td></tr>';
+      document.getElementById('results-body').innerHTML = '<tr class="empty-row"><td colspan="10">Failed to load site data: ' + escapeHtml(error.message || error) + '</td></tr>';
       document.getElementById('engine-summary-body').innerHTML = '<tr><td colspan="4" class="muted">No data.</td></tr>';
       document.getElementById('family-summary-body').innerHTML = '<tr><td colspan="4" class="muted">No data.</td></tr>';
     });

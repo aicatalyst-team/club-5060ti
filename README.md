@@ -2,7 +2,7 @@
 
 Practical local LLM recipes, benchmark receipts, and setup notes for RTX 5060 Ti 16GB systems.
 
-The project focus is simple: make low-VRAM Blackwell local inference less guessy. Every useful result should come with the launch shape, hardware context, model details, benchmark method, and caveats needed for someone else to reproduce or improve it.
+The project focus is simple: make low-VRAM Blackwell local inference more reproducible. Every useful result should come with the launch shape, hardware context, model details, benchmark method, and caveats needed for someone else to reproduce or improve it.
 
 ## Start Here
 
@@ -15,9 +15,9 @@ The project focus is simple: make low-VRAM Blackwell local inference less guessy
 
 ## Current Direction
 
-club-5060ti is the canonical source of truth for tested RTX 5060 Ti recipes and benchmark receipts. The results explorer is built from checked-in JSON under data/results/ so docs, scripts, and the static site all describe the same evidence.
+club-5060ti collects tested RTX 5060 Ti recipes and benchmark receipts. The results explorer is built from checked-in JSON under data/results/ so docs, scripts, and the static site all describe the same evidence.
 
-Imported llm-bench rows are marked as deprecated migration data until they are rerun under the benchmark protocol. They are useful history, not headline evidence.
+Imported llm-bench rows are archived historical data until they are rerun under the benchmark protocol. They are useful provenance, not headline evidence.
 
 ## Tested Baseline
 
@@ -42,8 +42,8 @@ See docs/hardware.md for the full baseline and hardware notes.
 | upstream llama.cpp | Qwen3.5 9B MTP GGUF | Working baseline | Small long-context route; useful sanity lane for 1x and 2x cards. |
 | upstream llama.cpp | Qwen3.6 35B A3B GGUF | Working recipe | Strong MoE/active-parameter comparison route. |
 | ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Planned | Needs controlled testing on CUDA and graph split. |
-| BeeLlama | Qwen3.6 27B DFlash/TurboQuant | Planned | Test after current release work; only compare with equal target/KV/context settings. |
-| vLLM | Qwen3.6 27B NVFP4/MTP | Working historical lane | Needs fresh protocol-shaped results. |
+| BeeLlama | Qwen3.6 27B DFlash/TurboQuant | Planned | Needs controlled testing before comparison; only compare with equal target/KV/context settings. |
+| vLLM | Qwen3.6 27B NVFP4/MTP | Working, needs fresh protocol-shaped results | Historical notes exist, but the lane needs current benchmark JSON before promotion. |
 | vLLM | BNB4/AutoRound routes | Experimental | Do not promote CPU-offload health checks as useful recipes. |
 
 ## Results And Data
@@ -76,9 +76,9 @@ python3 scripts/run_openai_bench.py \
   --output data/results/my-run.json
 ~~~
 
-The old llm-bench summary rows have been imported into data/results/llm-bench-legacy-import.json as deprecated data. They are useful migration material, not new headline evidence.
+The old llm-bench summary rows have been imported into data/results/llm-bench-legacy-import.json as archived historical data. Rerun them under the benchmark protocol before using them for comparisons.
 
-The hosted explorer defaults to one row per setup, using the best decode run when repeated measurements exist. Enable "all runs" in the explorer to inspect raw repeated measurements.
+The hosted explorer defaults to one row per setup, using the highest-decode raw run when repeated measurements exist. Enable "all runs" in the explorer to inspect raw repeated measurements.
 
 ## Repo Map
 
@@ -111,7 +111,7 @@ scripts/download-models.sh RedHatAI Qwen3.6-35B-A3B-NVFP4 '' ~/models/Qwen3.6-35
 
 When the selector ends in `.gguf`, it is treated as an exact file. Otherwise it becomes a GGUF include pattern, so `Q4_K_XL` downloads matching `*Q4_K_XL*.gguf` files. Leave the selector empty to download the full repository.
 
-Set `MODEL_DIR` if you want a different default root. Compatibility target aliases such as `qwen36-27b-gguf-q4` still work, but the explicit author/model/selector form is preferred because it is easier to audit and adapt.
+Install either the `hf` CLI or `huggingface-cli` before running it, and log in first when downloading gated models. Set `MODEL_DIR` if you want a different default root. Compatibility target aliases such as `qwen36-27b-gguf-q4` still work, but the explicit author/model/selector form is preferred because it is easier to audit and adapt.
 
 ## llama.cpp Build Helper
 

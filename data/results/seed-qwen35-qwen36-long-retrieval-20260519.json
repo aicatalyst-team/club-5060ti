@@ -61,7 +61,7 @@
         "wall_seconds": 0.463
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     },
     {
@@ -125,7 +125,7 @@
         "wall_seconds": 0.466
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     },
     {
@@ -190,7 +190,7 @@
         "wall_seconds": 0.809
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     },
     {
@@ -255,7 +255,7 @@
         "wall_seconds": 0.816
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     },
     {
@@ -320,7 +320,7 @@
         "wall_seconds": 0.505
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     },
     {
@@ -385,7 +385,7 @@
         "wall_seconds": 0.503
       },
       "caveats": [
-        "Seed long-retrieval protocol run on the 2x RTX 5060 Ti seed system."
+        "Long-prompt short-answer fit check on the 2x RTX 5060 Ti seed system; not a sustained decode benchmark."
       ]
     }
   ]

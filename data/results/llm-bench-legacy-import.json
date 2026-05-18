@@ -308,6 +308,7 @@
       "metrics": {},
       "caveats": [
         "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Archived fit-only row; no comparable speed metrics were captured in the imported source.",
         "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
       ]
     },
@@ -357,6 +358,7 @@
       "metrics": {},
       "caveats": [
         "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Archived fit-only row; no comparable speed metrics were captured in the imported source.",
         "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
       ]
     },
@@ -563,6 +565,7 @@
       "metrics": {},
       "caveats": [
         "Legacy import only; redo under docs/benchmark-protocol.md before using in headline comparisons.",
+        "Archived fit-only row; no comparable speed metrics were captured in the imported source.",
         "Importer keeps only rows selected for the migration pass; the old source repo remains the provenance archive."
       ]
     },

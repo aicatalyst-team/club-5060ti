@@ -116,7 +116,7 @@ CUDA_VISIBLE_DEVICES=0 llama-server \
   --spec-draft-n-max 2
 ~~~
 
-For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.5 9B MTP Q4 is the cleanest single-card starter because native 262144 context works with q8 KV. Qwen3.6 35B A3B IQ3_XXS has the best long-context larger-model fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. Qwen3.6 27B IQ4_XS is much tighter: use 32768 with q8 KV, or 65536 only if you are comfortable dropping KV to q4.
+For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.5 9B MTP Q4 is the least constrained observed single-card starter because native 262144 context works with q8 KV. Qwen3.6 35B A3B IQ3_XXS is the strongest observed long-context larger-model fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. Qwen3.6 27B IQ4_XS is much tighter: use 32768 with q8 KV, or 65536 with q4 KV only when the context-fit tradeoff is acceptable.
 
 ## What To Report
 

@@ -87,8 +87,8 @@ Prioritize reruns that are most useful for current 16GB and dual-16GB setups:
 | P0 | Qwen3.6 27B MTP | llama.cpp, ik_llama.cpp, BeeLlama, vLLM where viable | main dense 27B target for dual 16GB |
 | P0 | Qwen3.5 9B MTP | llama.cpp | practical small long-context baseline |
 | P1 | Qwen3.6 35B A3B | llama.cpp, vLLM where viable | strong MoE/active-params comparison |
-| P1 | Gemma 4 26B/31B | llama.cpp/vLLM where currently installed | useful non-Qwen comparison |
-| P2 | abliterated/uncensored Qwen3.6 27B variants | llama.cpp/vLLM | model-edit comparison, not default headline |
+| P1 | Gemma 4 26B/31B | llama.cpp/vLLM where supported by the runtime | useful non-Qwen comparison |
+| P2 | non-default Qwen3.6 27B variants | llama.cpp/vLLM | model-variant comparison, not default headline |
 
 ## Result Promotion Levels
 

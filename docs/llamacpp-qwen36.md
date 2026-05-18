@@ -48,7 +48,7 @@ See examples/llamacpp-qwen36-preset.ini.
 
 This is the public long-context preset shape. The direct tested setup uses Q6, q8 KV, tensor split 1,1, MTP draft 2, and 204800 context on 2x RTX 5060 Ti 16GB.
 
-For an always-on router setup with extra headroom, the current stable preset uses 65536 context, mmap disabled, q8 KV, MTP draft 3, p-min 0.75, and tensor split 51,49. See examples/llamacpp-qwen36-router.ini.
+For a lower-context serving preset with extra headroom, the example router shape uses 65536 context, mmap disabled, q8 KV, MTP draft 3, p-min 0.75, and tensor split 51,49. See examples/llamacpp-qwen36-router.ini.
 
 ## Observed Q4 vs Q6 Benchmark
 
@@ -85,7 +85,7 @@ For this Q6 test, draft 3 beat draft 2 and draft 6. The larger draft-6 window ge
 
 ## Observed Router Result
 
-The stable router-style shape at 65536 context, q8 KV, tensor split 1,1, and upstream `draft-mtp` produced 32.04 tok/s with draft 2 and 37.48 tok/s with draft 3 over 64 generated tokens. The live router preset uses draft 3.
+A 65536-context router-style shape with q8 KV, tensor split 1,1, and upstream `draft-mtp` produced 32.04 tok/s with draft 2 and 37.48 tok/s with draft 3 over 64 generated tokens. The example router preset uses draft 3 and tensor split 51,49 to leave slightly more headroom on the first GPU.
 
 ## Observed Q6 Context Fit
 
