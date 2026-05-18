@@ -111,7 +111,7 @@ scripts/download-models.sh RedHatAI Qwen3.6-35B-A3B-NVFP4 '' ~/models/Qwen3.6-35
 
 When the selector ends in `.gguf`, it is treated as an exact file. Otherwise it becomes a GGUF include pattern, so `Q4_K_XL` downloads matching `*Q4_K_XL*.gguf` files. Leave the selector empty to download the full repository.
 
-Install either the `hf` CLI or `huggingface-cli` before running it, and log in first when downloading gated models. Set `MODEL_DIR` if you want a different default root. Compatibility target aliases such as `qwen36-27b-gguf-q4` still work, but the explicit author/model/selector form is preferred because it is easier to audit and adapt.
+Install either the `hf` CLI or `huggingface-cli` before running it, and log in first when downloading gated models. Set `MODEL_DIR` if you want a different default root.
 
 ## llama.cpp Build Helper
 
