@@ -6,7 +6,7 @@ Benchmarks here are receipts, not universal claims. Always include the setup det
 
 Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are archived historical data and should be redone before comparison use.
 
-The explorer defaults to one row per setup and collapses repeated runs to the highest-decode raw run while keeping averages and the run count visible. Use the all-runs toggle when inspecting raw repeated measurements.
+The explorer defaults to one card per model/setup, with prompt-specific benchmark rows inside each card. Repeated runs are collapsed to the highest-generation row for each prompt while keeping averages and the run count visible. MTP/speculation is shown on each card and can be filtered directly. Use the raw-runs toggle when inspecting repeated measurements.
 
 Seed run files:
 
