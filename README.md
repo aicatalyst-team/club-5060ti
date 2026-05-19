@@ -40,7 +40,7 @@ See docs/hardware.md for the full baseline and hardware notes.
 
 | Lane | Model | Evidence | Notes |
 | --- | --- | --- | --- |
-| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Seed recipe | Current recipe uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
+| upstream llama.cpp | Qwen3.6 27B GGUF | Seed recipe | Dual-card MTP uses Q4_K_XL/q8 KV; single-card high-context uses Q3_K_XL/q8 KV. |
 | upstream llama.cpp | Qwen3.5 9B MTP GGUF | Seed recipe | Small long-context route; useful sanity lane for 1x and 2x cards. |
 | upstream llama.cpp | Qwen3.6 35B A3B GGUF | Seed recipe | Strong MoE/active-parameter comparison route. |
 | ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Comparison target | Needs controlled CUDA testing before any headline comparison. |

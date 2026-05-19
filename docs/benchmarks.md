@@ -13,6 +13,7 @@ Current headline benchmark files:
 - data/results/seed-qwen35-9b-mtp-1x5060ti-20260519.json
 - data/results/seed-qwen35-9b-nomtp-1x5060ti-20260519.json
 - data/results/seed-qwen36-27b-iq4xs-1x5060ti-20260519.json
+- data/results/seed-qwen36-27b-q3kxl-1x5060ti-20260519.json
 - data/results/seed-qwen36-35b-a3b-iq3xxs-1x5060ti-20260519.json
 - data/results/seed-qwen-mtp-2x5060ti-20260519.json
 - data/results/seed-qwen36-35b-a3b-2x5060ti-20260519.json
@@ -37,6 +38,10 @@ Best decode results by lane, model, and prompt:
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | code-generate | off |  | no MTP | 24.57 | 768 |
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | agent-tool | off |  | no MTP | 24.59 | 512 |
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | long-retrieval | off |  | no MTP | 22.26 | 17 |
+| 1x5060ti | Qwen3.6-27B | UD-Q3_K_XL | short-chat | off |  | no MTP | 22.76 | 256 |
+| 1x5060ti | Qwen3.6-27B | UD-Q3_K_XL | code-generate | off |  | no MTP | 22.68 | 768 |
+| 1x5060ti | Qwen3.6-27B | UD-Q3_K_XL | agent-tool | off |  | no MTP | 22.67 | 512 |
+| 1x5060ti | Qwen3.6-27B | UD-Q3_K_XL | long-retrieval | off |  | no MTP | 20.70 | 17 |
 | 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | short-chat | on | 384 | no MTP | 94.63 | 640 |
 | 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | code-generate | on | 384 | no MTP | 94.46 | 1152 |
 | 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | agent-tool | on | 384 | no MTP | 94.53 | 896 |
@@ -61,10 +66,11 @@ Long-retrieval rows use a synthetic filler prompt and short-answer retrieval tar
 Current single-card examples:
 
 - examples/llamacpp-single-5060ti.ini - Qwen3.5 9B high-context MTP and no-MTP presets.
-- examples/llamacpp-single-5060ti-qwen36-27b-iq4xs.ini - Qwen3.6 27B IQ4_XS no-MTP presets at 32768 q8 KV and 65536 q4 KV.
+- examples/llamacpp-single-5060ti-qwen36-27b-q3kxl.ini - Qwen3.6 27B Q3_K_XL no-MTP presets at 204800 and 262144 q8 KV.
+- examples/llamacpp-single-5060ti-qwen36-27b-iq4xs.ini - Qwen3.6 27B IQ4_XS no-MTP preset at 32768 q8 KV.
 - examples/llamacpp-single-5060ti-qwen36-35b-a3b-iq3xxs.ini - Qwen3.6 35B A3B IQ3_XXS thinking presets at 204800 and native max context.
 
-Qwen3.6 27B MTP Q4_XL is not currently a valid one-card GPU-only preset on this seed system because the model allocation fails on a single 16GB card. The current useful one-card MTP/no-MTP comparison is Qwen3.5 9B.
+Qwen3.6 27B MTP Q4_XL is not currently a valid one-card GPU-only preset on this seed system because the model allocation fails on a single 16GB card. The current useful one-card MTP/no-MTP comparison is Qwen3.5 9B. For high-context 27B on one card, the current clean route is Q3_K_XL with q8 KV rather than lowering the KV cache precision on the larger IQ4_XS file.
 
 ## Current Comparison Gaps
 

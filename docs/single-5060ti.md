@@ -8,7 +8,7 @@ Treat this page as a conservative starting point for community testing. The rows
 
 Start with llama.cpp and GGUF models.
 
-For one 16GB card, smaller GGUF models and lower quants are the practical first target. The Qwen3.5 9B MTP Q4 GGUF is a safe starter and has both MTP and no-MTP single-card presets. For Qwen3.6 27B and 35B A3B, use the lower single-card quants below rather than copying the dual-card Q4/Q6 recipes.
+For one 16GB card, smaller GGUF models and lower quants are the practical first target. The Qwen3.5 9B MTP Q4 GGUF is a safe starter and has both MTP and no-MTP single-card presets. For Qwen3.6 27B, the current high-context route is Q3_K_XL with q8 KV; IQ4_XS is useful when you want a stronger quant at lower context. For Qwen3.6 35B A3B, use the lower single-card MoE quant below rather than copying the dual-card Q4/Q6 recipes.
 
 Example preset:
 
@@ -60,7 +60,8 @@ Tested with batch 512, ubatch 128:
 
 | Model | Quant | Context | GPU layers | Result |
 | --- | --- | --- | --- | --- |
-| Qwen3.6 27B | IQ4_XS | 65536 | 65/65 | q4 KV, 64-token completion OK, 24.56 tok/s decode, 15625 MiB VRAM loaded |
+| Qwen3.6 27B | Q3_K_XL | 262144 | full | q8 KV, fit check passed, tiny completion OK, 12379 MiB VRAM loaded |
+| Qwen3.6 27B | Q3_K_XL | 204800 | full | q8 KV, protocol run: 22.76 tok/s short-chat, 22.68 tok/s code-generate, 22.67 tok/s agent-tool, 20.70 tok/s long-retrieval short-answer decode |
 | Qwen3.6 27B | IQ4_XS | 32768 | 65/65 | q8 KV, 64-token completion OK, 24.65 tok/s decode, 15561 MiB VRAM loaded |
 | Qwen3.6 27B | IQ4_XS | 16384 | 65/65 | q8 KV, 64-token completion OK, 24.65 tok/s decode, 15021 MiB VRAM loaded |
 | Qwen3.6 35B A3B | IQ3_XXS | 262144 | 41/41 | q8 KV, 93636-token needle retrieval OK, 938 tok/s prompt eval, 46.48 tok/s decode, 15345 MiB VRAM loaded |
@@ -71,6 +72,7 @@ Tested with batch 512, ubatch 128:
 
 Recommended examples:
 
+- examples/llamacpp-single-5060ti-qwen36-27b-q3kxl.ini
 - examples/llamacpp-single-5060ti-qwen36-27b-iq4xs.ini
 - examples/llamacpp-single-5060ti-qwen36-35b-a3b-iq3xxs.ini
 
@@ -80,7 +82,7 @@ Higher-quality/larger GGUF quants need partial CPU offload or fail on a single 1
 
 GPU-only checks failed:
 
-- Qwen3.6 27B IQ4_XS q8 KV failed at 65536 context allocating the KV cache. Switching to q4 KV made 65536 context fit on the seed card.
+- Qwen3.6 27B IQ4_XS q8 KV failed at 65536 context allocating the KV cache. Switching to q4 KV made 65536 context fit on the seed card, but the project avoids treating q4 KV as the normal path when a lower model quant can keep q8 KV.
 - Qwen3.6 27B IQ4_XS q4 KV still failed at 98304 and 110080 context allocating the KV cache on the seed card.
 - Qwen3.6 27B Q4_K_M at 4096 context failed allocating compute buffers after loading about 15.3 GiB of model data on GPU.
 - Qwen3.6 27B MTP Q4_XL failed model allocation on one 16GB card.
@@ -122,7 +124,7 @@ CUDA_VISIBLE_DEVICES=0 llama-server \
   --spec-draft-n-max 2
 ~~~
 
-For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.5 9B MTP Q4 is the least constrained observed single-card starter because native 262144 context works with q8 KV. Qwen3.6 35B A3B IQ3_XXS is the strongest observed long-context larger-model fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. Qwen3.6 27B IQ4_XS is much tighter: use 32768 with q8 KV, or 65536 with q4 KV only when the context-fit tradeoff is acceptable.
+For ordinary single-card use, start below the model's native maximum context and raise context only after short prompts are stable. Qwen3.5 9B MTP Q4 is the least constrained observed single-card starter because native 262144 context works with q8 KV. Qwen3.6 35B A3B IQ3_XXS is the strongest observed long-context larger-model fit in the current seed data, including a native-262144 slot and a 93636-token needle retrieval pass. For dense Qwen3.6 27B on one 16GB card, use Q3_K_XL when high context matters and IQ4_XS when a stronger quant matters more than context; q4 KV is only a fallback tradeoff, not the normal recommendation.
 
 ## What To Report
 

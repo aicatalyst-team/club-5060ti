@@ -845,7 +845,7 @@
   </main>
 
   <footer>
-    <div class="wrap">Numbers are benchmark evidence for this hardware lane and protocol, not universal speed claims.</div>
+    <div class="wrap">Numbers are benchmark evidence for the visible hardware lane(s) and protocol, not universal speed claims.</div>
   </footer>
 
   <script>
@@ -1078,28 +1078,36 @@
       });
     };
 
-    const buildHardwareLane = () => {
+    const buildHardwareLane = (items = allResults) => {
       const buckets = new Map();
       let latest = null;
-      for (const item of allResults) {
+      for (const item of items) {
         const gpuCount = get(item, 'hardware.gpu_count', '?');
         const gpuModel = get(item, 'hardware.gpu_model', 'GPU');
         const vram = get(item, 'hardware.vram_per_gpu_gb', null);
         const ram = get(item, 'hardware.inference_ram_gb', null);
-        const key = [gpuCount, gpuModel, vram, ram].join('|');
-        const existing = buckets.get(key) || { count: 0, gpuCount, gpuModel, vram, ram };
+        const lane = hardwareLaneLabel(item);
+        const key = [gpuCount, gpuModel, vram, ram, lane].join('|');
+        const existing = buckets.get(key) || { count: 0, gpuCount, gpuModel, vram, ram, lane };
         existing.count += 1;
         buckets.set(key, existing);
         const ts = get(item, 'timestamp_utc', null);
         if (ts && (!latest || ts > latest)) latest = ts;
       }
-      const lane = Array.from(buckets.values()).sort((a, b) => b.count - a.count)[0];
-      if (lane) {
+      const lanes = Array.from(buckets.values()).sort((a, b) => b.count - a.count);
+      if (lanes.length === 1) {
+        const lane = lanes[0];
         document.getElementById('hw-gpu').textContent = lane.gpuCount + 'x ' + lane.gpuModel;
         document.getElementById('hw-vram').textContent = lane.vram ? lane.vram + 'GB VRAM per GPU' : '';
         document.getElementById('hw-ram').textContent = lane.ram ? lane.ram + 'GB system RAM' : '';
+      } else if (lanes.length > 1) {
+        document.getElementById('hw-gpu').textContent = 'mixed hardware lanes';
+        document.getElementById('hw-vram').textContent = unique(lanes.map((lane) => lane.lane)).join(' / ');
+        document.getElementById('hw-ram').textContent = items.length + ' rows in current filters';
       } else {
-        document.getElementById('hw-gpu').textContent = 'dataset unavailable';
+        document.getElementById('hw-gpu').textContent = 'no matching rows';
+        document.getElementById('hw-vram').textContent = '';
+        document.getElementById('hw-ram').textContent = '';
       }
       document.getElementById('hw-updated').textContent = latest
         ? ('updated ' + new Date(latest).toLocaleString())
@@ -1258,6 +1266,7 @@
     const render = () => {
       const body = document.getElementById('results-list');
       const modelGroups = buildModelCards(visibleResults);
+      buildHardwareLane(filteredResults);
       const maxDecode = Math.max(1, ...visibleResults.map((item) => Number(get(item, 'metrics.decode_tok_s', 0) || 0)));
       const maxPrompt = Math.max(1, ...visibleResults.map((item) => Number(get(item, 'metrics.prompt_tok_s', 0) || 0)));
       if (!modelGroups.length) {
@@ -1303,7 +1312,6 @@
       if (!response.ok) throw new Error('HTTP ' + response.status + ' loading ' + DATA_URL);
       const data = await response.json();
       allResults = data.results || [];
-      buildHardwareLane();
 
       fillSelect('gpu-filter', 'all hardware', unique(allResults.map((item) => String(get(item, 'hardware.gpu_count', '')) + 'x ' + get(item, 'hardware.gpu_model', ''))));
       fillSelect('engine-filter', 'all engines', unique(allResults.map((item) => get(item, 'runtime.engine', ''))));
