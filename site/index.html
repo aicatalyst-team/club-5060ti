@@ -873,6 +873,17 @@
     const unique = (items) => Array.from(new Set(items.filter(Boolean))).sort((a, b) => String(a).localeCompare(String(b)));
     const resultLabels = ['Model', 'Engine', 'Hardware', 'Context', 'Prompt Set', 'Decode', 'Prompt', 'Runs', 'Evidence', 'Caveat'];
 
+    const normalizeGpuModel = (model) => String(model || 'GPU')
+      .replace(/^NVIDIA\s+(GeForce\s+)?/i, '')
+      .replace(/\s+/g, ' ')
+      .trim();
+
+    const gpuFilterLabel = (item) => {
+      const count = get(item, 'hardware.gpu_count', '');
+      const model = normalizeGpuModel(get(item, 'hardware.gpu_model', 'GPU'));
+      return String(count || '?') + 'x ' + model;
+    };
+
     const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
       '&': '&amp;',
       '<': '&lt;',
@@ -902,6 +913,8 @@
       get(item, 'model.quant', ''),
       get(item, 'runtime.engine', ''),
       hardwareLaneLabel(item),
+      gpuFilterLabel(item),
+      get(item, 'hardware.gpu_model', ''),
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
       get(item, 'serving.thinking', ''),
@@ -1169,7 +1182,7 @@
       const showRawRuns = document.getElementById('raw-filter').checked;
 
       filteredResults = allResults.filter((item) => {
-        const gpuLabel = String(get(item, 'hardware.gpu_count', '')) + 'x ' + get(item, 'hardware.gpu_model', '');
+        const gpuLabel = gpuFilterLabel(item);
         const itemLevel = get(item, 'promotion_level', '');
         if (!includeArchived && !level && itemLevel === 'deprecated') return false;
         if (search && !resultText(item).includes(search)) return false;
@@ -1314,7 +1327,7 @@
       const data = await response.json();
       allResults = data.results || [];
 
-      fillSelect('gpu-filter', 'all hardware', unique(allResults.map((item) => String(get(item, 'hardware.gpu_count', '')) + 'x ' + get(item, 'hardware.gpu_model', ''))));
+      fillSelect('gpu-filter', 'all hardware', unique(allResults.map((item) => gpuFilterLabel(item))));
       fillSelect('engine-filter', 'all engines', unique(allResults.map((item) => get(item, 'runtime.engine', ''))));
       fillSelect('spec-filter', 'all MTP/spec', unique(allResults.map((item) => specLabel(item))));
       fillSelect('thinking-filter', 'all thinking', unique(allResults.map((item) => get(item, 'serving.thinking', 'unknown'))));
