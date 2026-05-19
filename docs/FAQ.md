@@ -8,6 +8,8 @@ A practical repo for running local LLMs on RTX 5060 Ti 16GB cards. The tested ba
 
 They are consumer cards with 16GB VRAM. One card is constrained, but two cards give 32GB total VRAM, which is enough for useful 27B-class experiments with the right quant/runtime choices.
 
+The repo is about the card family rather than one exact GPU count. A single 5060 Ti result, a dual-card setup, and a quad-card setup should all be reported as separate hardware lanes.
+
 ## Do I need Linux?
 
 For vLLM, yes in practice: Linux + CUDA + NVIDIA container runtime is the target for these recipes.

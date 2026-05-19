@@ -10,7 +10,11 @@ Primary hardware lanes:
 
 - 1x RTX 5060 Ti 16GB;
 - 2x RTX 5060 Ti 16GB;
-- nearby low-VRAM comparison cards only when clearly labeled.
+- 3x/4x+ RTX 5060 Ti 16GB community multi-card setups;
+- mixed RTX 5060 Ti plus other CUDA GPUs;
+- other CUDA GPUs only when clearly labeled as comparison/adaptation data.
+
+See docs/hardware-lanes.md before comparing across GPU counts.
 
 Primary engine lanes:
 

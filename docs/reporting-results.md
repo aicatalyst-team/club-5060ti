@@ -33,6 +33,7 @@ report.sh redacts common secrets, private IPs, and URL hosts from command output
 
 ## Include These Details
 
+- hardware lane: 1x 5060 Ti, 2x 5060 Ti, 3x/4x+ 5060 Ti, mixed 5060 Ti plus other CUDA GPUs, or other CUDA GPU comparison
 - GPU model and count
 - VRAM per GPU
 - driver version
@@ -49,6 +50,8 @@ report.sh redacts common secrets, private IPs, and URL hosts from command output
 - decode tok/s
 - warnings, restarts, or caveats
 - anything unusual that affects reproducibility
+
+If the result is from three or more 5060 Ti cards, mixed GPUs, or non-5060 Ti hardware, say that plainly in the title or first paragraph. It is useful data, but it should not be blended into the 2x RTX 5060 Ti baseline.
 
 ## Issue Reports
 

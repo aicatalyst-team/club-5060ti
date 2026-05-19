@@ -13,6 +13,7 @@ labels: result
 
 ## Hardware
 
+- Hardware lane:
 - GPU(s):
 - GPU architecture(s), if mixed:
 - VRAM per GPU:
