@@ -1085,10 +1085,11 @@
         const gpuCount = get(item, 'hardware.gpu_count', '?');
         const gpuModel = get(item, 'hardware.gpu_model', 'GPU');
         const vram = get(item, 'hardware.vram_per_gpu_gb', null);
-        const ram = get(item, 'hardware.inference_ram_gb', null);
+        const hostRam = get(item, 'hardware.host_ram_gb', null);
+        const inferenceRam = get(item, 'hardware.inference_ram_gb', null);
         const lane = hardwareLaneLabel(item);
-        const key = [gpuCount, gpuModel, vram, ram, lane].join('|');
-        const existing = buckets.get(key) || { count: 0, gpuCount, gpuModel, vram, ram, lane };
+        const key = [gpuCount, gpuModel, vram, hostRam, inferenceRam, lane].join('|');
+        const existing = buckets.get(key) || { count: 0, gpuCount, gpuModel, vram, hostRam, inferenceRam, lane };
         existing.count += 1;
         buckets.set(key, existing);
         const ts = get(item, 'timestamp_utc', null);
@@ -1099,7 +1100,7 @@
         const lane = lanes[0];
         document.getElementById('hw-gpu').textContent = lane.gpuCount + 'x ' + lane.gpuModel;
         document.getElementById('hw-vram').textContent = lane.vram ? lane.vram + 'GB VRAM per GPU' : '';
-        document.getElementById('hw-ram').textContent = lane.ram ? lane.ram + 'GB system RAM' : '';
+        document.getElementById('hw-ram').textContent = [lane.hostRam ? lane.hostRam + 'GB host RAM' : '', lane.inferenceRam ? lane.inferenceRam + 'GB inference RAM' : ''].filter(Boolean).join(' / ');
       } else if (lanes.length > 1) {
         document.getElementById('hw-gpu').textContent = 'mixed hardware lanes';
         document.getElementById('hw-vram').textContent = unique(lanes.map((lane) => lane.lane)).join(' / ');

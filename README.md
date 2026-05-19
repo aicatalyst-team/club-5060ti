@@ -84,6 +84,16 @@ The hosted explorer defaults to one card per model/setup, with prompt-specific b
 
 Results are expected to grow over time. New community reports can be added as archived notes, recipe evidence, benchmark rows, or verified reproductions depending on how complete and comparable they are.
 
+## Useful Next Data
+
+The most useful new submissions are:
+
+- 3x/4x+ RTX 5060 Ti results with full PCIe topology.
+- Matched 2x RTX 5060 Ti no-MTP and MTP rows for the same 27B model, quant, context, and KV cache.
+- Qwen3.6 35B A3B rows from different 5060 Ti systems, especially dual-card and larger-card-count setups.
+- Clearly labeled mixed-GPU or non-5060 Ti CUDA adaptation results.
+- Power, thermal, and PCIe-link notes when they explain performance differences.
+
 ## Submit A Result
 
 The preferred path is a GitHub issue using the result report template. Include the hardware lane, exact GPU count, PCIe topology, runtime, model, quant, context, KV cache, generated-token count, prompt eval tok/s, generation tok/s, and caveats.
