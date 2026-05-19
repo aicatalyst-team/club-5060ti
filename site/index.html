@@ -905,6 +905,7 @@
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
       get(item, 'serving.thinking', ''),
+      get(item, 'serving.reasoning_budget', ''),
       get(item, 'benchmark.prompt_set', ''),
       (item.caveats || []).join(' ')
     ].join(' ').toLowerCase();
@@ -990,6 +991,7 @@
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
       get(item, 'serving.thinking', ''),
+      get(item, 'serving.reasoning_budget', ''),
       get(item, 'promotion_level', ''),
       get(item, 'source.type', ''),
       get(item, 'source.label', '')
@@ -1042,6 +1044,7 @@
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
       get(item, 'serving.thinking', ''),
+      get(item, 'serving.reasoning_budget', ''),
       get(item, 'benchmark.prompt_set', ''),
       get(item, 'benchmark.configured_context_tokens', ''),
       get(item, 'benchmark.actual_prompt_tokens', ''),
@@ -1229,6 +1232,8 @@
       const level = get(item, 'promotion_level', 'unknown');
       const kv = [get(item, 'serving.kv_cache_k', ''), get(item, 'serving.kv_cache_v', '')].filter(Boolean).join('/') || 'KV n/a';
       const thinking = get(item, 'serving.thinking', 'unknown');
+      const reasoningBudget = get(item, 'serving.reasoning_budget', null);
+      const thinkingLabel = 'thinking ' + thinking + (reasoningBudget !== null && reasoningBudget !== undefined ? ' / budget ' + formatNumber(reasoningBudget, 0) : '');
       return '<article class="model-card">' +
         '<div class="model-head">' +
           '<div class="model-title"><div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div></div>' +
@@ -1239,7 +1244,7 @@
             '<span class="badge">ctx ' + formatNumber(context, 0) + '</span>' +
             '<span class="badge">' + escapeHtml(kv) + '</span>' +
             '<span class="badge blue">' + escapeHtml(specLabel(item)) + '</span>' +
-            '<span class="badge amber">thinking ' + escapeHtml(thinking) + '</span>' +
+            '<span class="badge amber">' + escapeHtml(thinkingLabel) + '</span>' +
             '<span class="badge ' + badgeClass(level) + '">' + escapeHtml(level) + '</span>' +
           '</div>' +
           '<div class="model-kpis"><div class="model-kpi"><div class="k">best generation</div><div class="v">' + (group.bestDecode ? formatNumber(group.bestDecode, 1) : 'n/a') + '</div></div><div class="model-kpi"><div class="k">prompt rows</div><div class="v">' + group.rows.length + '</div></div></div>' +

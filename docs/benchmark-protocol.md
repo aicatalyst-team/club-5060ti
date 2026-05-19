@@ -80,11 +80,11 @@ Use strict comparison tables only when these are equivalent:
 - same generated-token budget;
 - same KV cache type or clearly separated rows;
 - same engine lane or a table explicitly marked cross-engine;
-- same thinking/reasoning mode.
+- same thinking/reasoning mode and reasoning budget.
 
 Recipe tables may mix settings, but they must be labeled as recipe tables rather than engine benchmarks.
 
-For MTP and other speculative decoding work, keep baseline and accelerated lanes separate. A useful matrix records both a no-MTP baseline and the MTP/speculative variant for the same model, quant, prompt set, context tier, KV cache, and thinking mode whenever the engine supports both.
+For MTP and other speculative decoding work, keep baseline and accelerated lanes separate. A useful matrix records both a no-MTP baseline and the MTP/speculative variant for the same model, quant, prompt set, context tier, KV cache, thinking mode, and reasoning budget whenever the engine supports both.
 
 ## Benchmark Gap Matrix
 

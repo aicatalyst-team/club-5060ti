@@ -320,6 +320,7 @@ def build_result(args, model_id, status, prompt_set, run_index, response, elapse
                 "notes": args.speculation_notes,
             },
             "thinking": args.thinking,
+            "reasoning_budget": args.reasoning_budget or status_reasoning_budget(status),
             "notes": args.serving_notes,
         },
         "benchmark": {

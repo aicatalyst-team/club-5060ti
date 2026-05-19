@@ -207,6 +207,10 @@
           "type": "string",
           "enum": ["on", "off", "unknown"]
         },
+        "reasoning_budget": {
+          "type": "integer",
+          "minimum": 0
+        },
         "launch": {
           "type": "string"
         },
