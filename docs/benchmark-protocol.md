@@ -53,6 +53,8 @@ The site should distinguish benchmark task shapes instead of hiding them behind 
 
 Do not compare results from different prompt sets as if they are one benchmark.
 
+For thinking/reasoning models, the request token cap must include both reasoning tokens and final answer tokens. The default output values above describe the target final-answer shape; benchmark runners should add the configured reasoning budget on top when thinking is enabled.
+
 ## Context Tiers
 
 Use these configured context tiers when practical:

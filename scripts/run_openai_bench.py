@@ -144,6 +144,27 @@ def positive_int_or_none(value):
     return parsed if parsed > 0 else None
 
 
+def status_arg(status, *names):
+    return arg_after((status or {}).get("args") or [], *names)
+
+
+def status_reasoning_enabled(status):
+    return status_arg(status, "--reasoning") == "on"
+
+
+def status_reasoning_budget(status):
+    return positive_int_or_none(status_arg(status, "--reasoning-budget"))
+
+
+def request_max_tokens(prompt_config, status, args):
+    target_tokens = prompt_config["max_tokens"]
+    reasoning_budget = args.reasoning_budget or status_reasoning_budget(status)
+    thinking_enabled = not args.no_thinking and (args.thinking == "on" or status_reasoning_enabled(status))
+    if thinking_enabled and reasoning_budget:
+        return target_tokens + reasoning_budget
+    return target_tokens
+
+
 def sanitize_public_text(value):
     if not isinstance(value, str):
         return value
@@ -329,12 +350,12 @@ def strip_nones(value):
     return value
 
 
-def run_prompt(base_url, model_id, prompt_set, prompt_config, args):
+def run_prompt(base_url, model_id, prompt_set, prompt_config, args, status):
     payload = {
         "model": model_id,
         "messages": [{"role": "user", "content": prompt_config["text"]}],
         "temperature": args.temperature,
-        "max_tokens": prompt_config["max_tokens"],
+        "max_tokens": request_max_tokens(prompt_config, status, args),
         "stream": False,
     }
     if args.no_thinking:
@@ -392,6 +413,7 @@ def main():
     parser.add_argument("--draft-n", type=int, default=0)
     parser.add_argument("--speculation-notes", default="")
     parser.add_argument("--thinking", default="unknown", choices=["on", "off", "unknown"])
+    parser.add_argument("--reasoning-budget", type=int, default=0, help="Add this token budget to prompt-set output caps when thinking is on")
     parser.add_argument("--serving-notes", default="")
     parser.add_argument("--benchmark-notes", default="")
     parser.add_argument("--caveat", action="append", default=[])
@@ -417,9 +439,9 @@ def main():
         for prompt_set in prompt_sets:
             prompt_config = PROMPTS[prompt_set]
             for _ in range(args.warmups):
-                run_prompt(args.base_url, model_id, prompt_set, prompt_config, args)
+                run_prompt(args.base_url, model_id, prompt_set, prompt_config, args, status)
             for run_index in range(args.runs):
-                response, elapsed = run_prompt(args.base_url, model_id, prompt_set, prompt_config, args)
+                response, elapsed = run_prompt(args.base_url, model_id, prompt_set, prompt_config, args, status)
                 results.append(build_result(args, model_id, status, prompt_set, run_index, response, elapsed))
 
     output = Path(args.output)
