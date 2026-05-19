@@ -770,7 +770,7 @@
         <select id="thinking-filter" aria-controls="results-list"></select>
         <label class="sr-only" for="family-filter">Model family filter</label>
         <select id="family-filter" aria-controls="results-list"></select>
-        <label class="sr-only" for="level-filter">Status filter</label>
+        <label class="sr-only" for="level-filter">Evidence filter</label>
         <select id="level-filter" aria-controls="results-list"></select>
         <label class="sr-only" for="prompt-filter">Prompt set filter</label>
         <select id="prompt-filter" aria-controls="results-list"></select>
@@ -871,7 +871,7 @@
     };
 
     const unique = (items) => Array.from(new Set(items.filter(Boolean))).sort((a, b) => String(a).localeCompare(String(b)));
-    const resultLabels = ['Model', 'Engine', 'Hardware', 'Context', 'Prompt Set', 'Decode', 'Prompt', 'Runs', 'Status', 'Caveat'];
+    const resultLabels = ['Model', 'Engine', 'Hardware', 'Context', 'Prompt Set', 'Decode', 'Prompt', 'Runs', 'Evidence', 'Caveat'];
 
     const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
       '&': '&amp;',
@@ -949,13 +949,21 @@
 
     const hardwareLaneLabel = (item) => {
       const lane = get(item, 'hardware.lane', '');
-      if (lane) return lane.replaceAll('-', ' ');
+      const labels = {
+        '1x5060ti': '1x 5060 Ti',
+        '2x5060ti': '2x 5060 Ti',
+        'multi-5060ti': 'multi 5060 Ti',
+        'mixed-5060ti-cuda': 'mixed 5060 Ti + CUDA',
+        'other-cuda': 'other CUDA',
+        'unknown': 'unknown lane',
+      };
+      if (lane) return labels[lane] || lane.replaceAll('-', ' ');
       const count = Number(get(item, 'hardware.gpu_count', 0) || 0);
       const model = String(get(item, 'hardware.gpu_model', 'GPU'));
-      if (model.includes('5060 Ti') && count === 1) return '1x 5060ti';
-      if (model.includes('5060 Ti') && count === 2) return '2x 5060ti';
-      if (model.includes('5060 Ti') && count >= 3) return 'multi 5060ti';
-      return 'other cuda';
+      if (model.includes('5060 Ti') && count === 1) return '1x 5060 Ti';
+      if (model.includes('5060 Ti') && count === 2) return '2x 5060 Ti';
+      if (model.includes('5060 Ti') && count >= 3) return 'multi 5060 Ti';
+      return 'other CUDA';
     };
 
     const setupCardKey = (item) => [

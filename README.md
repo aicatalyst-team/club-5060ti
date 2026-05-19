@@ -36,17 +36,17 @@ Seed hardware:
 
 See docs/hardware.md for the full baseline and hardware notes.
 
-## Recipe Status
+## Recipe Index
 
-| Lane | Model | Status | Notes |
+| Lane | Model | Evidence | Notes |
 | --- | --- | --- | --- |
-| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Working baseline | Current recipe uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
-| upstream llama.cpp | Qwen3.5 9B MTP GGUF | Working baseline | Small long-context route; useful sanity lane for 1x and 2x cards. |
-| upstream llama.cpp | Qwen3.6 35B A3B GGUF | Working recipe | Strong MoE/active-parameter comparison route. |
-| ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Planned | Needs controlled testing on CUDA and graph split. |
-| BeeLlama | Qwen3.6 27B DFlash/TurboQuant | Planned | Needs controlled testing before comparison; only compare with equal target/KV/context settings. |
-| vLLM | Qwen3.6 27B NVFP4/MTP | Working, needs fresh protocol-shaped results | Historical notes exist, but the lane needs current benchmark JSON before promotion. |
-| vLLM | BNB4/AutoRound routes | Experimental | Do not promote CPU-offload health checks as useful recipes. |
+| upstream llama.cpp | Qwen3.6 27B MTP GGUF | Seed recipe | Current recipe uses Q4_K_XL, q8 KV, tensor split, and draft-MTP. |
+| upstream llama.cpp | Qwen3.5 9B MTP GGUF | Seed recipe | Small long-context route; useful sanity lane for 1x and 2x cards. |
+| upstream llama.cpp | Qwen3.6 35B A3B GGUF | Seed recipe | Strong MoE/active-parameter comparison route. |
+| ik_llama.cpp | Qwen3.6 27B IQ4/IQ5 | Comparison target | Needs controlled CUDA testing before any headline comparison. |
+| BeeLlama | Qwen3.6 27B DFlash/TurboQuant | Comparison target | Only compare with equal target/KV/context settings once the route is testable. |
+| vLLM | Qwen3.6 27B NVFP4/MTP | Comparison target | Historical notes exist, but this needs current benchmark JSON before promotion. |
+| vLLM | BNB4/AutoRound routes | Experimental notes | Do not promote CPU-offload health checks as useful recipes. |
 
 ## Results And Data
 
@@ -81,6 +81,8 @@ python3 scripts/run_openai_bench.py \
 The old llm-bench summary rows have been imported into data/results/llm-bench-legacy-import.json as archived historical data. Rerun them under the benchmark protocol before using them for comparisons.
 
 The hosted explorer defaults to one card per model/setup, with prompt-specific benchmark rows inside each card. Generation tok/s is output-token speed; prompt eval tok/s is prompt/prefill processing speed. MTP/speculation and thinking mode are shown on each card and can be filtered directly. Enable "raw runs" in the explorer to inspect repeated measurements.
+
+Results are expected to grow over time. New community reports can be added as archived notes, recipe evidence, benchmark rows, or verified reproductions depending on how complete and comparable they are.
 
 ## Submit A Result
 

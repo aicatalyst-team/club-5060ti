@@ -84,9 +84,9 @@ Recipe tables may mix settings, but they must be labeled as recipe tables rather
 
 For MTP and other speculative decoding work, keep baseline and accelerated lanes separate. A useful matrix records both a no-MTP baseline and the MTP/speculative variant for the same model, quant, prompt set, context tier, KV cache, and thinking mode whenever the engine supports both.
 
-## Current Redo Matrix
+## Benchmark Gap Matrix
 
-Prioritize reruns that are most useful for current 16GB and dual-16GB setups:
+Prioritize missing benchmark rows that are most useful for current 16GB and dual-16GB setups:
 
 | Priority | Model | Engine lanes | Why |
 | --- | --- | --- | --- |

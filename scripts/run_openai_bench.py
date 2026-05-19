@@ -44,7 +44,7 @@ PROMPTS = {
 }
 
 SOURCE_TYPES = {"seed", "community", "imported", "external"}
-HARDWARE_LANES = {"1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
+HARDWARE_LANES = {"1x5060ti", "2x5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
 
 
 def slugify(value):
@@ -103,9 +103,9 @@ def infer_hardware_lane(gpu_count, gpu_model):
     model = (gpu_model or "").lower()
     is_5060ti = "5060" in model and "ti" in model
     if is_5060ti and gpu_count == 1:
-        return "1x-5060ti"
+        return "1x5060ti"
     if is_5060ti and gpu_count == 2:
-        return "2x-5060ti"
+        return "2x5060ti"
     if is_5060ti and gpu_count and gpu_count >= 3:
         return "multi-5060ti"
     if is_5060ti:

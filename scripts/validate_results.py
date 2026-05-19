@@ -32,7 +32,7 @@ PROMPT_SETS = {
     "legacy",
     "custom",
 }
-HARDWARE_LANES = {"1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
+HARDWARE_LANES = {"1x5060ti", "2x5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
 
 PRIVATE_IPV4_RE = re.compile(r"\b(192\.168|10\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[0-1]))(\.[0-9]{1,3}){2}\b")
 TOKEN_RE = re.compile(r"(Bearer\s+[A-Za-z0-9._-]{10,}|hf_[A-Za-z0-9]{10,}|sk-[A-Za-z0-9]{10,})")

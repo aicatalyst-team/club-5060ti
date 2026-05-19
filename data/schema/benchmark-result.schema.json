@@ -59,7 +59,7 @@
       "properties": {
         "lane": {
           "type": "string",
-          "enum": ["1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"]
+          "enum": ["1x5060ti", "2x5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"]
         },
         "gpu_count": {
           "type": "integer",
