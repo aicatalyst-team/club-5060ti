@@ -11,6 +11,7 @@ The explorer defaults to one card per model/setup, with prompt-specific benchmar
 Current headline benchmark files:
 
 - data/results/seed-qwen35-9b-mtp-1x5060ti-20260519.json
+- data/results/seed-qwen35-9b-nomtp-1x5060ti-20260519.json
 - data/results/seed-qwen36-27b-iq4xs-1x5060ti-20260519.json
 - data/results/seed-qwen36-35b-a3b-iq3xxs-1x5060ti-20260519.json
 - data/results/seed-qwen-mtp-2x5060ti-20260519.json
@@ -28,6 +29,10 @@ Best decode results by lane, model, and prompt:
 | 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | code-generate | off |  | draft-mtp n=2 | 96.25 | 768 |
 | 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | agent-tool | off |  | draft-mtp n=2 | 77.31 | 512 |
 | 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | long-retrieval | off |  | draft-mtp n=2 | 77.41 | 17 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | short-chat | off |  | no MTP | 63.32 | 256 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | code-generate | off |  | no MTP | 63.31 | 768 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | agent-tool | off |  | no MTP | 63.28 | 512 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | long-retrieval | off |  | no MTP | 57.90 | 17 |
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | short-chat | off |  | no MTP | 24.66 | 256 |
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | code-generate | off |  | no MTP | 24.57 | 768 |
 | 1x5060ti | Qwen3.6-27B | IQ4_XS | agent-tool | off |  | no MTP | 24.59 | 512 |
@@ -51,12 +56,22 @@ Best decode results by lane, model, and prompt:
 
 Long-retrieval rows use a synthetic filler prompt and short-answer retrieval target. Treat them as long-prompt fit/retrieval checks, not sustained decode benchmarks.
 
+## Single-GPU Presets
+
+Current single-card examples:
+
+- examples/llamacpp-single-5060ti.ini - Qwen3.5 9B high-context MTP and no-MTP presets.
+- examples/llamacpp-single-5060ti-qwen36-27b-iq4xs.ini - Qwen3.6 27B IQ4_XS no-MTP presets at 32768 q8 KV and 65536 q4 KV.
+- examples/llamacpp-single-5060ti-qwen36-35b-a3b-iq3xxs.ini - Qwen3.6 35B A3B IQ3_XXS thinking presets at 204800 and native max context.
+
+Qwen3.6 27B MTP Q4_XL is not currently a valid one-card GPU-only preset on this seed system because the model allocation fails on a single 16GB card. The current useful one-card MTP/no-MTP comparison is Qwen3.5 9B.
+
 ## Current Comparison Gaps
 
 - Qwen3.6 27B no-MTP on 2x5060ti with the same quant/context as the MTP route, if a clean non-MTP route is available.
-- Qwen3.6 27B MTP on 1x5060ti is not currently a headline recipe because the Q4_K_XL MTP file does not fit GPU-only on one 16GB card.
 - Qwen3.6 35B A3B NVFP4/MTP belongs in a separate vLLM engine lane, not mixed into the llama.cpp GGUF rows.
 - Reasoning-budget sweeps for Qwen3.6 35B A3B should be added as quality/latency rows once the baseline speed data is stable.
+- Community multi-card submissions should start with the same prompt sets and schema fields so 3x/4x results can sit beside the 1x and 2x lanes.
 
 ## Benchmark Hygiene
 

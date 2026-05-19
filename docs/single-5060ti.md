@@ -8,7 +8,7 @@ Treat this page as a conservative starting point for community testing. The rows
 
 Start with llama.cpp and GGUF models.
 
-For one 16GB card, smaller GGUF models and lower quants are the practical first target. The Qwen3.5 9B MTP Q4 GGUF is a safe starter. For Qwen3.6 27B and 35B A3B, use the lower single-card quants below rather than copying the dual-card Q4/Q6 recipes.
+For one 16GB card, smaller GGUF models and lower quants are the practical first target. The Qwen3.5 9B MTP Q4 GGUF is a safe starter and has both MTP and no-MTP single-card presets. For Qwen3.6 27B and 35B A3B, use the lower single-card quants below rather than copying the dual-card Q4/Q6 recipes.
 
 Example preset:
 
@@ -27,20 +27,24 @@ spec-draft-p-min = 0.75
 spec-draft-n-max = 2
 jinja = on
 parallel = 1
+reasoning = off
+chat-template-kwargs = {"enable_thinking": false}
 ~~~
 
-See examples/llamacpp-single-5060ti.ini.
+See examples/llamacpp-single-5060ti.ini for both the MTP and no-MTP 9B presets.
 
 If you want more headroom for other services, start lower and raise context in steps. Do not jump straight to the largest context unless you are deliberately stress testing.
 
 ## Qwen3.5 9B Single-Card Recipe
 
-This is the tested small-model llama.cpp MTP recipe on one RTX 5060 Ti 16GB, with no unified-memory overcommit and one GPU visible.
+This is the tested small-model llama.cpp recipe on one RTX 5060 Ti 16GB, with no unified-memory overcommit and one GPU visible. The same Qwen3.5 9B MTP GGUF can be run with MTP enabled or with speculation disabled for a clean baseline.
 
 Tested with batch 1024, ubatch 256:
 
 | Model | Quant | Context | GPU layers | Result |
 | --- | --- | --- | --- | --- |
+| Qwen3.5 9B | Q4_K_XL | 262144 | full | no MTP, protocol run: 63 tok/s short/code/agent decode, 57-58 tok/s long-retrieval short-answer decode |
+| Qwen3.5 9B MTP | Q4_K_XL | 262144 | full | draft-MTP n=2, protocol run: 82 tok/s short-chat, 96 tok/s code-generate, 77 tok/s agent/long-retrieval short-answer decode |
 | Qwen3.5 9B MTP | Q4_K_XL | 262144 | full | q8 KV, 126053-token needle retrieval OK, 1006 tok/s prompt eval, 53.36 tok/s decode, about 13091 MiB VRAM during the long prompt |
 | Qwen3.5 9B MTP | Q4_K_XL | 262144 | full | q8 KV, 251-token short decode, 85.23 tok/s decode, about 11535 MiB VRAM loaded |
 
@@ -81,6 +85,8 @@ GPU-only checks failed:
 - Qwen3.6 27B Q4_K_M at 4096 context failed allocating compute buffers after loading about 15.3 GiB of model data on GPU.
 - Qwen3.6 27B MTP Q4_XL failed model allocation on one 16GB card.
 - Qwen3.6 35B A3B IQ4_XS failed model allocation on one 16GB card.
+
+That means the current useful single-card MTP/no-MTP comparison is Qwen3.5 9B. Qwen3.6 27B has a single-card no-MTP baseline, but not a GPU-only MTP baseline with the current Q4_K_XL MTP file.
 
 Partial-offload fallbacks that completed:
 
