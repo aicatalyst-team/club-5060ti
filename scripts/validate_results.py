@@ -32,6 +32,7 @@ PROMPT_SETS = {
     "legacy",
     "custom",
 }
+HARDWARE_LANES = {"1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
 
 PRIVATE_IPV4_RE = re.compile(r"\b(192\.168|10\.[0-9]{1,3}|172\.(1[6-9]|2[0-9]|3[0-1]))(\.[0-9]{1,3}){2}\b")
 TOKEN_RE = re.compile(r"(Bearer\s+[A-Za-z0-9._-]{10,}|hf_[A-Za-z0-9]{10,}|sk-[A-Za-z0-9]{10,})")
@@ -98,6 +99,8 @@ def validate_result(result, label, allow_private=False):
 
     hardware = result.get("hardware") or {}
     require(isinstance(hardware, dict), errors, f"{label}: hardware must be an object")
+    if hardware.get("lane") is not None:
+        require(hardware.get("lane") in HARDWARE_LANES, errors, f"{label}: hardware.lane is invalid")
     require(isinstance(hardware.get("gpu_count"), int), errors, f"{label}: hardware.gpu_count must be an integer")
     require(bool(hardware.get("gpu_model")), errors, f"{label}: hardware.gpu_model is required")
     require(isinstance(hardware.get("vram_per_gpu_gb"), (int, float)), errors, f"{label}: hardware.vram_per_gpu_gb must be numeric")

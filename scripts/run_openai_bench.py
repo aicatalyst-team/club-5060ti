@@ -44,6 +44,7 @@ PROMPTS = {
 }
 
 SOURCE_TYPES = {"seed", "community", "imported", "external"}
+HARDWARE_LANES = {"1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"}
 
 
 def slugify(value):
@@ -96,6 +97,20 @@ def infer_family(model_id):
     if "Gemma4" in model_id or "Gemma 4" in model_id:
         return "Gemma4"
     return "unknown"
+
+
+def infer_hardware_lane(gpu_count, gpu_model):
+    model = (gpu_model or "").lower()
+    is_5060ti = "5060" in model and "ti" in model
+    if is_5060ti and gpu_count == 1:
+        return "1x-5060ti"
+    if is_5060ti and gpu_count == 2:
+        return "2x-5060ti"
+    if is_5060ti and gpu_count and gpu_count >= 3:
+        return "multi-5060ti"
+    if is_5060ti:
+        return "mixed-5060ti-cuda"
+    return "other-cuda"
 
 
 def infer_quant(status):
@@ -181,6 +196,7 @@ def write_report(path, result_json_path, results):
             "",
             "## Hardware",
             "",
+            "- Hardware lane:",
             "- GPU(s):",
             "- VRAM per GPU:",
             "- Driver:",
@@ -243,6 +259,7 @@ def build_result(args, model_id, status, prompt_set, run_index, response, elapse
         },
         "promotion_level": "benchmark",
         "hardware": {
+            "lane": args.hardware_lane or infer_hardware_lane(args.gpu_count, args.gpu_model),
             "gpu_count": args.gpu_count,
             "gpu_model": args.gpu_model,
             "vram_per_gpu_gb": args.vram_per_gpu_gb,
@@ -346,6 +363,7 @@ def main():
     parser.add_argument("--source-type", default="community", choices=sorted(SOURCE_TYPES))
     parser.add_argument("--source-label", default="community-5060ti")
     parser.add_argument("--gpu-count", type=int, default=1)
+    parser.add_argument("--hardware-lane", default="", choices=[""] + sorted(HARDWARE_LANES))
     parser.add_argument("--gpu-model", default="RTX 5060 Ti")
     parser.add_argument("--vram-per-gpu-gb", type=float, default=16)
     parser.add_argument("--driver", default="")

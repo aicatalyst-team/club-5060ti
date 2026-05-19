@@ -901,6 +901,7 @@
       get(item, 'model.family', ''),
       get(item, 'model.quant', ''),
       get(item, 'runtime.engine', ''),
+      hardwareLaneLabel(item),
       get(item, 'serving.speculation.type', ''),
       get(item, 'serving.speculation.draft_n', ''),
       get(item, 'serving.thinking', ''),
@@ -946,6 +947,17 @@
       return type + (draft ? ' n=' + draft : '');
     };
 
+    const hardwareLaneLabel = (item) => {
+      const lane = get(item, 'hardware.lane', '');
+      if (lane) return lane.replaceAll('-', ' ');
+      const count = Number(get(item, 'hardware.gpu_count', 0) || 0);
+      const model = String(get(item, 'hardware.gpu_model', 'GPU'));
+      if (model.includes('5060 Ti') && count === 1) return '1x 5060ti';
+      if (model.includes('5060 Ti') && count === 2) return '2x 5060ti';
+      if (model.includes('5060 Ti') && count >= 3) return 'multi 5060ti';
+      return 'other cuda';
+    };
+
     const setupCardKey = (item) => [
       get(item, 'model.id', ''),
       get(item, 'model.family', ''),
@@ -955,6 +967,7 @@
       get(item, 'runtime.commit', ''),
       get(item, 'runtime.build', ''),
       get(item, 'hardware.gpu_count', ''),
+      get(item, 'hardware.lane', ''),
       get(item, 'hardware.gpu_model', ''),
       get(item, 'hardware.driver', ''),
       get(item, 'hardware.pcie', ''),
@@ -1006,6 +1019,7 @@
       get(item, 'runtime.commit', ''),
       get(item, 'runtime.build', ''),
       get(item, 'hardware.gpu_count', ''),
+      get(item, 'hardware.lane', ''),
       get(item, 'hardware.gpu_model', ''),
       get(item, 'hardware.driver', ''),
       get(item, 'hardware.pcie', ''),
@@ -1202,6 +1216,7 @@
       const family = get(item, 'model.family', 'unknown');
       const engine = get(item, 'runtime.engine', 'unknown');
       const gpu = get(item, 'hardware.gpu_count', '?') + 'x ' + get(item, 'hardware.gpu_model', 'GPU');
+      const lane = hardwareLaneLabel(item);
       const context = get(item, 'serving.context_tokens', get(item, 'benchmark.configured_context_tokens', null));
       const level = get(item, 'promotion_level', 'unknown');
       const kv = [get(item, 'serving.kv_cache_k', ''), get(item, 'serving.kv_cache_v', '')].filter(Boolean).join('/') || 'KV n/a';
@@ -1211,6 +1226,7 @@
           '<div class="model-title"><div class="model">' + escapeHtml(model) + '</div><div class="subline">' + escapeHtml(family) + ' / ' + escapeHtml(quant) + '</div></div>' +
           '<div class="model-tags">' +
             '<span class="badge engine">' + escapeHtml(engine) + '</span>' +
+            '<span class="badge green">' + escapeHtml(lane) + '</span>' +
             '<span class="badge">' + escapeHtml(gpu) + '</span>' +
             '<span class="badge">ctx ' + formatNumber(context, 0) + '</span>' +
             '<span class="badge">' + escapeHtml(kv) + '</span>' +

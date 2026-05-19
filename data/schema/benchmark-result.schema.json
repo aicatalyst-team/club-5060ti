@@ -57,6 +57,10 @@
       "type": "object",
       "required": ["gpu_count", "gpu_model", "vram_per_gpu_gb"],
       "properties": {
+        "lane": {
+          "type": "string",
+          "enum": ["1x-5060ti", "2x-5060ti", "multi-5060ti", "mixed-5060ti-cuda", "other-cuda", "unknown"]
+        },
         "gpu_count": {
           "type": "integer",
           "minimum": 1
