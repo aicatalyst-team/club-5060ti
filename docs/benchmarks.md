@@ -2,108 +2,62 @@
 
 Benchmarks here are receipts, not universal claims. Always include the setup details needed to reproduce them.
 
-## 2026-05-19 Protocol-Shaped Seed Run
-
 Fresh seed results are stored as schema-validated JSON under data/results/ and rendered through the hosted explorer at https://5p00kyy.github.io/club-5060ti/. Imported llm-bench rows are archived historical data and should be redone before comparison use.
 
-The explorer defaults to one card per model/setup, with prompt-specific benchmark rows inside each card. Repeated runs are collapsed to the highest-generation row for each prompt while keeping averages and the run count visible. MTP/speculation is shown on each card and can be filtered directly. Use the raw-runs toggle when inspecting repeated measurements.
+The explorer defaults to one card per model/setup, with prompt-specific benchmark rows inside each card. Repeated runs are collapsed to the highest-generation row for each prompt while keeping averages and the run count visible. MTP/speculation, hardware lane, thinking mode, and reasoning budget are shown on each card.
 
-Seed run files:
+## 2026-05-19 Focused Seed Data
 
-- data/results/seed-qwen35-server-20260519.json
-- data/results/seed-qwen35-qwen36-server-20260519.json
-- data/results/seed-qwen35-qwen36-long-retrieval-20260519.json
-- data/results/seed-qwen36-35b-a3b-thinking-20260519.json
-- data/results/seed-qwen36-35b-a3b-thinking-long-retrieval-20260519.json
+Current headline benchmark files:
 
-Best decode results by model/prompt from the first run:
+- data/results/seed-qwen35-9b-mtp-1x5060ti-20260519.json
+- data/results/seed-qwen36-27b-iq4xs-1x5060ti-20260519.json
+- data/results/seed-qwen36-35b-a3b-iq3xxs-1x5060ti-20260519.json
+- data/results/seed-qwen-mtp-2x5060ti-20260519.json
+- data/results/seed-qwen36-35b-a3b-2x5060ti-20260519.json
 
-| Model | Prompt set | Thinking | Speculation | Best generation tok/s | Best prompt eval tok/s | Generated tokens |
-| --- | --- | --- | --- | ---: | ---: | ---: |
-| Qwen3.5-0.8B | short-chat | off | no MTP | 268.65 | 1832.80 | 256 |
-| Qwen3.5-0.8B | code-generate | off | no MTP | 269.99 | 3095.07 | 768 |
-| Qwen3.5-0.8B | agent-tool | off | no MTP | 270.52 | 241.08 | 512 |
-| Qwen3.5-0.8B | long-retrieval | off | no MTP | 194.78 | 26.66 | 17 |
-| Qwen3.5-2B | short-chat | off | no MTP | 182.50 | 1669.63 | 256 |
-| Qwen3.5-2B | code-generate | off | no MTP | 178.30 | 2607.75 | 768 |
-| Qwen3.5-2B | agent-tool | off | no MTP | 177.99 | 212.04 | 512 |
-| Qwen3.5-2B | long-retrieval | off | no MTP | 145.73 | 26.03 | 17 |
-| Qwen3.5-4B | short-chat | off | no MTP | 97.73 | 1159.83 | 256 |
-| Qwen3.5-4B | code-generate | off | no MTP | 94.68 | 1802.11 | 768 |
-| Qwen3.5-4B | agent-tool | off | no MTP | 94.69 | 126.31 | 512 |
-| Qwen3.5-4B | long-retrieval | off | no MTP | 77.74 | 21.68 | 17 |
-| Qwen3.5-9B | short-chat | off | draft-mtp n=3 | 70.99 | 508.23 | 256 |
-| Qwen3.5-9B | code-generate | off | draft-mtp n=3 | 90.99 | 726.45 | 768 |
-| Qwen3.5-9B | agent-tool | off | draft-mtp n=3 | 72.74 | 94.87 | 512 |
-| Qwen3.5-9B | long-retrieval | off | draft-mtp n=3 | 104.45 | 19.62 | 17 |
-| Qwen3.6-27B | short-chat | off | draft-mtp n=3 | 34.39 | 196.19 | 256 |
-| Qwen3.6-27B | code-generate | off | draft-mtp n=3 | 37.78 | 288.80 | 768 |
-| Qwen3.6-27B | agent-tool | off | draft-mtp n=3 | 29.03 | 35.03 | 512 |
-| Qwen3.6-27B | long-retrieval | off | draft-mtp n=3 | 38.76 | 14.66 | 17 |
-| Qwen3.6-35B-A3B | short-chat | on | no MTP | 92.16 | 595.95 | 256 |
-| Qwen3.6-35B-A3B | code-generate | on | no MTP | 89.75 | 871.21 | 768 |
-| Qwen3.6-35B-A3B | agent-tool | on | no MTP | 89.71 | 102.65 | 512 |
-| Qwen3.6-35B-A3B | long-retrieval | on | no MTP | 70.41 | 21.89 | 96 |
+Archived provenance:
 
-These are OpenAI-compatible server benchmark results from the 2x RTX 5060 Ti seed system using scripts/run_openai_bench.py. Long-retrieval rows use a synthetic filler prompt and short answer budget, so they primarily measure long-prompt handling rather than sustained decode.
+- data/results/llm-bench-legacy-import.json
 
-Current comparison gaps to fill before making stricter MTP/no-MTP claims:
+Best decode results by lane, model, and prompt:
 
-- Qwen3.6 27B with the same benchmark protocol and MTP disabled.
-- Qwen3.6 35B A3B with a supported MTP/speculative route, if a stable engine lane is available.
-- Matching vLLM and alternate llama.cpp-family lanes with the same prompt sets, context, KV cache, and thinking mode.
+| Lane | Model | Quant | Prompt set | Thinking | Reasoning budget | Speculation | Best generation tok/s | Generated tokens |
+| --- | --- | --- | --- | --- | ---: | --- | ---: | ---: |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | short-chat | off |  | draft-mtp n=2 | 82.16 | 256 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | code-generate | off |  | draft-mtp n=2 | 96.25 | 768 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | agent-tool | off |  | draft-mtp n=2 | 77.31 | 512 |
+| 1x5060ti | Qwen3.5-9B | UD-Q4_K_XL | long-retrieval | off |  | draft-mtp n=2 | 77.41 | 17 |
+| 1x5060ti | Qwen3.6-27B | IQ4_XS | short-chat | off |  | no MTP | 24.66 | 256 |
+| 1x5060ti | Qwen3.6-27B | IQ4_XS | code-generate | off |  | no MTP | 24.57 | 768 |
+| 1x5060ti | Qwen3.6-27B | IQ4_XS | agent-tool | off |  | no MTP | 24.59 | 512 |
+| 1x5060ti | Qwen3.6-27B | IQ4_XS | long-retrieval | off |  | no MTP | 22.26 | 17 |
+| 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | short-chat | on | 384 | no MTP | 94.63 | 640 |
+| 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | code-generate | on | 384 | no MTP | 94.46 | 1152 |
+| 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | agent-tool | on | 384 | no MTP | 94.53 | 896 |
+| 1x5060ti | Qwen3.6-35B-A3B | IQ3_XXS | long-retrieval | on | 384 | no MTP | 75.89 | 191 |
+| 2x5060ti | Qwen3.5-9B | UD-Q4_K_XL | short-chat | off |  | draft-mtp n=3 | 69.43 | 256 |
+| 2x5060ti | Qwen3.5-9B | UD-Q4_K_XL | code-generate | off |  | draft-mtp n=3 | 88.64 | 768 |
+| 2x5060ti | Qwen3.5-9B | UD-Q4_K_XL | agent-tool | off |  | draft-mtp n=3 | 70.89 | 512 |
+| 2x5060ti | Qwen3.5-9B | UD-Q4_K_XL | long-retrieval | off |  | draft-mtp n=3 | 102.42 | 17 |
+| 2x5060ti | Qwen3.6-27B | UD-Q4_K_XL | short-chat | off |  | draft-mtp n=3 | 34.11 | 256 |
+| 2x5060ti | Qwen3.6-27B | UD-Q4_K_XL | code-generate | off |  | draft-mtp n=3 | 37.66 | 768 |
+| 2x5060ti | Qwen3.6-27B | UD-Q4_K_XL | agent-tool | off |  | draft-mtp n=3 | 28.95 | 512 |
+| 2x5060ti | Qwen3.6-27B | UD-Q4_K_XL | long-retrieval | off |  | draft-mtp n=3 | 38.37 | 17 |
+| 2x5060ti | Qwen3.6-35B-A3B | UD-IQ4_XS | short-chat | on | 384 | no MTP | 90.10 | 640 |
+| 2x5060ti | Qwen3.6-35B-A3B | UD-IQ4_XS | code-generate | on | 384 | no MTP | 89.79 | 1152 |
+| 2x5060ti | Qwen3.6-35B-A3B | UD-IQ4_XS | agent-tool | on | 384 | no MTP | 89.64 | 896 |
+| 2x5060ti | Qwen3.6-35B-A3B | UD-IQ4_XS | long-retrieval | on | 384 | no MTP | 70.33 | 172 |
 
-## Current Seed Results
+Long-retrieval rows use a synthetic filler prompt and short-answer retrieval target. Treat them as long-prompt fit/retrieval checks, not sustained decode benchmarks.
 
-Seed hardware is a Dell Precision Tower 7810 with a Dell 0GWHMW board, 2x Intel Xeon E5-2680 v4, 128GB DDR4-2133 host RAM, and 2x RTX 5060 Ti 16GB. Both GPUs are running at PCIe x8 link width. The inference environment is a Proxmox LXC with 16 vCPU and 60GB RAM assigned. PCIe-sensitive comparisons should still include full slot topology and negotiated link generation.
+## Current Comparison Gaps
 
-| Date | Hardware | Runtime | Model | Context | Config | Result |
-| --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q4 GGUF | 8K | q8 KV, no MTP | 21.31 tok/s |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q4 GGUF | 8K | q8 KV, MTP draft 2 | 34.63 tok/s, acceptance 0.607 |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q6 GGUF | 8K | q8 KV, no MTP | 15.61 tok/s |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q6 GGUF | 8K | q8 KV, MTP draft 2 | 27.33 tok/s, acceptance 0.628 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 8K | q8 KV, no MTP, fit off | 15.66 tok/s over 384 generated tokens |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 8K | q8 KV, draft-mtp n=2, p-min 0.75, fit off | 28.34 tok/s over 384 generated tokens; acceptance 0.704 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 8K | q8 KV, draft-mtp n=3, p-min 0.75, fit off | 30.46 tok/s over 384 generated tokens; acceptance 0.628 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 8K | q8 KV, draft-mtp n=6, p-min 0.75, fit off | 23.64 tok/s over 384 generated tokens; acceptance 0.345 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 65K | q8 KV, draft-mtp n=2, p-min 0.75, fit off | 32.04 tok/s over 64 generated tokens; acceptance 0.889 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 65K | q8 KV, draft-mtp n=3, p-min 0.75, fit off | 37.48 tok/s over 64 generated tokens; acceptance 0.833 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 131K | q8 KV, draft-mtp n=2, p-min 0.75, fit off | 30.02 tok/s over 32 generated tokens; acceptance 0.826 |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 200000 | q8 KV, draft-mtp n=3, p-min 0.75, fit off | 87031-token needle retrieval OK; prompt eval 298 tok/s; decode 23.16 tok/s over 26 generated tokens; about 15847/15825 MiB during request |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 204800 | q8 KV, draft-mtp n=2, p-min 0.75, fit off | loaded and generated 16 tokens; about 15105/15825 MiB VRAM loaded |
-| 2026-05-17 | 2x RTX 5060 Ti 16GB | llama.cpp 9190-b64739ea3 | Qwen3.6 27B MTP Q6 GGUF | 204800 | q8 KV, draft-mtp n=3, p-min 0.75, fit off | 87031-token needle retrieval OK; prompt eval 294 tok/s; decode 24.22 tok/s over 26 generated tokens; about 15847/15825 MiB during request |
-| 2026-05-15 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q6 GGUF | 65K | q8 KV, MTP draft 2 | 24.83 tok/s over 512 generated tokens |
-| 2026-05-15 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q6 GGUF | 204800 | q8 KV, MTP draft 2 | direct server chat OK; tight long-context fit |
-| 2026-05-15 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.5 9B MTP Q4 GGUF | 262144 | q8 KV, MTP draft 2 | native max context loaded; 72.50 tok/s over 512 generated tokens |
-| 2026-05-15 | 2x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ4_XS GGUF | 8K | q8 KV, no MTP | 90.45 tok/s over 256 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.5 9B MTP Q4 GGUF | 262144 | q8 KV, MTP draft 2, GPU-only | 126053-token needle retrieval OK; 1006 tok/s prompt eval, 53.36 tok/s decode over 10 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B IQ4_XS GGUF | 32K | q8 KV, GPU-only | 24.65 tok/s over 64 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B IQ4_XS GGUF | 65K | q4 KV, GPU-only | 24.56 tok/s over 64 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ3_XXS GGUF | 32K | q8 KV, GPU-only | 89.06 tok/s over 64 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ3_XXS GGUF | 131K | q8 KV, GPU-only | 93.04 tok/s over 64 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ3_XXS GGUF | 204800 | q8 KV, GPU-only | 92.83 tok/s over 64 generated tokens |
-| 2026-05-16 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ3_XXS GGUF | 262144 | q8 KV, GPU-only | 93636-token needle retrieval OK; 938 tok/s prompt eval, 46.48 tok/s decode over 16 generated tokens |
-| 2026-05-15 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 27B Q4_K_M GGUF | 4K | q8 KV, partial CPU offload, n-gpu-layers 60 | 12.36 tok/s over 64 generated tokens |
-| 2026-05-15 | 1x RTX 5060 Ti 16GB | llama.cpp MTP 9032-5d5f1b46e | Qwen3.6 35B A3B IQ4_XS GGUF | 4K | q8 KV, partial CPU offload, n-gpu-layers 32 | 17.08 tok/s over 64 generated tokens |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | vLLM | Qwen3.6 27B NVFP4/MTP | 8K | fp8 KV, MTP n=3 | about 62-66 tok/s decode |
-| 2026-05-14 | 2x RTX 5060 Ti 16GB | vLLM | Qwen3.6 27B NVFP4/MTP | 200K | fp8 KV, prefix caching, MTP n=3 | reached health and passed long-context retrieval checks |
-| 2026-05-04 | 2x RTX 5060 Ti 16GB | vLLM | Qwen3.6 35B A3B NVFP4/MTP | 131K | fp8 KV, MTP n=3, FlashInfer MoE | startup OK; /v1/models OK |
-
-## Quality Smoke
-
-In one local smoke suite, the vLLM NVFP4/MTP setup passed a deterministic no-thinking check at 23/23 across math, logic, code, JSON, instruction following, knowledge, robustness, tool-calling, and long-context retrieval. This is not a general quality evaluation.
-
-Long-context needle retrieval passed at actual prompt token counts around 22,228, 88,685, and 177,317.
+- Qwen3.6 27B no-MTP on 2x5060ti with the same quant/context as the MTP route, if a clean non-MTP route is available.
+- Qwen3.6 27B MTP on 1x5060ti is not currently a headline recipe because the Q4_K_XL MTP file does not fit GPU-only on one 16GB card.
+- Qwen3.6 35B A3B NVFP4/MTP belongs in a separate vLLM engine lane, not mixed into the llama.cpp GGUF rows.
+- Reasoning-budget sweeps for Qwen3.6 35B A3B should be added as quality/latency rows once the baseline speed data is stable.
 
 ## Benchmark Hygiene
 
-When adding results, say whether tokens/sec is decode-only or end-to-end, include generated token count, prompt/context size, runtime version, quant, KV cache dtype, and whether thinking/reasoning was enabled.
-
-## llama.cpp Context Notes
-
-The Q6 llama.cpp MTP route was checked with q8 KV at 65K, 98K, 131K, 160K, 180K, and 200K context. On upstream `9190-b64739ea3`, 200000 and 204800 both passed an 87031-token needle retrieval with `draft-mtp` n=3. The 200000 setting is slightly safer because it leaves about 4800 more context slots; llama.cpp rounded it to an internal `n_ctx_seq` of 200192 in this build. Both are still tight: the long runs used about 15847/15825 MiB during the request. Router setups that use no-mmap or different split/headroom settings may need a lower context such as 65536.
-
-Qwen3.5 9B MTP Q4 is a separate small-model check. It fits the GGUF's native 262144-token max context with q8 KV and MTP draft 2 on both 2x and 1x RTX 5060 Ti 16GB using the stock GGUF metadata. The single-card run also recovered a needle from a 126053-token prompt. Larger extrapolated contexts are deliberately not treated as the public recipe for this model.
-
-Single-card Qwen3.6 27B and 35B A3B GGUF checks work best with lower quants. Qwen3.6 27B IQ4_XS ran GPU-only at 32768 context with q8 KV and at 65536 context with q4 KV; q8 KV failed at 65536, and q4 KV failed at 98304 and 110080 on the seed card. Qwen3.6 35B A3B IQ3_XXS was the stronger long-context single-card fit: it loaded native 262144 context with q8 KV and recovered a needle from a 93636-token prompt. Larger quants are fallback/partial-offload territory: GPU-only/no-unified-memory tests failed at 4096 context for Qwen3.6 27B Q4_K_M, Qwen3.6 27B MTP Q4_XL, and Qwen3.6 35B A3B IQ4_XS.
+When adding results, say whether tokens/sec is decode-only or end-to-end, include generated token count, prompt/context size, runtime version, quant, KV cache dtype, MTP/speculative settings, thinking mode, and reasoning budget.
