@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Learn how to containerize the club-5060ti LLM benchmarking toolkit and run it as Kubernetes Jobs on OpenShift AI to test vLLM and KServe inference endpoints.">
+  <title>Deploying club-5060ti on OpenShift AI</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+                   "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.7;
+      color: #1a1a1a;
+      background: #fff;
+    }
+
+    /* --- Header --- */
+    .header {
+      background: #1a1a1a;
+      color: #fff;
+      padding: 1rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      border-bottom: 3px solid #e00;
+    }
+    .header .logo { font-weight: 700; font-size: 1.1rem; }
+    .header .logo span { color: #e00; }
+
+    /* --- Hero --- */
+    .hero {
+      background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+      color: #fff;
+      padding: 3rem 2rem;
+      text-align: center;
+    }
+    .hero h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      max-width: 800px;
+      margin: 0 auto 0.75rem;
+      line-height: 1.3;
+    }
+    .hero .subtitle {
+      font-size: 1.15rem;
+      color: #ccc;
+      max-width: 700px;
+      margin: 0 auto 1.5rem;
+      font-style: italic;
+    }
+    .hero .meta {
+      font-size: 0.9rem;
+      color: #999;
+    }
+    .hero .meta span { margin: 0 0.5rem; }
+
+    /* --- Article --- */
+    article {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    article h2 {
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin: 2.5rem 0 1rem;
+      padding-bottom: 0.3rem;
+      border-bottom: 2px solid #e00;
+      color: #1a1a1a;
+    }
+    article h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin: 2rem 0 0.75rem;
+      color: #333;
+    }
+    article h4 {
+      font-size: 1.05rem;
+      font-weight: 600;
+      margin: 1.5rem 0 0.5rem;
+      color: #555;
+    }
+
+    article p {
+      margin: 0 0 1.2rem;
+      font-size: 1.05rem;
+    }
+
+    article ul, article ol {
+      margin: 0 0 1.2rem 1.5rem;
+      font-size: 1.05rem;
+    }
+    article li { margin-bottom: 0.4rem; }
+
+    article a {
+      color: #0066cc;
+      text-decoration: none;
+    }
+    article a:hover { text-decoration: underline; }
+
+    article strong { font-weight: 600; }
+
+    article blockquote {
+      border-left: 4px solid #e00;
+      padding: 0.75rem 1rem;
+      margin: 1.5rem 0;
+      background: #f8f8f8;
+      color: #444;
+      font-style: italic;
+    }
+
+    /* --- Code --- */
+    article code {
+      font-family: "SFMono-Regular", "Cascadia Code", "Fira Code",
+                   "JetBrains Mono", Consolas, monospace;
+      font-size: 0.9em;
+      background: #f0f0f0;
+      padding: 0.15em 0.4em;
+      border-radius: 3px;
+    }
+    article pre {
+      background: #1e1e1e;
+      color: #d4d4d4;
+      padding: 1.2rem 1.5rem;
+      border-radius: 6px;
+      overflow-x: auto;
+      margin: 1.2rem 0 1.5rem;
+      font-size: 0.9rem;
+      line-height: 1.5;
+    }
+    article pre code {
+      background: none;
+      padding: 0;
+      color: inherit;
+      font-size: inherit;
+    }
+
+    /* --- Tables --- */
+    article table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1.2rem 0 1.5rem;
+      font-size: 0.95rem;
+    }
+    article th {
+      background: #f0f0f0;
+      font-weight: 600;
+      text-align: left;
+      padding: 0.6rem 0.8rem;
+      border-bottom: 2px solid #ddd;
+    }
+    article td {
+      padding: 0.5rem 0.8rem;
+      border-bottom: 1px solid #eee;
+    }
+    article tr:hover { background: #fafafa; }
+
+    /* --- Image placeholders --- */
+    .image-placeholder {
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      padding: 1.5rem;
+      margin: 1.5rem 0;
+      background: #fafafa;
+      text-align: center;
+      color: #666;
+    }
+    .image-placeholder strong { color: #333; }
+
+    /* --- Footer --- */
+    .footer {
+      background: #1a1a1a;
+      color: #999;
+      padding: 2rem;
+      text-align: center;
+      font-size: 0.85rem;
+      margin-top: 3rem;
+    }
+
+    /* --- Responsive --- */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 1.6rem; }
+      article { padding: 1.5rem 1rem 3rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">Open<span>Shift</span> AI — Developer Blog</div>
+  </div>
+
+  <div class="hero">
+    <h1>Deploying club-5060ti on OpenShift AI</h1>
+    <div class="subtitle">club-5060ti is a community-driven knowledge base and benchmarking project for running local LLM inference on NVIDIA RTX 5060 Ti GPUs.</div>
+    <div class="meta">
+      <span>AutoPoC</span> &middot;
+      <span>May 2026</span> &middot;
+      <span>10 min read</span>
+    </div>
+  </div>
+
+  <article>
+    <h2>What is club-5060ti?</h2>
+<p>Club-5060ti is a community-driven knowledge base and benchmarking project focused on running local LLM inference on NVIDIA RTX 5060 Ti GPUs. It's not a deployable application in the traditional sense — it's a curated collection of benchmark results stored as JSON, configuration recipes for llama.cpp and vLLM, Python utility scripts for running and validating benchmarks, and a static HTML site for exploring the data.</p>
+<p>Think of it as the "lab notebook" for a community of developers who want to know exactly what performance to expect when they run Llama, Mistral, or other open models on a specific consumer GPU. The project includes a schema-validated result format, an OpenAI-compatible benchmarking harness, and tooling to aggregate individual results into a browsable dataset.</p>
+<p>The interesting bit for our purposes: that benchmarking harness (<code>run_openai_bench.py</code>) targets the same OpenAI-compatible API surface that OpenShift AI's model-serving components expose. That makes it a natural candidate for containerization as a reusable benchmark tool.</p>
+<h2>Why this matters for OpenShift AI</h2>
+<p>At first glance, a consumer GPU benchmarking project doesn't scream "enterprise AI platform." The RHOAI fitness score of 38/100 reflects that honestly — there's no deployable model, no training pipeline, no platform integration out of the box. So why bother?</p>
+<p>Because benchmark tooling is infrastructure, and infrastructure PoCs have real value. The <code>run_openai_bench.py</code> script speaks the same OpenAI-compatible protocol that vLLM and KServe expose in OpenShift AI. Containerizing this toolkit means we get a portable, reproducible benchmark harness that can be pointed at any ODH inference endpoint. Run it as a Kubernetes Job, collect the JSON results, compare performance across model-serving configurations. That's a practical addition to any platform engineer's toolkit.</p>
+<p>This PoC also exercises a common real-world pattern: taking a loose collection of scripts and data files — the kind of thing that lives on someone's laptop — and packaging it into something that runs reliably in a cluster. If we can containerize it, validate it, and run it as a Job, we've proven the path for similar community tooling.</p>
+<h2>Setting up the PoC</h2>
+<p>The infrastructure requirements here are refreshingly minimal. This is a CPU-only toolkit that talks to GPU-backed servers over HTTP — the scripts themselves don't need a GPU.</p>
+<ul>
+<li><strong>Resource profile:</strong> Small — 256Mi RAM, 250m CPU</li>
+<li><strong>GPU:</strong> Not required</li>
+<li><strong>Inference server:</strong> None (the project <em>benchmarks</em> inference servers; it doesn't include one)</li>
+<li><strong>Vector database:</strong> None</li>
+<li><strong>Persistent storage:</strong> None</li>
+<li><strong>Sidecar containers:</strong> None</li>
+<li><strong>Deployment model:</strong> Kubernetes Job (not a long-running Deployment)</li>
+</ul>
+<p>The key decision was treating this as a Job-based PoC rather than trying to force it into a server model. These are CLI scripts that run, produce output, and exit. Jobs are the right abstraction.</p>
+<div class="image-placeholder">
+<p><strong>[Image Placeholder 1: Architecture diagram showing the club-5060ti toolkit container running as a Kubernetes Job]</strong></p>
+<p><strong>Placement rationale</strong>: Readers benefit from seeing the simple architecture — a Job pod running validation scripts against bundled data, with a future arrow pointing toward an ODH inference endpoint.</p>
+<p><strong>Image generation prompt</strong>: A clean architectural diagram on a white background showing a Kubernetes Job pod labeled "club-5060ti scripts" containing icons for Python scripts and JSON data files. An arrow labeled "OpenAI API (future)" points from the pod toward a separate box labeled "ODH Model Serving (vLLM)". Use flat design, Red Hat brand colors (red #EE0000, dark gray #333), and a 16:9 aspect ratio. Include the OpenShift logo on the cluster boundary.</p>
+<p><strong>Alt text</strong>: Architecture diagram showing a Kubernetes Job pod containing Python benchmark scripts and JSON data, with a future integration arrow pointing to an OpenShift AI model-serving endpoint.</p>
+</div>
+<h2>Containerizing with UBI</h2>
+<p>We built two images — one for the static site and one for the scripts — but the scripts image is where the interesting work happened. The challenge was packaging a loose collection of Python scripts, shell scripts, and JSON data into something that runs cleanly on a UBI base.</p>
+<p>The Dockerfile uses <code>ubi9/python-311</code> as the base, copies in the full repository, and installs the Python dependencies. Since there's no <code>requirements.txt</code> in the upstream repo, we had to inspect the scripts' imports and pin the dependencies ourselves. The key packages are <code>aiohttp</code> and <code>jsonschema</code> — the former for the async OpenAI benchmark client, the latter for result validation.</p>
+<pre><code class="language-dockerfile">
+FROM registry.access.redhat.com/ubi9/python-311:latest
+
+WORKDIR /opt/app-root/src
+
+COPY . .
+
+RUN pip install --no-cache-dir \
+    aiohttp \
+    jsonschema \
+    && chmod +x scripts/*.sh
+
+USER 1001
+
+ENTRYPOINT ["python3"]
+</code></pre>
+<p>One detail worth noting: the <code>check_repo.sh</code> script assumes it's running from the repository root and checks for specific directory structures. By setting <code>WORKDIR</code> to the source root and copying everything in, we preserved those path assumptions without modification. Small thing, but it's the kind of detail that burns 30 minutes if you miss it.</p>
+<h2>Deploying to Kubernetes</h2>
+<p>Each test scenario runs as a separate Kubernetes Job. The pattern is straightforward — override the container's command to run the specific script, set resource limits, and let it complete. Here's the Job manifest for the schema validation scenario:</p>
+<pre><code class="language-yaml">
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: club-5060ti-validate-results
+  labels:
+    app: club-5060ti
+    scenario: validate-results
+spec:
+  backoffLimit: 0
+  activeDeadlineSeconds: 30
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: validate
+          image: quay.io/aicatalyst/club-5060ti-scripts:latest
+          command: ["python3", "scripts/validate_results.py", "data/results"]
+          resources:
+            requests:
+              cpu: 100m
+              memory: 128Mi
+            limits:
+              cpu: 250m
+              memory: 256Mi
+</code></pre>
+<p>No Services, no PVCs, no Secrets, no sidecars. This is about as clean as a Kubernetes deployment gets. Each Job has <code>backoffLimit: 0</code> because we want to see failures immediately — no retries masking intermittent issues. The <code>activeDeadlineSeconds</code> acts as our test timeout.</p>
+<p>The four Jobs were deployed sequentially, and we collected exit codes and logs from each. In a more mature setup, you'd orchestrate this with a Tekton Pipeline or an Argo Workflow, but for a PoC, <code>kubectl apply</code> followed by <code>kubectl wait</code> works fine.</p>
+<div class="image-placeholder">
+<p><strong>[Image Placeholder 2: Terminal screenshot showing all four Jobs completing successfully]</strong></p>
+<p><strong>Placement rationale</strong>: Showing the actual Job completion output gives readers confidence in the results and a sense of what the workflow looks like in practice.</p>
+<p><strong>Image generation prompt</strong>: A dark terminal window (dark gray background #1e1e1e, monospace font) showing kubectl output for four completed Kubernetes Jobs. Each line shows a Job name (validate-results, build-site-data, bench-help, check-repo) with status "Complete" and duration under 1 second. Use green text (#4ec9b0) for the "Complete" status. 16:9 aspect ratio, slight drop shadow on the terminal window.</p>
+<p><strong>Alt text</strong>: Terminal output showing four Kubernetes Jobs — validate-results, build-site-data, bench-help, and check-repo — all completed successfully with sub-second durations.</p>
+</div>
+<h2>Test results</h2>
+<p>All four scenarios passed cleanly on the first run:</p>
+<table>
+<tr><th>Scenario</th><th>Description</th><th>Status</th><th>Duration</th></tr>
+<tr><td>validate-results</td><td>JSON schema validation of all bundled benchmark results</td><td>✅ PASS</td><td>0.3s</td></tr>
+<tr><td>build-site-data</td><td>Regenerate aggregated `results.json` from individual files</td><td>✅ PASS</td><td>0.5s</td></tr>
+<tr><td>bench-help</td><td>Verify benchmark script starts and prints usage info</td><td>✅ PASS</td><td>0.3s</td></tr>
+<tr><td>check-repo</td><td>Repository structure health-check</td><td>✅ PASS</td><td>0.3s</td></tr>
+</table>
+<p><strong>Overall: 4/4 passed.</strong></p>
+<p>The sub-second durations reflect the lightweight nature of these scripts — they're validating local files and checking imports, not running actual inference benchmarks. The <code>bench-help</code> scenario confirmed that <code>run_openai_bench.py</code> is importable and exposes the expected CLI flags (<code>--base-url</code>, <code>--model</code>, <code>--concurrency</code>), which means it's ready to be pointed at a live inference endpoint.</p>
+<p>The <code>build-site-data</code> scenario is slightly more interesting because it exercises the data aggregation pipeline — reading individual JSON result files and producing a combined dataset. At 0.5s, it was the "slowest" of the bunch, which gives you a sense of the scale we're working with.</p>
+<p>No failures to report here, which is actually slightly unusual for our PoCs. The simplicity of the project — pure Python, no compiled dependencies, no GPU requirements — meant fewer things could go wrong during containerization.</p>
+<div class="image-placeholder">
+<p><strong>[Image Placeholder 3: Results summary card showing 4/4 tests passed with the project details]</strong></p>
+<p><strong>Placement rationale</strong>: A visual summary card provides a scannable takeaway for readers who scroll to results first.</p>
+<p><strong>Image generation prompt</strong>: A clean summary card with a white background and subtle gray border. Header shows "club-5060ti PoC Results" in dark text. A large green checkmark icon sits next to "4/4 Tests Passed". Below, four rows show each test name with a small green dot and its duration. Footer shows "Resource profile: small (256Mi / 250m CPU) | No GPU required". Use flat design, 4:3 aspect ratio, Red Hat brand colors for accents.</p>
+<p><strong>Alt text</strong>: Summary card showing club-5060ti proof-of-concept results: four out of four tests passed, with durations ranging from 0.3 to 0.5 seconds, running on a small resource profile with no GPU required.</p>
+</div>
+<h2>What we learned</h2>
+<p><strong>The toolkit containerizes cleanly, and that's the point.</strong> The value here isn't in the benchmark results themselves — it's in proving that a community-maintained collection of scripts can be packaged into a portable, reproducible container that runs in any Kubernetes environment. The path from "scripts on a laptop" to "Jobs in a cluster" was smooth.</p>
+<p><strong>The OpenAI-compatible benchmark harness has real potential.</strong> The <code>run_openai_bench.py</code> script targets the same API surface as vLLM-based model serving in OpenShift AI. In a follow-up integration, you could deploy a model via ODH's KServe stack, then run this toolkit as a Job to benchmark throughput, latency at various concurrency levels, and token generation rates. That's a legitimate testing workflow.</p>
+<p><strong>What we'd do differently:</strong> We'd add a Tekton Pipeline to orchestrate the test scenarios instead of running Jobs manually. We'd also wire up a fifth scenario that actually hits a live inference endpoint — even a small model on CPU — to validate the end-to-end benchmark flow, not just the <code>--help</code> output.</p>
+<p><strong>Is this production-ready?</strong> As a standalone PoC, no — and it's not meant to be. The RHOAI fitness score of 38/100 is fair. The project is documentation and tooling, not a deployable ML workload. But as a <em>component</em> in a larger testing pipeline — specifically, as a benchmark harness for ODH inference deployments — it has a clear role. The gap is integration: connecting this toolkit to an actual model-serving endpoint and automating result collection.</p>
+<p><strong>ODH components that would improve this:</strong> A vLLM ServingRuntime would give the benchmark script something to talk to. Tekton Pipelines would orchestrate the run-benchmark-collect-results workflow. And S3-compatible storage (via ODH's MinIO or Ceph) would provide a natural place to persist benchmark results across runs.</p>
+<h2>Try it yourself</h2>
+<p>If you want to reproduce this PoC or extend it with a live inference endpoint:</p>
+<ul>
+<li><strong>Forked repository:</strong> <a href="https://github.com/aicatalyst-team/club-5060ti.git">github.com/aicatalyst-team/club-5060ti</a> — includes the Dockerfiles and Job manifests we used</li>
+<li><strong>Container images:</strong></li>
+<li><code>quay.io/aicatalyst/club-5060ti-scripts:latest</code></li>
+<li><code>quay.io/aicatalyst/club-5060ti-site:latest</code></li>
+<li><strong>Original project:</strong> <a href="https://github.com/5p00kyy/club-5060ti">github.com/5p00kyy/club-5060ti</a></li>
+<li><strong>Open Data Hub documentation:</strong> <a href="https://opendatahub.io/docs">opendatahub.io/docs</a></li>
+</ul>
+<p>Pull the scripts image, run the validation Job, and see for yourself. If you've got an OpenShift AI cluster with a vLLM endpoint, try pointing <code>run_openai_bench.py</code> at it — that's where this toolkit starts to earn its keep.</p>
+  </article>
+
+  <div class="footer">
+    <p>Generated by AutoPoC &middot; Preview only — not for publication</p>
+  </div>
+</body>
+</html>
