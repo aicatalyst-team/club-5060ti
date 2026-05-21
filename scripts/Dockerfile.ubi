@@ -1,0 +1,27 @@
+# Dockerfile.ubi — scripts toolkit (CLI / job)
+# Build context: repo root (club-5060ti/)
+#   docker build -f scripts/Dockerfile.ubi -t club-5060ti-scripts .
+
+FROM registry.access.redhat.com/ubi9/python-312
+
+# --- install system packages as root ---
+USER 0
+
+# bash is needed for check_repo.sh and shell scripts; git for check_repo.sh grep
+RUN dnf install -y bash git && dnf clean all
+
+# --- copy entire repo (scripts need data/, site/, examples/) ---
+WORKDIR /opt/app-root/src
+COPY . .
+
+# No pip dependencies needed — all scripts use Python standard library only
+# (urllib.request, argparse, json, pathlib, re, time, etc.)
+
+# --- OpenShift arbitrary-UID support ---
+RUN chgrp -R 0 /opt/app-root && chmod -R g=u /opt/app-root
+
+# --- drop back to non-root ---
+USER 1001
+
+ENTRYPOINT ["python3"]
+CMD ["scripts/run_openai_bench.py", "--help"]

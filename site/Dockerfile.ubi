@@ -1,0 +1,28 @@
+# club-5060ti CLI toolkit
+# Runs benchmark scripts, validation, and site data generation.
+# Build context: repo root (club-5060ti/)
+FROM registry.access.redhat.com/ubi9/python-312
+
+USER 0
+
+# Install bash (needed for check_repo.sh and shell scripts)
+RUN dnf install -y bash git && dnf clean all
+
+USER 1001
+
+WORKDIR /opt/app-root/src
+
+# Copy the entire repository (scripts need access to data/, site/, scripts/, examples/)
+COPY . .
+
+# Fix group permissions for OpenShift arbitrary UID support
+USER 0
+RUN chgrp -R 0 /opt/app-root && chmod -R g=u /opt/app-root
+USER 1001
+
+# All scripts use only Python stdlib — no pip install required.
+# Validate that all .py scripts compile cleanly.
+RUN python3 -m py_compile scripts/*.py
+
+ENTRYPOINT ["python3"]
+CMD ["scripts/run_openai_bench.py", "--help"]
