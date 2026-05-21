@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: club-5060ti
+  labels:
+    app.kubernetes.io/name: club-5060ti
+    app.kubernetes.io/managed-by: autopoc
